@@ -6,4 +6,4 @@ Please install nodejs in your computer:
 https://nodejs.org/en/download/
 
 
-## Installing the program
+## Installing the script
