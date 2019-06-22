@@ -39,15 +39,18 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
+        //getting worksheet
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
         var total = 0;
         while (i <= worksheet.rowCount) {
+
             var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
             var k = 0;
             if (valor_celula_p != null) {
                 while (k < not_allowed.length) {
                     valor_celula_p = valor_celula_p.toLowerCase().replace(not_allowed[k], "")
+                    // valor_celula_p = valor_celula_p.replace(" ","")
                     valor_celula_p = valor_celula_p.replace(" ,", "")
                     valor_celula_p = valor_celula_p.replace(", ", "")
                     valor_celula_p = valor_celula_p.trim()
@@ -57,6 +60,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
             }
 
             if (worksheet.getCell(STORE_CLIENT_COLUMN + i).value == worksheet.getCell("L" + i).value) {
+                // total = total + 1;
                 worksheet.getCell("AG" + i).fill = {
                     type: 'pattern',
                     pattern: 'darkTrellis',
@@ -67,6 +71,39 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
             i++;
         }
+        // while (i <= worksheet.rowCount) {
+
+        //     //getting value from cell K
+        //     var client = worksheet.getCell(CLIENTS_COLUMN + i).value
+
+        //     //getting value from cell P
+        //     var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
+        //     if (valor_celula_p != null && client) {
+        //         valor_celula_p = valor_celula_p.toLowerCase().replace(", " + client.toLowerCase(), "");
+        //         valor_celula_p = valor_celula_p.toLowerCase().replace(client.toLowerCase() + " ,", "");
+
+        //         var pieces = valor_celula_p.split(",");
+        //         var k = 0
+        //         while (k < pieces.length) {
+        //             if (nao_pode_ser.indexOf(pieces[k].toLowerCase().trim()) == -1) {
+        //                 nao_pode_ser.push(pieces[k].toLowerCase().trim())
+        //             }
+        //             k++;
+        //         }
+        //     }
+
+        //     //checking if the cell value is not empty
+
+        //     // console.log(pieces)
+        //     // console.log(valor_celula_p)
+
+
+        //     i++;
+        // }
+
+
+        // console.log(JSON.stringify(nao_pode_ser))
+        // console.log(total, worksheet.rowCount)
         console.log('finalizado!');
         return workbook.xlsx.writeFile(OUTPUT_FILE);
     })
