@@ -118,7 +118,11 @@ The script generate a summary view of all the clients and the amount of severiti
 
 ![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.30.31.png?raw=true)
 
-2. Now just type `node filtrar_clientes.js` or `node filtrar_severidades.js`
+
+2. Now we have to install the dependencies, just type `npm install`.
+
+
+3. Now just type `node filtrar_clientes.js` or `node filtrar_severidades.js`
 
 ![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.28.54.png?raw=true)
 
