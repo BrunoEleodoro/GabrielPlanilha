@@ -69,6 +69,8 @@ SEV_SUMMARY_CLIENT_SEV4=AO
     
 * STORE_CLIENT_COLUMN
     
+    ![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.21.32.png?raw=true)
+
     Say to the script where to **save** the client name, where to **store** the values. in this case `AF`
 
 * CLIENTS_COLUMN
@@ -90,7 +92,7 @@ SEV_SUMMARY_CLIENT_SEV4=AO
     the name of the worksheet that the script will read all the cells and columns, in this case `Dados`.
 
 * STORE_SEVERITY_COLUNM
-    
+       
     Where the script will **save**, **store** the severity numbers, in this case `AH`
 
 The script have a functionallity that counts the amount of `sev1`, `sev2`, `sev3` and `sev4`. To control where this data will be **saved**, **stored** you have to change this two parameters.
@@ -106,3 +108,18 @@ The script generate a summary view of all the clients and the amount of severiti
 *   SEV_SUMMARY_CLIENT_SEV2=AM
 *   SEV_SUMMARY_CLIENT_SEV3=AN
 *   SEV_SUMMARY_CLIENT_SEV4=AO
+
+![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.24.10.png?raw=true)
+
+
+## Finally running the script.
+
+1. Open the terminal (`cmd`) and then navigate to the folder where you extracted the files in the `Step 1`.
+
+![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.30.31.png?raw=true)
+
+2. Now just type `node filtrar_clientes.js` or `node filtrar_severidades.js`
+
+![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.28.54.png?raw=true)
+
+3. Now you're done, you should see a file in the folder named `new.xlsx` or with the name that you've set in `OUTPUT_FILE` in the `config`.
