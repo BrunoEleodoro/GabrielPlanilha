@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.0.0",
-    "exceljs": "^1.12.2"
+    "exceljs": "^1.12.2",
+    "iconv": "^2.3.4",
+    "utf8": "^3.0.0"
   }
 }

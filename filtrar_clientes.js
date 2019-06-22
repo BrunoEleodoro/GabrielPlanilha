@@ -1,8 +1,11 @@
 require('dotenv').config({ path: 'config' })
+const utf8 = require('utf8');
+const iconv = require('iconv')
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 var not_allowed = [];
+
 
 var fs = require('fs'),
     path = require('path'),
@@ -15,6 +18,13 @@ fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
         console.log(err);
     }
 });
+
+function toUTF8(body) {
+    // convert from iso-8859-1 to utf-8
+    var ic = new iconv.Iconv('iso-8859-1', 'utf-8');
+    var buf = ic.convert(body);
+    return buf.toString('utf-8');
+}
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
@@ -44,14 +54,34 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var total = 0;
         while (i <= worksheet.rowCount) {
             var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
+
             var k = 0;
             if (valor_celula_p != null) {
+
                 while (k < not_allowed.length) {
+                    valor_celula_p = valor_celula_p.replace('√©', 'E')
+
                     valor_celula_p = valor_celula_p.toLowerCase().replace(not_allowed[k], "")
                     valor_celula_p = valor_celula_p.replace(" ,", "")
                     valor_celula_p = valor_celula_p.replace(", ", "")
+                    valor_celula_p = valor_celula_p.replace(",", "")
                     valor_celula_p = valor_celula_p.trim()
+
                     k++;
+                }
+
+                if (valor_celula_p.toUpperCase().includes("ORBITALLORBITAL")) {
+                    valor_celula_p = "ORBITALL"
+                } else if (valor_celula_p.toUpperCase().includes("ORBITAL")) {
+                    valor_celula_p = "ORBITALL"
+                } else if (valor_celula_p.toUpperCase().includes("ORBITALL ORBITAL")) {
+                    valor_celula_p = "ORBITALL"
+                } 
+                
+                if (valor_celula_p.toUpperCase().includes("COPERSUCARCOPERSUCAR")) {
+                    valor_celula_p = "COPERSUCAR"
+                } else if (valor_celula_p.toUpperCase().includes("COPERSUCAR COPERSUCAR")) {
+                    valor_celula_p = "COPERSUCAR"
                 }
                 worksheet.getCell(STORE_CLIENT_COLUMN + i).value = valor_celula_p.toUpperCase()
             }
