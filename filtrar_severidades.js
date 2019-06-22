@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: 'config' })
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
