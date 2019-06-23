@@ -1,6 +1,5 @@
 require('dotenv').config({ path: 'config' })
 const utf8 = require('utf8');
-const iconv = require('iconv')
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
