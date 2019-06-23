@@ -27,7 +27,7 @@ function toUTF8(body) {
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
-const TYPE_COLUMN = process.env.TYPE_COLUMN
+const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
 const SOURCE_FILE = process.env.SOURCE_FILE

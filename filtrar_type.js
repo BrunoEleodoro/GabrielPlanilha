@@ -7,7 +7,7 @@ var not_allowed = [];
 
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
-const TYPE_COLUMN = process.env.TYPE_COLUMN
+const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
@@ -45,7 +45,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 } else if(valor_celula_p.toLowerCase().includes("change")) {
                     type=  "CH"
                 } 
-                worksheet.getCell(TYPE_COLUMN + i).value = type.toUpperCase()
+                worksheet.getCell(STORE_TYPE_COLUMN + i).value = type.toUpperCase()
             }
             i++;
         }
