@@ -25,7 +25,7 @@ function toUTF8(body) {
     return buf.toString('utf-8');
 }
 // CONTROLLERS
-const LABELS_COLUMN = process.env.LABELS_COLUMN
+const PRIMARY_LABELS_COLUMN = process.env.PRIMARY_LABELS_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
 const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
@@ -34,6 +34,7 @@ const SOURCE_FILE = process.env.SOURCE_FILE
 const OUTPUT_FILE = process.env.OUTPUT_FILE
 const WORKSHEET = process.env.WORKSHEET
 const STORE_SEVERITY_COLUNM = process.env.STORE_SEVERITY_COLUNM
+const STORE_PRIMARY_LABELS_COLUMN = process.env.STORE_PRIMARY_LABELS_COLUMN
 
 //Summary for severities
 const SEV_SUMMARY_LABELS = process.env.SEV_SUMMARY_LABELS
@@ -52,8 +53,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
         var total = 0;
+        //setting the title of the column
+        worksheet.getCell(STORE_CLIENT_COLUMN + 1).value = "client"
         while (i <= worksheet.rowCount) {
-            var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
+            var valor_celula_p = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
 
             var k = 0;
             if (valor_celula_p != null) {
@@ -76,23 +79,14 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     valor_celula_p = "ORBITALL"
                 } else if (valor_celula_p.toUpperCase().includes("ORBITALL ORBITAL")) {
                     valor_celula_p = "ORBITALL"
-                } 
-                
+                }
+
                 if (valor_celula_p.toUpperCase().includes("COPERSUCARCOPERSUCAR")) {
                     valor_celula_p = "COPERSUCAR"
                 } else if (valor_celula_p.toUpperCase().includes("COPERSUCAR COPERSUCAR")) {
                     valor_celula_p = "COPERSUCAR"
                 }
                 worksheet.getCell(STORE_CLIENT_COLUMN + i).value = valor_celula_p.toUpperCase()
-            }
-
-            if (worksheet.getCell(STORE_CLIENT_COLUMN + i).value == worksheet.getCell("L" + i).value) {
-                worksheet.getCell("AG" + i).fill = {
-                    type: 'pattern',
-                    pattern: 'darkTrellis',
-                    fgColor: { argb: 'FFFFFF00' },
-                    bgColor: { argb: 'FF0000FF' }
-                };
             }
 
             i++;

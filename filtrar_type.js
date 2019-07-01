@@ -6,7 +6,7 @@ var workbook = new Excel.Workbook();
 var not_allowed = [];
 
 // CONTROLLERS
-const LABELS_COLUMN = process.env.LABELS_COLUMN
+const STORE_PRIMARY_LABELS_COLUMN = process.env.STORE_PRIMARY_LABELS_COLUMN
 const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
@@ -34,7 +34,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var i = 2;
         
         while (i <= worksheet.rowCount) {
-            var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
+            var valor_celula_p = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
 
             if (valor_celula_p != null) {
                 var type = "OTHER"

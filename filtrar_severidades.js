@@ -4,7 +4,7 @@ var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 
 // CONTROLLERS
-const LABELS_COLUMN = process.env.LABELS_COLUMN
+const STORE_PRIMARY_LABELS_COLUMN = process.env.STORE_PRIMARY_LABELS_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
 const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
@@ -43,7 +43,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
         // the first step is search for all the spreadsheet values for unknow severities
         while (i <= worksheet.rowCount) {
-            var labels = worksheet.getCell(LABELS_COLUMN + i).value
+            var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
             if (labels != null) {
                 if (
                     !labels.toLowerCase().trim().includes("sev1") &&
@@ -53,7 +53,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 ) {
                     // if the severity is NOT 1,2,3 or 4, them generate a random number for that 
                     var x = Math.floor((Math.random() * 4) + 1)
-                    worksheet.getCell(LABELS_COLUMN + i).value = worksheet.getCell(LABELS_COLUMN + i).value + ",gerado sev" + parseFloat(x);
+                    worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value + ",gerado sev" + parseFloat(x);
 
                     // painting the cell when the severity is unknow
                     worksheet.getCell(STORE_SEVERITY_COLUNM + i).fill = {
@@ -89,7 +89,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
             }
 
             // Here comes the magic
-            var labels = worksheet.getCell(LABELS_COLUMN + i).value
+            var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
             var severidade = "n";
             // checking if the labels is not empty
             if (labels != null) {
