@@ -63,6 +63,9 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
                 while (k < not_allowed.length) {
                     valor_celula_p = valor_celula_p.replace('√©', 'E')
+                    valor_celula_p = valor_celula_p.replace('Ã©', 'É')
+                    valor_celula_p = valor_celula_p.replace('Ã§', 'Ç')
+                    valor_celula_p = valor_celula_p.replace('Ã£', 'Ã')
 
                     valor_celula_p = valor_celula_p.toLowerCase().replace(not_allowed[k], "")
                     valor_celula_p = valor_celula_p.replace(" ,", "")
