@@ -1,4 +1,4 @@
-require('dotenv').config({ path: 'config' })
+require('dotenv').config({ path: 'config_criar_planilha' })
 const utf8 = require('utf8');
 
 var Excel = require('exceljs');
