@@ -1,5 +1,5 @@
 SOURCE_FILE=CIC BR - ISM - CIC BR - ISM (SAM)_metrics_2019-06-23.csv
-OUTPUT_FILE=Metricas Maio.2019.xlsx
+OUTPUT_FILE=Metricas Junho.2019.xlsx
 WORKSHEET=Dados
 
 CREATED_BY_COLUMN=N

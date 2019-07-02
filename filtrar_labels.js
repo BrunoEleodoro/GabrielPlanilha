@@ -113,29 +113,43 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
         // console.log(todos_os_clientes[2], relacao_clientes_labels[todos_os_clientes[2]])
         var i = 0;
-        while( i < todos_os_clientes.length) {
+        while (i < todos_os_clientes.length) {
             // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
             var client = todos_os_clientes[i]
-            worksheet.getRow(i+3).getCell(column_starts_at).value = client            
+            worksheet.getRow(i + 3).getCell(column_starts_at).value = client
             i++;
         }
 
         var i = 0;
-        while( i < todos_os_clientes.length) {
+        while (i < todos_os_clientes.length) {
             // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
             var client = todos_os_clientes[i]
             var k = 0;
-            while(k < todas_as_labels.length){
+            while (k < todas_as_labels.length) {
                 var label = todas_as_labels[k].toLowerCase().trim()
-                
-                if(i == 0) {
-                    worksheet.getRow(2).getCell(24+k).value = label
-                } else {
-                    worksheet.getRow(i+2).getCell(24+k).value = relacao_clientes_labels[client][label]
-                }
+                worksheet.getRow(2).getCell(24 + k).value = label
+                // if (i == 0) {
+                    
+                // } else {
+                //     worksheet.getRow(i + 2).getCell(24 + k).value = relacao_clientes_labels[client][label]
+                // }
                 k++;
             }
-            
+            break
+            i++;
+        }
+
+        var i = 0;
+        while (i < todos_os_clientes.length) {
+            // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+            var client = todos_os_clientes[i]
+            var k = 0;
+            while (k < todas_as_labels.length) {
+                var label = todas_as_labels[k].toLowerCase().trim()
+                worksheet.getRow(i + 3).getCell(24 + k).value = relacao_clientes_labels[client][label]
+                k++;
+            }
+
             i++;
         }
         ////?????

@@ -56,7 +56,7 @@ const clientes_possiveis = [
     "DPSP",
     "COPERSUCAR",
     "TIGRE",
-    "ONOFRE",
+    "DROGARIA ONOFRE",
     "ORBITALL",
     "LASA",
     "LEROY MERLIN",
@@ -100,7 +100,13 @@ const clientes_possiveis = [
     "ALPARGATAS",
     "BANCO PINE",
     "SANTA HELENA",
-    "REDECARD"
+    "REDECARD",
+    "PESA",
+    "MULTI VAREJO",
+    "ORBITAL",
+    "ASSAI",
+    "CRDC",
+    "MERCEDES BENZ"
 ]
 
 // READ WORKBOOK
@@ -113,15 +119,35 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(STORE_CLIENT_COLUMN + 1).value = "client"
         while (i <= worksheet.rowCount) {
             var valor_celula_p = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
-
             var k = 0;
             if (valor_celula_p != null) {
                 var possivel_cliente = "";
                 while (k < clientes_possiveis.length) {
                     if (valor_celula_p.toLowerCase().includes(clientes_possiveis[k].toLowerCase())) {
                         possivel_cliente = clientes_possiveis[k].toUpperCase()
+                        break
                     }
                     k++;
+                }
+
+                if (possivel_cliente == "") {
+                    var valor_client = worksheet.getCell(TITLE_COLUMN + i).value
+                    valor_client = valor_client.split("-")[0]
+                    // removing the brackets
+                    valor_client = valor_client.replace("[", "").replace("]", "")
+                    // removing the blank space from the beggining and from the end
+                    valor_client = valor_client.trim()
+                    possivel_cliente = valor_client
+                    if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
+                        possivel_cliente = "MERCEDES BENZ"
+                    }
+                    if (possivel_cliente.trim().toUpperCase() == "RCC") {
+                        possivel_cliente = "RECORD"
+                    }
+                    
+                    worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
+                } else {
+                    worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 }
             } else {
                 var valor_client = worksheet.getCell(TITLE_COLUMN + i).value
@@ -131,7 +157,12 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 // removing the blank space from the beggining and from the end
                 valor_client = valor_client.trim()
                 possivel_cliente = valor_client
-
+                if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
+                    possivel_cliente = "MERCEDES BENZ"
+                }
+                if (possivel_cliente.trim().toUpperCase() == "RCC") {
+                    possivel_cliente = "RECORD"
+                }
                 worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
             }
 

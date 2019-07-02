@@ -130,46 +130,46 @@ workbook.xlsx.readFile(SOURCE_FILE)
         }
 
         // Creating the summary for each severity
-        worksheet.getCell(SEV_SUMMARY_LABELS + 3).value = "sev1"
-        worksheet.getCell(SEV_SUMMARY_VALUES + 3).value = total_sev1
+        // worksheet.getCell(SEV_SUMMARY_LABELS + 3).value = "sev1"
+        // worksheet.getCell(SEV_SUMMARY_VALUES + 3).value = total_sev1
 
-        worksheet.getCell(SEV_SUMMARY_LABELS + 4).value = "sev2"
-        worksheet.getCell(SEV_SUMMARY_VALUES + 4).value = total_sev2
+        // worksheet.getCell(SEV_SUMMARY_LABELS + 4).value = "sev2"
+        // worksheet.getCell(SEV_SUMMARY_VALUES + 4).value = total_sev2
 
-        worksheet.getCell(SEV_SUMMARY_LABELS + 5).value = "sev3"
-        worksheet.getCell(SEV_SUMMARY_VALUES + 5).value = total_sev3
+        // worksheet.getCell(SEV_SUMMARY_LABELS + 5).value = "sev3"
+        // worksheet.getCell(SEV_SUMMARY_VALUES + 5).value = total_sev3
 
-        worksheet.getCell(SEV_SUMMARY_LABELS + 6).value = "sev4"
-        worksheet.getCell(SEV_SUMMARY_VALUES + 6).value = total_sev4
+        // worksheet.getCell(SEV_SUMMARY_LABELS + 6).value = "sev4"
+        // worksheet.getCell(SEV_SUMMARY_VALUES + 6).value = total_sev4
 
-        worksheet.getCell(SEV_SUMMARY_LABELS + 7).value = "no sev"
-        worksheet.getCell(SEV_SUMMARY_VALUES + 7).value = worksheet.rowCount - total
+        // worksheet.getCell(SEV_SUMMARY_LABELS + 7).value = "no sev"
+        // worksheet.getCell(SEV_SUMMARY_VALUES + 7).value = worksheet.rowCount - total
 
-        console.log('sev1', total_sev1)
-        console.log('sev2', total_sev2)
-        console.log('sev3', total_sev3)
-        console.log('sev4', total_sev4)
-        console.log(total, worksheet.rowCount)
+        // console.log('sev1', total_sev1)
+        // console.log('sev2', total_sev2)
+        // console.log('sev3', total_sev3)
+        // console.log('sev4', total_sev4)
+        // console.log(total, worksheet.rowCount)
 
 
-        // Creating the summary for each client
-        worksheet.getCell(SEV_SUMMARY_CLIENT_NAME + 2).value = "Client name"
-        worksheet.getCell(SEV_SUMMARY_CLIENT_SEV1 + 2).value = "SEV1"
-        worksheet.getCell(SEV_SUMMARY_CLIENT_SEV2 + 2).value = "SEV2"
-        worksheet.getCell(SEV_SUMMARY_CLIENT_SEV3 + 2).value = "SEV3"
-        worksheet.getCell(SEV_SUMMARY_CLIENT_SEV4 + 2).value = "SEV4"
-        var i = 0;
-        while (i < clientes.length) {
-            var pos = i + 3;
-            worksheet.getCell(SEV_SUMMARY_CLIENT_NAME + (pos)).value = clientes[i]
+        // // Creating the summary for each client
+        // worksheet.getCell(SEV_SUMMARY_CLIENT_NAME + 2).value = "Client name"
+        // worksheet.getCell(SEV_SUMMARY_CLIENT_SEV1 + 2).value = "SEV1"
+        // worksheet.getCell(SEV_SUMMARY_CLIENT_SEV2 + 2).value = "SEV2"
+        // worksheet.getCell(SEV_SUMMARY_CLIENT_SEV3 + 2).value = "SEV3"
+        // worksheet.getCell(SEV_SUMMARY_CLIENT_SEV4 + 2).value = "SEV4"
+        // var i = 0;
+        // while (i < clientes.length) {
+        //     var pos = i + 3;
+        //     worksheet.getCell(SEV_SUMMARY_CLIENT_NAME + (pos)).value = clientes[i]
 
-            worksheet.getCell(SEV_SUMMARY_CLIENT_SEV1 + (pos)).value = clientes_sevs[i].sev1
-            worksheet.getCell(SEV_SUMMARY_CLIENT_SEV2 + (pos)).value = clientes_sevs[i].sev2
-            worksheet.getCell(SEV_SUMMARY_CLIENT_SEV3 + (pos)).value = clientes_sevs[i].sev3
-            worksheet.getCell(SEV_SUMMARY_CLIENT_SEV4 + (pos)).value = clientes_sevs[i].sev4
-            // worksheet.getCell('AP' + (pos)).value = clientes_sevs[i].non_sev
-            i++;
-        }
+        //     worksheet.getCell(SEV_SUMMARY_CLIENT_SEV1 + (pos)).value = clientes_sevs[i].sev1
+        //     worksheet.getCell(SEV_SUMMARY_CLIENT_SEV2 + (pos)).value = clientes_sevs[i].sev2
+        //     worksheet.getCell(SEV_SUMMARY_CLIENT_SEV3 + (pos)).value = clientes_sevs[i].sev3
+        //     worksheet.getCell(SEV_SUMMARY_CLIENT_SEV4 + (pos)).value = clientes_sevs[i].sev4
+        //     // worksheet.getCell('AP' + (pos)).value = clientes_sevs[i].non_sev
+        //     i++;
+        // }
 
         return workbook.xlsx.writeFile(OUTPUT_FILE);
     })
