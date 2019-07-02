@@ -36,6 +36,16 @@ const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST.split(",")
 const listCreatedBy = []
 const matrice = []
 
+function convert(input) {
+    if(input == null){ 
+        return input
+    }
+    var iconv = require('iconv-lite');
+    var output = iconv.decode(input, "UTF-8");
+    // output = iconv.decode(output, "UTF-8");
+    return output;
+}
+
 // READ WORKBOOK
 async function main() {
     var linhas_novas = []
@@ -47,15 +57,15 @@ async function main() {
             var i = 2;
             while (i <= worksheet.rowCount) {
                 var linha_antiga = []
-                
+
                 var k = 0;
                 while (k < SOURCE_COLUMNS_LIST.length) {
                     //getting the titles
-                    if(i == 2) {
+                    if (i == 2) {
                         titles.push(worksheet.getRow(1).getCell(SOURCE_COLUMNS_LIST[k]).value)
                     }
                     var value = worksheet.getRow(i).getCell(SOURCE_COLUMNS_LIST[k]).value
-                    linha_antiga.push(value)
+                    linha_antiga.push(convert(value))
                     k++;
                 }
 
@@ -71,15 +81,15 @@ async function main() {
             var worksheet = workbook.addWorksheet("Dados");
             var i = 2;
             while (i <= linhas_novas.length) {
-                
+
                 var k = 0;
                 while (k < DESTINATION_COLUMNS_LIST.length) {
                     //writing the titles
-                    if(i == 2) {
+                    if (i == 2) {
                         worksheet.getRow(1).getCell(DESTINATION_COLUMNS_LIST[k]).value = titles[k]
                     }
 
-                    var value = linhas_novas[i-2][k]
+                    var value = linhas_novas[i - 2][k]
                     worksheet.getRow(i).getCell(DESTINATION_COLUMNS_LIST[k]).value = value
                     k++;
                 }

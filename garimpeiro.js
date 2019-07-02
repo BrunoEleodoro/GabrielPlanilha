@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: 'config' })
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
@@ -15,6 +15,7 @@ fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
         console.log(err);
     }
 });
+
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
@@ -36,6 +37,16 @@ const SEV_SUMMARY_CLIENT_SEV2 = process.env.SEV_SUMMARY_CLIENT_SEV2
 const SEV_SUMMARY_CLIENT_SEV3 = process.env.SEV_SUMMARY_CLIENT_SEV3
 const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 
+function convert(input) {
+    if (input == null) {
+        return input
+    }
+    var iconv = require('iconv-lite');
+    var output = iconv.decode(input, "UTF-8");
+    // output = iconv.decode(output, "UTF-8");
+    return output;
+}
+
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
@@ -43,34 +54,49 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
         var total = 0;
+
+        i = 2;
+        var todos_os_clientes = []
         while (i <= worksheet.rowCount) {
-
-            var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
-            var k = 0;
-            if (valor_celula_p != null) {
-                while (k < not_allowed.length) {
-                    valor_celula_p = valor_celula_p.toLowerCase().replace(not_allowed[k], "")
-                    // valor_celula_p = valor_celula_p.replace(" ","")
-                    valor_celula_p = valor_celula_p.replace(" ,", "")
-                    valor_celula_p = valor_celula_p.replace(", ", "")
-                    valor_celula_p = valor_celula_p.trim()
-                    k++;
+            var client = worksheet.getCell("L" + i).value
+            if (client != null) {
+                if(todos_os_clientes.indexOf(client) == -1) {
+                    todos_os_clientes.push(client)
                 }
-                worksheet.getCell(STORE_CLIENT_COLUMN + i).value = valor_celula_p.toUpperCase()
             }
-
-            if (worksheet.getCell(STORE_CLIENT_COLUMN + i).value == worksheet.getCell("L" + i).value) {
-                // total = total + 1;
-                worksheet.getCell("AG" + i).fill = {
-                    type: 'pattern',
-                    pattern: 'darkTrellis',
-                    fgColor: { argb: 'FFFFFF00' },
-                    bgColor: { argb: 'FF0000FF' }
-                };
-            }
-
             i++;
         }
+        console.log(JSON.stringify(todos_os_clientes))
+        // while (i <= worksheet.rowCount) {
+
+        //     var valor_celula_p = worksheet.getCell(LABELS_COLUMN + i).value
+        //     var k = 0;
+        //     if (valor_celula_p != null) {
+        //         while (k < not_allowed.length) {
+        //             valor_celula_p = valor_celula_p.toLowerCase().replace(not_allowed[k], "")
+        //             // valor_celula_p = valor_celula_p.replace(" ","")
+        //             valor_celula_p = valor_celula_p.replace(" ,", "")
+        //             valor_celula_p = valor_celula_p.replace(", ", "")
+        //             valor_celula_p = valor_celula_p.trim()
+        //             k++;
+        //         }
+        //         worksheet.getCell(STORE_CLIENT_COLUMN + i).value = valor_celula_p.toUpperCase()
+        //     }
+
+        //     if (worksheet.getCell(STORE_CLIENT_COLUMN + i).value == worksheet.getCell("L" + i).value) {
+        //         // total = total + 1;
+        //         worksheet.getCell("AG" + i).fill = {
+        //             type: 'pattern',
+        //             pattern: 'darkTrellis',
+        //             fgColor: { argb: 'FFFFFF00' },
+        //             bgColor: { argb: 'FF0000FF' }
+        //         };
+        //     }
+
+        //     i++;
+        // }
+        // var nao_pode_ser = []
+        // i = 0
         // while (i <= worksheet.rowCount) {
 
         //     //getting value from cell K

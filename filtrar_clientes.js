@@ -30,6 +30,7 @@ const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
 const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
+const TITLE_COLUMN = process.env.TITLE_COLUMN
 const SOURCE_FILE = process.env.SOURCE_FILE
 const OUTPUT_FILE = process.env.OUTPUT_FILE
 const WORKSHEET = process.env.WORKSHEET
@@ -47,6 +48,61 @@ const SEV_SUMMARY_CLIENT_SEV2 = process.env.SEV_SUMMARY_CLIENT_SEV2
 const SEV_SUMMARY_CLIENT_SEV3 = process.env.SEV_SUMMARY_CLIENT_SEV3
 const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 
+const clientes_possiveis = [
+    "CARREFOUR",
+    "FLEURY",
+    "GERDAU",
+    "BRF",
+    "DPSP",
+    "COPERSUCAR",
+    "TIGRE",
+    "ONOFRE",
+    "ORBITALL",
+    "LASA",
+    "LEROY MERLIN",
+    "RECORD",
+    "SAINT-GOBAIN",
+    "INTERMEDICA",
+    "BCG",
+    "GPA",
+    "ADP",
+    "VIA VAREJO",
+    "LIVELO",
+    "HONDA",
+    "GALGO",
+    "CIELO",
+    "BRMALLS",
+    "ETERNIT",
+    "ARTERIS",
+    "CONSTRUDECOR",
+    "LEAO",
+    "CMOC",
+    "SENIOR",
+    "AREZZO",
+    "G2",
+    "GENERALI",
+    "WPP",
+    "CEBRACE",
+    "MULTIPLUS",
+    "CONFESOL",
+    "MANGELS",
+    "ZETRASOFT",
+    "FAST SHOP",
+    "LEROY",
+    "FIRST DATA",
+    "BOA VISTA",
+    "SPRINGER",
+    "RIOCARD",
+    "ESSILOR",
+    "PROFARMA",
+    "STELO",
+    "FASTSHOP",
+    "ALPARGATAS",
+    "BANCO PINE",
+    "SANTA HELENA",
+    "REDECARD"
+]
+
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
@@ -60,38 +116,36 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
             var k = 0;
             if (valor_celula_p != null) {
-
-                while (k < not_allowed.length) {
-                    valor_celula_p = valor_celula_p.replace('√©', 'E')
-                    valor_celula_p = valor_celula_p.replace('Ã©', 'É')
-                    valor_celula_p = valor_celula_p.replace('Ã§', 'Ç')
-                    valor_celula_p = valor_celula_p.replace('Ã£', 'Ã')
-
-                    valor_celula_p = valor_celula_p.toLowerCase().replace(not_allowed[k], "")
-                    valor_celula_p = valor_celula_p.replace(" ,", "")
-                    valor_celula_p = valor_celula_p.replace(", ", "")
-                    valor_celula_p = valor_celula_p.replace(",", "")
-                    valor_celula_p = valor_celula_p.trim()
-
+                var possivel_cliente = "";
+                while (k < clientes_possiveis.length) {
+                    if (valor_celula_p.toLowerCase().includes(clientes_possiveis[k].toLowerCase())) {
+                        possivel_cliente = clientes_possiveis[k].toUpperCase()
+                    }
                     k++;
                 }
+            } else {
+                var valor_client = worksheet.getCell(TITLE_COLUMN + i).value
+                valor_client = valor_client.split("-")[0]
+                // removing the brackets
+                valor_client = valor_client.replace("[", "").replace("]", "")
+                // removing the blank space from the beggining and from the end
+                valor_client = valor_client.trim()
+                possivel_cliente = valor_client
 
-                if (valor_celula_p.toUpperCase().includes("ORBITALLORBITAL")) {
-                    valor_celula_p = "ORBITALL"
-                } else if (valor_celula_p.toUpperCase().includes("ORBITAL")) {
-                    valor_celula_p = "ORBITALL"
-                } else if (valor_celula_p.toUpperCase().includes("ORBITALL ORBITAL")) {
-                    valor_celula_p = "ORBITALL"
-                }
-
-                if (valor_celula_p.toUpperCase().includes("COPERSUCARCOPERSUCAR")) {
-                    valor_celula_p = "COPERSUCAR"
-                } else if (valor_celula_p.toUpperCase().includes("COPERSUCAR COPERSUCAR")) {
-                    valor_celula_p = "COPERSUCAR"
-                }
-                worksheet.getCell(STORE_CLIENT_COLUMN + i).value = valor_celula_p.toUpperCase()
+                worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
             }
 
+            // if (true) {
+            //     if (worksheet.getCell("D" + i).value == worksheet.getCell(STORE_CLIENT_COLUMN + i).value) {
+            //         worksheet.getCell("M" + i).fill = {
+            //             type: 'pattern',
+            //             pattern: 'solid',
+            //             fgColor: { argb: 'FFFFFF00' },
+            //             bgColor: { argb: 'aa00ff' }
+            //         };
+            //     }
+
+            // }
             i++;
         }
         console.log('finalizado!');

@@ -53,7 +53,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 ) {
                     // if the severity is NOT 1,2,3 or 4, them generate a random number for that 
                     var x = Math.floor((Math.random() * 4) + 1)
-                    worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value + ",gerado sev" + parseFloat(x);
+                    worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value + ",gerado sev" + parseFloat(x)+",sev"+parseFloat(x);
 
                     // painting the cell when the severity is unknow
                     worksheet.getCell(STORE_SEVERITY_COLUNM + i).fill = {
