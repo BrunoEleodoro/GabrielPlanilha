@@ -141,8 +141,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
                         possivel_cliente = "MERCEDES BENZ"
                     }
-                    if (possivel_cliente.trim().toUpperCase() == "RCC") {
+                    if (possivel_cliente.trim().toUpperCase() == "RRC") {
                         possivel_cliente = "RECORD"
+                    }
+                    if (possivel_cliente.trim().toUpperCase() == "CAR") {
+                        possivel_cliente = "CARREFOUR"
                     }
                     
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
@@ -160,8 +163,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
                     possivel_cliente = "MERCEDES BENZ"
                 }
-                if (possivel_cliente.trim().toUpperCase() == "RCC") {
+                if (possivel_cliente.trim().toUpperCase() == "RRC") {
                     possivel_cliente = "RECORD"
+                }
+                if (possivel_cliente.trim().toUpperCase() == "CAR") {
+                    possivel_cliente = "CARREFOUR"
                 }
                 worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
             }
