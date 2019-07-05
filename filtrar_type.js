@@ -32,7 +32,9 @@ workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
-        
+        //setting the title of the column
+        worksheet.getCell(STORE_TYPE_COLUMN + 1).value = "type"
+
         while (i <= worksheet.rowCount) {
             var valor_celula_p = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
 
