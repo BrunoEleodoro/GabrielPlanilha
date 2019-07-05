@@ -15,6 +15,7 @@ const TITLE_COLUMN = process.env.TITLE_COLUMN
 const PRIMARY_LABELS_COLUMN = process.env.PRIMARY_LABELS_COLUMN
 const CLOSED_AT = process.env.CLOSED_AT
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
+const CREATED_AT = process.env.CREATED_AT
 
 const STORE_CREATED_BY_COLUMN = process.env.STORE_CREATED_BY_COLUMN
 const STORE_SHIFT = process.env.STORE_SHIFT
@@ -40,40 +41,163 @@ const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+function changeDayAndMonthPosition(date, separator) {
+    var pieces = date.split(separator)
+    var newDate = pieces[1] + separator + pieces[0] + separator + pieces[2]
+    return newDate
+}
+
 
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
-        console.log('')
+
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
 
         //setting the title of the column
         worksheet.getCell(STORE_MONTH + 1).value = "month"
         var valor_anterior = ""
+        var mes_anterior = ""
+        var mes_certo = ""
+
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
+
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
-                var date = new Date(pieces[0])
-                var dayName = months[date.getMonth()];
-                if(valor_anterior != "" && valor_anterior != dayName) {
-                    // dayName = valor_anterior
-                    dayName = months[parseFloat(pieces[0].split("/")[1]) - 1]
-                    var newDateUS = pieces[0].split("/")[1] + "/" + pieces[0].split("/")[0] + "/" + pieces[0].split("/")[2]
-                    var date = new Date(newDateUS)
-                    worksheet.getCell(STORE_CLOSED_AT + i).value = newDateUS+" "+pieces[1]
-                    dayName = months[date.getMonth()];
+                var date = pieces[0].trim();
+                if (parseFloat(date.split("/")[0]) > 12) {
+                    worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/") + " " + pieces[1]
                 }
-                // if (dayName == null) {
-                    
-                // }
-                worksheet.getCell(STORE_MONTH + i).value = dayName
-                valor_anterior = dayName
+                // worksheet.getCell(STORE_MONTH + i).value = dayName
             }
-            
+
             i++;
         }
+
+        var first_parts = []
+        var first_values = []
+        i = 2;
+        while (i <= worksheet.rowCount) {
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
+            if (valor_celula != null) {
+                var pieces = valor_celula.split(" ")
+                var first = pieces[0].trim().split('/')[0];
+                var index = first_parts.indexOf(first)
+                if (index == -1) {
+                    first_parts.push(first);
+                    first_values.push(1)
+                } else {
+                    first_values[index] = parseFloat(first_values[index]) + 1
+                }
+                // worksheet.getCell(STORE_MONTH + i).value = dayName
+            }
+            i++;
+            // if (i > 30) { break }
+        }
+        // console.log(JSON.stringify(first_parts), JSON.stringify(first_values))
+
+        var maior_valor = 0;
+        var index = 0;
+        i = 0;
+        while (i <= first_parts.length) {
+            var valor = first_values[i]
+            if (maior_valor < valor) {
+                index = i
+                maior_valor = valor
+            }
+            i++;
+            // if (i > 30) { break }
+        }
+
+        var primeiro_maior_valor = maior_valor;
+        var primeiro_maior_valor_index = index;
+
+        // first_parts.splice(index)
+        // first_values.splice(index)
+
+        var maior_valor = 0;
+        var index = 0;
+        i = 0;
+        while (i <= first_parts.length) {
+            var valor = first_values[i]
+            if (maior_valor < valor && valor != primeiro_maior_valor) {
+                index = i
+                maior_valor = valor
+            }
+            i++;
+        }
+
+        var segundo_maior_valor = maior_valor;
+        var segundo_maior_valor_index = index;
+
+        var meses_permitidos = []
+        meses_permitidos.push(first_parts[primeiro_maior_valor_index])
+        meses_permitidos.push(first_parts[segundo_maior_valor_index])
+
+
+
+        i = 2;
+        while (i <= worksheet.rowCount) {
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
+            if (valor_celula != null) {
+                var pieces = valor_celula.split(" ")
+                var date = pieces[0].trim();
+
+                var index1 = meses_permitidos.indexOf(date.split("/")[0])
+                var index2 = meses_permitidos.indexOf(date.split("/")[1])
+
+                if (index1 == -1 && index2 != -1) {
+                    worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/")
+                }
+                
+                var date = new Date(worksheet.getCell(CREATED_AT + i).value.split(" ")[0].trim())
+                var dayName = months[date.getMonth()];
+                worksheet.getCell(STORE_MONTH + i).value = dayName
+            }
+            i++;
+            // if (i > 30) { break }
+        }
+        // while (i <= worksheet.rowCount) {
+        //     var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+        //     if (valor_celula != null) {
+        //         var pieces = valor_celula.split(" ")
+        //         var date = new Date(pieces[0])
+        //         var dayName = months[date.getMonth()];
+
+        //         if (valor_anterior != "" && valor_anterior != dayName) {
+        //             // console.log(mes_anterior, date.getMonth())
+        //             if (mes_anterior != date.getMonth() && date.getMonth() != mes_certo) {
+        //                 // dayName = valor_anterior
+        //                 dayName = months[parseFloat(pieces[0].split("/")[1]) - 1]
+        //                 var newDateUS = pieces[0].split("/")[1] + "/" + pieces[0].split("/")[0] + "/" + pieces[0].split("/")[2]
+        //                 var date = new Date(newDateUS)
+        //                 worksheet.getCell(STORE_CLOSED_AT + i).value = newDateUS + " " + pieces[1]
+        //                 dayName = months[date.getMonth()];
+        //             }
+
+        //         }
+
+        //         if (mes_anterior == "") {
+        //             mes_anterior = date.getMonth() - 1
+        //             if (mes_anterior == 0) {
+        //                 mes_anterior = 11
+        //             }
+        //         }
+        //         if(mes_certo == "") {
+        //             mes_certo = date.getMonth()
+        //         }
+        //         // if (dayName == null) {
+
+        //         // }
+        //         worksheet.getCell(STORE_MONTH + i).value = dayName
+        //         valor_anterior = dayName
+        //     }
+
+        //     i++;
+        // }
         console.log('finalizado!');
         return workbook.xlsx.writeFile(OUTPUT_FILE);
     })

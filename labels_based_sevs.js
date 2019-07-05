@@ -15,6 +15,7 @@ const TITLE_COLUMN = process.env.TITLE_COLUMN
 const PRIMARY_LABELS_COLUMN = process.env.PRIMARY_LABELS_COLUMN
 const CLOSED_AT = process.env.CLOSED_AT
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
+const CARD_ASSIGNEES = process.env.CARD_ASSIGNEES
 
 const STORE_CREATED_BY_COLUMN = process.env.STORE_CREATED_BY_COLUMN
 const STORE_SHIFT = process.env.STORE_SHIFT
@@ -50,16 +51,40 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var valor_celula = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
             var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
             var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
-            if (valor_celula != null) {
+            var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
+            if (valor_celula != null && assignee != null) {
                 var pieces = valor_celula.split(",");
                 var k = 0;
                 var res = "";
-                while(k < pieces.length) {
-                    res += pieces[k].trim()+"_sev"+sev+"_"+type+", "
+                while (k < pieces.length) {
+                    res += pieces[k].trim() + "_sev" + sev + "_" + type + ", "
                     k++;
                 }
-                res = res.substr(0,res.length - 2);
-                worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res
+                res = res.substr(0, res.length - 2);
+
+                var pieces_assignee = []
+                if (!assignee.includes(",")) {
+                    pieces_assignee.push(assignee)
+                } else {
+                    pieces_assignee = assignee.split(",");
+                }
+                
+                var res2 = ""
+                var pieces = res.split(",");
+                var j = 0;
+                while (j < pieces_assignee.length) {
+                    var email = pieces_assignee[j].split("@")[0]
+                    var k = 0;
+                    while (k < pieces.length) {
+                        res2 += pieces[k].trim() + "_" + email + ", "
+                        k++;
+                    }
+                    j++;
+                }
+
+                res2 = res2.substr(0, res2.length - 2);
+
+                worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res+","+res2
             }
 
             i++;

@@ -147,29 +147,32 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     if (possivel_cliente.trim().toUpperCase() == "CAR") {
                         possivel_cliente = "CARREFOUR"
                     }
-                    
+
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 } else {
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 }
             } else {
                 var valor_client = worksheet.getCell(TITLE_COLUMN + i).value
-                valor_client = valor_client.split("-")[0]
-                // removing the brackets
-                valor_client = valor_client.replace("[", "").replace("]", "")
-                // removing the blank space from the beggining and from the end
-                valor_client = valor_client.trim()
-                possivel_cliente = valor_client
-                if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
-                    possivel_cliente = "MERCEDES BENZ"
+                if (valor_client != null) {
+                    valor_client = valor_client.split("-")[0]
+                    // removing the brackets
+                    valor_client = valor_client.replace("[", "").replace("]", "")
+                    // removing the blank space from the beggining and from the end
+                    valor_client = valor_client.trim()
+                    possivel_cliente = valor_client
+                    if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
+                        possivel_cliente = "MERCEDES BENZ"
+                    }
+                    if (possivel_cliente.trim().toUpperCase() == "RRC") {
+                        possivel_cliente = "RECORD"
+                    }
+                    if (possivel_cliente.trim().toUpperCase() == "CAR") {
+                        possivel_cliente = "CARREFOUR"
+                    }
+                    worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 }
-                if (possivel_cliente.trim().toUpperCase() == "RRC") {
-                    possivel_cliente = "RECORD"
-                }
-                if (possivel_cliente.trim().toUpperCase() == "CAR") {
-                    possivel_cliente = "CARREFOUR"
-                }
-                worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
+
             }
 
             // if (true) {
