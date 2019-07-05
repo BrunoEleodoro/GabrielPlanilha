@@ -3,3 +3,4 @@ node_modules/
 *.xlsm
 *.csv
 *.zip
+.env

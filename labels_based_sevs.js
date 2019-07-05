@@ -7,7 +7,6 @@ var not_allowed = [];
 
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
-
 const SOURCE_FILE = process.env.SOURCE_FILE
 const OUTPUT_FILE = process.env.OUTPUT_FILE
 const WORKSHEET = process.env.WORKSHEET
@@ -38,10 +37,6 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
-
-var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
@@ -49,16 +44,24 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var i = 2;
 
         //setting the title of the column
-        worksheet.getCell(STORE_WEEK_DAY + 1).value = "week_day"
+        // worksheet.getCell(STORE_MONTH + 1).value = "month"
 
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
+            var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
+            var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
             if (valor_celula != null) {
-                var pieces = valor_celula.split(" ")
-                var date = new Date(pieces[0])
-                var dayName = days[date.getDay()];
-                worksheet.getCell(STORE_WEEK_DAY + i).value = dayName
+                var pieces = valor_celula.split(",");
+                var k = 0;
+                var res = "";
+                while(k < pieces.length) {
+                    res += pieces[k].trim()+"_sev"+sev+"_"+type+", "
+                    k++;
+                }
+                res = res.substr(0,res.length - 2);
+                worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res
             }
+
             i++;
         }
         console.log('finalizado!');

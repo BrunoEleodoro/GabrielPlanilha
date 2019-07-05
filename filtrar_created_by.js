@@ -9,13 +9,13 @@ var not_allowed = [];
 const CREATED_BY_COLUMN = process.env.CREATED_BY_COLUMN
 const TITLE_COLUMN = process.env.TITLE_COLUMN
 const PRIMARY_LABELS_COLUMN = process.env.PRIMARY_LABELS_COLUMN
-const OPENED_AT = process.env.OPENED_AT
+const CLOSED_AT = process.env.CLOSED_AT
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
 
 const STORE_CREATED_BY_COLUMN = process.env.CREATED_BY_COLUMN
 const STORE_TITLE_COLUMN = process.env.TITLE_COLUMN
 const STORE_PRIMARY_LABELS_COLUMN = process.env.PRIMARY_LABELS_COLUMN
-const STORE_OPENED_AT = process.env.OPENED_AT
+const STORE_CLOSED_AT = process.env.CLOSED_AT
 const STORE_CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
 
 const STORE_SHIFT = process.env.STORE_SHIFT
