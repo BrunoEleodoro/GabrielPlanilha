@@ -4,3 +4,5 @@ node_modules/
 *.csv
 *.zip
 .env
+.1.env
+slack

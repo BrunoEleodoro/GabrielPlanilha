@@ -39,7 +39,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var valor_celula_p = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
 
             if (valor_celula_p != null) {
-                var type = "OTHER"
+                var type = "Sem Chamado"
                 if(valor_celula_p.toLowerCase().includes("service request")) {
                     type=  "SR"
                 } else if(valor_celula_p.toLowerCase().includes("sev")) {

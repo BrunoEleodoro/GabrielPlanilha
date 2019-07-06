@@ -152,7 +152,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 if (index1 == -1 && index2 != -1) {
                     worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/")
                 }
-                
+
                 var date = new Date(worksheet.getCell(CREATED_AT + i).value.split(" ")[0].trim())
                 var dayName = months[date.getMonth()];
                 worksheet.getCell(STORE_MONTH + i).value = dayName

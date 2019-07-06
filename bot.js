@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: 'slack' });
 
 var Botkit = require('botkit');
 var express = require('express');
