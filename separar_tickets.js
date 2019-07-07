@@ -60,8 +60,8 @@ function replaceEmailToName(email) {
     email = email.toLowerCase()
     var i = 0;
     var keys = Object.keys(people);
-    while(i < keys.length) {
-        if(people[keys[i]] == email) {
+    while (i < keys.length) {
+        if (people[keys[i]] == email) {
             return keys[i]
         }
         i++;
@@ -76,28 +76,55 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var todos_emails_lista = []
         var i = 2;
         var todas_as_labels = []
+
+        var integrantes_ism = []
+        var clientes = []
+        var types = []
+        var sevs = []
+
+
         while (i <= worksheet.rowCount) {
 
+            var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
+            var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
             var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
             var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
             var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
-            if (labels != null && type != null && sev != null) {
-                type = type.toString().trim().toLowerCase()
-                sev = sev.toString().trim().toLowerCase()
 
-                labels = labels.split(",");
+            if (assignee != null && assignee.includes(",")) {
                 var k = 0;
-                while (k < labels.length) {
-                    if (todas_as_labels.indexOf(labels[k].toLowerCase().trim()) == -1) {
-                        todas_as_labels.push(labels[k].toLowerCase().trim())
-                    }
+                var pieces = assignee.split(",")
+                while (k < pieces.length) {
+                    integrantes_ism.push(replaceEmailToName(pieces[k].trim()));
+                    clientes.push(client);
+                    types.push(type);
+                    sevs.push(sev);
                     k++;
                 }
+            } else if (assignee != null) {
+                integrantes_ism.push(replaceEmailToName(assignee.trim()));
+                clientes.push(client);
+                types.push(type);
+                sevs.push(sev);
             }
+
+            // if (labels != null && type != null && sev != null) {
+            //     type = type.toString().trim().toLowerCase()
+            //     sev = sev.toString().trim().toLowerCase()
+
+            //     labels = labels.split(",");
+            //     var k = 0;
+            //     while (k < labels.length) {
+            //         if (todas_as_labels.indexOf(labels[k].toLowerCase().trim()) == -1) {
+            //             todas_as_labels.push(labels[k].toLowerCase().trim())
+            //         }
+            //         k++;
+            //     }
+            // }
             i++;
 
         }
-
+        console.log(integrantes_ism.length, clientes.length, types.length, sevs.length)
 
         // var i = 2;
         // while (i <= worksheet.rowCount) {
@@ -120,125 +147,134 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
 
         //get the users
-        var i = 2;
-        while (i <= worksheet.rowCount) {
-            var assignees = worksheet.getCell(CARD_ASSIGNEES + i).value
-            if (assignees != null) {
-                if (assignees.includes(",")) {
-                    var k = 0;
-                    while (k < assignees.split(',').length) {
-                        if (todos_emails.indexOf(assignees.split(',')[k].trim()) == -1) {
-                            todos_emails.push(assignees.split(',')[k].trim())
-                        }
-                        k++;
-                    }
-                }
-            } else {
-                if (assignees != null && todos_emails.indexOf(assignees.trim()) == -1) {
-                    todos_emails.push(assignees.trim())
-                }
-            }
-            i++;
-        }
+        // var i = 2;
+        // while (i <= worksheet.rowCount) {
+        //     var assignees = worksheet.getCell(CARD_ASSIGNEES + i).value
+        //     if (assignees != null) {
+        //         if (assignees.includes(",")) {
+        //             var k = 0;
+        //             while (k < assignees.split(',').length) {
+        //                 if (todos_emails.indexOf(assignees.split(',')[k].trim()) == -1) {
+        //                     todos_emails.push(assignees.split(',')[k].trim())
+        //                 }
+        //                 k++;
+        //             }
+        //         }
+        //     } else {
+        //         if (assignees != null && todos_emails.indexOf(assignees.trim()) == -1) {
+        //             todos_emails.push(assignees.trim())
+        //         }
+        //     }
+        //     i++;
+        // }
 
-        var todos_os_assignee = []
-        var relacao_assignee_labels = []
-        i = 0
-        while (i <= todos_emails.length) {
-            // var assignees = worksheet.getCell(CARD_ASSIGNEES + i).value
-            var email = todos_emails[i]
-            var k = 0;
-            relacao_assignee_labels[email] = []
-            while (k < todas_as_labels.length) {
-                var label = todas_as_labels[k];
-                relacao_assignee_labels[email][label] = 0
-                k++;
-            }
-            i++;
-        }
-
-
-        i = 2;
-        while (i <= worksheet.rowCount) {
-            var assignees = worksheet.getCell(CARD_ASSIGNEES + i).value
-            var primary_labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
-            var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
-            var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
-            if (type != null && sev != null) {
-                type = type.toString().trim().toLowerCase()
-                sev = sev.toString().trim().toLowerCase()
-            }
-
-            if (primary_labels != null && assignees != null && assignees.includes(",")) {
-                var list_assignees = assignees.split(",")
-                labels = primary_labels.split(",");
-                var j = 0;
-                while (j < list_assignees.length) {
-                    var assignee = list_assignees[j].trim();
-                    var k = 0;
-                    while (k < labels.length) {
-                        var label = labels[k].toLowerCase().trim()
-                        // console.log(relacao_assignee_labels[assignee][label], assignee, label)
-                        relacao_assignee_labels[assignee][label] = parseFloat(relacao_assignee_labels[assignee][label]) + 1
-                        k++;
-                    }
+        // var todos_os_assignee = []
+        // var relacao_assignee_labels = []
+        // i = 0
+        // while (i <= todos_emails.length) {
+        //     // var assignees = worksheet.getCell(CARD_ASSIGNEES + i).value
+        //     var email = todos_emails[i]
+        //     var k = 0;
+        //     relacao_assignee_labels[email] = []
+        //     while (k < todas_as_labels.length) {
+        //         var label = todas_as_labels[k];
+        //         relacao_assignee_labels[email][label] = 0
+        //         k++;
+        //     }
+        //     i++;
+        // }
 
 
-                    j++;
-                }
-            } else {
-                if (primary_labels != null && assignees != null) {
-                    labels = primary_labels.split(",");
-                    var k = 0;
-                    while (k < labels.length) {
-                        var label = labels[k].toLowerCase().trim()
-                        relacao_assignee_labels[assignees.trim()][label] = parseFloat(relacao_assignee_labels[assignees.trim()][label]) + 1
-                        // console.log(relacao_assignee_labels[assignees][label], assignees, label)
-                        k++;
-                    }
-                }
-            }
+        // i = 2;
+        // while (i <= worksheet.rowCount) {
+        //     var assignees = worksheet.getCell(CARD_ASSIGNEES + i).value
+        //     var primary_labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
+        //     var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
+        //     var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
+        //     if (type != null && sev != null) {
+        //         type = type.toString().trim().toLowerCase()
+        //         sev = sev.toString().trim().toLowerCase()
+        //     }
 
-            i++;
-        }
+        //     if (primary_labels != null && assignees != null && assignees.includes(",")) {
+        //         var list_assignees = assignees.split(",")
+        //         labels = primary_labels.split(",");
+        //         var j = 0;
+        //         while (j < list_assignees.length) {
+        //             var assignee = list_assignees[j].trim();
+        //             var k = 0;
+        //             while (k < labels.length) {
+        //                 var label = labels[k].toLowerCase().trim()
+        //                 // console.log(relacao_assignee_labels[assignee][label], assignee, label)
+        //                 relacao_assignee_labels[assignee][label] = parseFloat(relacao_assignee_labels[assignee][label]) + 1
+        //                 k++;
+        //             }
+
+
+        //             j++;
+        //         }
+        //     } else {
+        //         if (primary_labels != null && assignees != null) {
+        //             labels = primary_labels.split(",");
+        //             var k = 0;
+        //             while (k < labels.length) {
+        //                 var label = labels[k].toLowerCase().trim()
+        //                 relacao_assignee_labels[assignees.trim()][label] = parseFloat(relacao_assignee_labels[assignees.trim()][label]) + 1
+        //                 // console.log(relacao_assignee_labels[assignees][label], assignees, label)
+        //                 k++;
+        //             }
+        //         }
+        //     }
+
+        //     i++;
+        // }
 
         var column_starts_at = 23
         // console.log(todos_os_clientes[2], relacao_clientes_labels[todos_os_clientes[2]])
         var i = 0;
-        while (i < todos_emails.length) {
+        while (i < integrantes_ism.length) {
             // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var email = todos_emails[i]
-            worksheet.getRow(i + 93).getCell(column_starts_at).value = replaceEmailToName(email)
+            worksheet.getRow(i + 93).getCell(column_starts_at).value = integrantes_ism[i]
             i++;
         }
 
-        var k = 0;
-        while (k < todas_as_labels.length) {
-            var label = todas_as_labels[k].toLowerCase().trim()
-            worksheet.getRow(92).getCell(24 + k).value = label
-            k++;
-        }
+        
+
+        worksheet.getRow(92).getCell(23).value = "Integrante ISM"
+        worksheet.getRow(92).getCell(24).value = "Cliente"
+        worksheet.getRow(92).getCell(25).value = "Type"
+        worksheet.getRow(92).getCell(26).value = "Severidade"
+        worksheet.getRow(92).getCell(27).value = "Media"
 
         var i = 0;
-        while (i < todos_emails.length) {
+        while (i < clientes.length) {
             // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var type = worksheet.getCell(STORE_TYPE_COLUMN + (i + 2)).value
-            var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + (i + 2)).value
-            if (type != null && sev != null) {
-                type = type.toString().trim().toLowerCase()
-                sev = sev.toString().trim().toLowerCase()
-            }
-            var client = todos_emails[i].trim()
-            var k = 0;
-            while (k < todas_as_labels.length) {
-                var label = todas_as_labels[k].toLowerCase().trim()
-                worksheet.getRow(i + 93).getCell(24 + k).value = parseFloat(relacao_assignee_labels[client][label])
-                // console.log(relacao_assignee_labels[client][label], client, label)
-                k++;
-            }
-
+            worksheet.getRow(i + 93).getCell(24).value = clientes[i]
+            worksheet.getRow(i + 93).getCell(25).value = types[i]
+            worksheet.getRow(i + 93).getCell(26).value = "sev"+sevs[i]
+            worksheet.getRow(i + 93).getCell(27).value = parseFloat(1)
             i++;
         }
+        // var i = 0;
+        // while (i < todos_emails.length) {
+        //     // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+        //     var type = worksheet.getCell(STORE_TYPE_COLUMN + (i + 2)).value
+        //     var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + (i + 2)).value
+        //     if (type != null && sev != null) {
+        //         type = type.toString().trim().toLowerCase()
+        //         sev = sev.toString().trim().toLowerCase()
+        //     }
+        //     var client = todos_emails[i].trim()
+        //     var k = 0;
+        //     while (k < todas_as_labels.length) {
+        //         var label = todas_as_labels[k].toLowerCase().trim()
+        //         worksheet.getRow(i + 93).getCell(24 + k).value = parseFloat(relacao_assignee_labels[client][label])
+        //         // console.log(relacao_assignee_labels[client][label], client, label)
+        //         k++;
+        //     }
+
+        //     i++;
+        // }
 
         // console.log(relacao_assignee_labels['gsiq@br.ibm.com'])
         // console.log(JSON.stringify(relacao_assignee_labels['gsiq@br.ibm.com']))
