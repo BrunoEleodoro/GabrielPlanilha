@@ -20,6 +20,8 @@ build:
 	node labels_based_sevs.js
 	@echo "\033[0;32mFiltering labels...\033[0m" 
 	node filtrar_labels.js
+	@echo "\033[0;32mLabels for each employee...\033[0m" 
+	node separar_tickets.js
 
 consolidado: 
 	@echo "\033[0;32mStarting now... $(stamp)\033[0m" 
