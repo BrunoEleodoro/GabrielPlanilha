@@ -4,6 +4,7 @@ const utf8 = require('utf8');
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 var not_allowed = [];
+var path = require('path')
 
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
@@ -49,7 +50,7 @@ function changeDayAndMonthPosition(date, separator) {
 
 
 // READ WORKBOOK
-workbook.xlsx.readFile(SOURCE_FILE)
+workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
     .then(function () {
 
         var worksheet = workbook.getWorksheet(WORKSHEET);
@@ -199,5 +200,5 @@ workbook.xlsx.readFile(SOURCE_FILE)
         //     i++;
         // }
         console.log('finalizado!');
-        return workbook.xlsx.writeFile(OUTPUT_FILE);
+        return workbook.xlsx.writeFile(path.join(__dirname, OUTPUT_FILE));
     })

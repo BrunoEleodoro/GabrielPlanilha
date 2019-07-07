@@ -113,6 +113,16 @@ var acao_ism = [
     "priorizar"
 ]
 
+function convert(input) {
+    if(input == null){ 
+        return input
+    }
+    var iconv = require('iconv-lite');
+    var output = iconv.decode(input, "ISO-8859-1");
+    // output = iconv.decode(output, "UTF-8");
+    return output;
+}
+
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
@@ -148,6 +158,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     var found = false;
                     var label = pieces[k].trim().toLowerCase()
 
+                    if(label.includes("acionamento t")) {
+                        label = convert(label)
+                        label = label.replace("ý","é");
+                    }
                     if (areas_envolvidas.indexOf(label) >= 0) {
                         worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value + label + ", "
                         found = true;
