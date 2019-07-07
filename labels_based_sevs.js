@@ -50,6 +50,7 @@ var areas_envolvidas = [
     "acionamento técnico",
     "acionamento tecnico",
     "acionamento t",
+    "acionamento t√©cnico",
     "acionamento cliente",
     "acionamento sam",
     "sam",

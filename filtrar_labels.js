@@ -45,113 +45,113 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var total_sev4 = 0
         var last_index = 0
 
-        var todas_as_labels = []
-        while (i <= worksheet.rowCount) {
-            var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
-            if (labels != null) {
-                labels = labels.split(",");
-                var k = 0;
-                while (k < labels.length) {
-                    if (todas_as_labels.indexOf(labels[k].toLowerCase().trim()) == -1) {
-                        todas_as_labels.push(labels[k].toLowerCase().trim())
-                    }
-                    k++;
-                }
-            }
-            i++;
-        }
+        // var todas_as_labels = []
+        // while (i <= worksheet.rowCount) {
+        //     var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
+        //     if (labels != null) {
+        //         labels = labels.split(",");
+        //         var k = 0;
+        //         while (k < labels.length) {
+        //             if (todas_as_labels.indexOf(labels[k].toLowerCase().trim()) == -1) {
+        //                 todas_as_labels.push(labels[k].toLowerCase().trim())
+        //             }
+        //             k++;
+        //         }
+        //     }
+        //     i++;
+        // }
 
-        i = 2;
-        var todos_os_clientes = []
-        var relacao_clientes_labels = []
-        while (i <= worksheet.rowCount) {
-            var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            if (client != null) {
-                var index = todos_os_clientes.indexOf(client);
-                if (index == -1) {
-                    todos_os_clientes.push(client);
-                    var k = 0;
-                    relacao_clientes_labels[client] = []
-                    while (k < todas_as_labels.length) {
-                        var label = todas_as_labels[k];
-                        relacao_clientes_labels[client][label] = 0
-                        k++;
-                    }
-                }
-            }
-            // if (labels != null) {
-            //     labels = labels.split(",");
-            //     var k = 0;
-            //     while(k < labels.length)
-            //     {
-            //         if(todas_as_labels.indexOf(labels[k].toLowerCase()) == -1) {
-            //             todas_as_labels.push(labels[k].toLowerCase())
-            //         }
-            //         k++;
-            //     }
-            // }
-            i++;
-        }
+        // i = 2;
+        // var todos_os_clientes = []
+        // var relacao_clientes_labels = []
+        // while (i <= worksheet.rowCount) {
+        //     var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+        //     if (client != null) {
+        //         var index = todos_os_clientes.indexOf(client);
+        //         if (index == -1) {
+        //             todos_os_clientes.push(client);
+        //             var k = 0;
+        //             relacao_clientes_labels[client] = []
+        //             while (k < todas_as_labels.length) {
+        //                 var label = todas_as_labels[k];
+        //                 relacao_clientes_labels[client][label] = 0
+        //                 k++;
+        //             }
+        //         }
+        //     }
+        //     // if (labels != null) {
+        //     //     labels = labels.split(",");
+        //     //     var k = 0;
+        //     //     while(k < labels.length)
+        //     //     {
+        //     //         if(todas_as_labels.indexOf(labels[k].toLowerCase()) == -1) {
+        //     //             todas_as_labels.push(labels[k].toLowerCase())
+        //     //         }
+        //     //         k++;
+        //     //     }
+        //     // }
+        //     i++;
+        // }
 
-        i = 2;
-        while (i <= worksheet.rowCount) {
-            var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
-            if (labels != null && client != null) {
-                labels = labels.split(",");
-                var k = 0;
-                while (k < labels.length) {
-                    var label = labels[k].toLowerCase().trim()
-                    relacao_clientes_labels[client][label] = parseFloat(relacao_clientes_labels[client][label]) + 1
-                    k++;
-                }
-            }
-            i++;
-        }
+        // i = 2;
+        // while (i <= worksheet.rowCount) {
+        //     var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+        //     var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
+        //     if (labels != null && client != null) {
+        //         labels = labels.split(",");
+        //         var k = 0;
+        //         while (k < labels.length) {
+        //             var label = labels[k].toLowerCase().trim()
+        //             relacao_clientes_labels[client][label] = parseFloat(relacao_clientes_labels[client][label]) + 1
+        //             k++;
+        //         }
+        //     }
+        //     i++;
+        // }
 
-        var column_starts_at = 23
+        // var column_starts_at = 23
 
-        // console.log(todos_os_clientes[2], relacao_clientes_labels[todos_os_clientes[2]])
-        var i = 0;
-        while (i < todos_os_clientes.length) {
-            // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var client = todos_os_clientes[i]
-            worksheet.getRow(i + 3).getCell(column_starts_at).value = client
-            i++;
-        }
+        // // console.log(todos_os_clientes[2], relacao_clientes_labels[todos_os_clientes[2]])
+        // var i = 0;
+        // while (i < todos_os_clientes.length) {
+        //     // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+        //     var client = todos_os_clientes[i]
+        //     worksheet.getRow(i + 3).getCell(column_starts_at).value = client
+        //     i++;
+        // }
 
-        var i = 0;
-        while (i < todos_os_clientes.length) {
-            // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var client = todos_os_clientes[i]
-            var k = 0;
-            while (k < todas_as_labels.length) {
-                var label = todas_as_labels[k].toLowerCase().trim()
-                worksheet.getRow(2).getCell(24 + k).value = label
-                // if (i == 0) {
+        // var i = 0;
+        // while (i < todos_os_clientes.length) {
+        //     // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+        //     var client = todos_os_clientes[i]
+        //     var k = 0;
+        //     while (k < todas_as_labels.length) {
+        //         var label = todas_as_labels[k].toLowerCase().trim()
+        //         worksheet.getRow(2).getCell(24 + k).value = label
+        //         // if (i == 0) {
                     
-                // } else {
-                //     worksheet.getRow(i + 2).getCell(24 + k).value = relacao_clientes_labels[client][label]
-                // }
-                k++;
-            }
-            break
-            i++;
-        }
+        //         // } else {
+        //         //     worksheet.getRow(i + 2).getCell(24 + k).value = relacao_clientes_labels[client][label]
+        //         // }
+        //         k++;
+        //     }
+        //     break
+        //     i++;
+        // }
 
-        var i = 0;
-        while (i < todos_os_clientes.length) {
-            // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var client = todos_os_clientes[i]
-            var k = 0;
-            while (k < todas_as_labels.length) {
-                var label = todas_as_labels[k].toLowerCase().trim()
-                worksheet.getRow(i + 3).getCell(24 + k).value = relacao_clientes_labels[client][label]
-                k++;
-            }
+        // var i = 0;
+        // while (i < todos_os_clientes.length) {
+        //     // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+        //     var client = todos_os_clientes[i]
+        //     var k = 0;
+        //     while (k < todas_as_labels.length) {
+        //         var label = todas_as_labels[k].toLowerCase().trim()
+        //         worksheet.getRow(i + 3).getCell(24 + k).value = relacao_clientes_labels[client][label]
+        //         k++;
+        //     }
 
-            i++;
-        }
+        //     i++;
+        // }
         ////?????
 
 
