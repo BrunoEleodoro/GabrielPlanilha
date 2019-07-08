@@ -15,7 +15,7 @@ var slackBot = slackController.spawn({
 // slackController.hears(['.*'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
 slackController.hears(['.*'], ['direct_message', 'direct_mention', 'other_event', 'file_shared'], function (bot, message) {
     slackController.log('Slack message received');
-    console.log('message', message); 
+    console.log('message', message);
     bot.reply(message, "I'm here :) :hello-bear:");
     // bot.replyInThread(message, 'hahaha')
     // bot.api.files.upload({
@@ -80,19 +80,33 @@ slackController.on('file_shared', function (bot, message) {
                 channel: message.channel_id // channel Id for #slack_integration
             });
         } else if (response.file.filetype == "csv") {
-            const file = fs.createWriteStream(path.join(__dirname, "a.csv"))
-            https.get(response.file.url_private_download, {
-                headers: {
-                    'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
-                }
-            }, function (response) {
-                response.pipe(file);
-                build(bot, message);
-            });
-            bot.say({
-                text: "Received! :fbhappy: \nWorking now... :construction-2:",
-                channel: message.channel_id // channel Id for #slack_integration
-            });
+            if (response.file.title.includes("metrics_")) {
+                var output_filename = response.file.title;
+                output_filename = output_filename.split(".")[0];
+                output_filename = output_filename.split("metrics_");
+                output_filename = output_filename[1].toString().trim().split("-")
+                output_filename = output_filename[2] + "-" + output_filename[1] + "-" + output_filename[0]
+                output_filename = "Metricas_" + output_filename + ".xlsx"
+                const file = fs.createWriteStream(path.join(__dirname, "a.csv"))
+                https.get(response.file.url_private_download, {
+                    headers: {
+                        'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
+                    }
+                }, function (response) {
+                    response.pipe(file);
+                    build(bot, message, output_filename);
+                });
+                bot.say({
+                    text: "Received! :fbhappy: \nProcessing file and collecting metrics... :construction-2:",
+                    channel: message.channel_id // channel Id for #slack_integration
+                });
+            } else {
+                bot.say({
+                    text: "Invalid file name :sad1: ",
+                    channel: message.channel_id // channel Id for #slack_integration
+                });
+            }
+
         }
 
     })
@@ -100,7 +114,7 @@ slackController.on('file_shared', function (bot, message) {
 
 slackBot.startRTM();
 
-function build(bot, message) {
+function build(bot, message, output_filename) {
     // exec('node criar_planilha.js', (err, stdout, stderr) => {
     //     console.log('aaa');
     //     console.log(stderr);
@@ -118,11 +132,16 @@ function build(bot, message) {
         fs.readFile("config", { encoding: 'utf-8' }, function (err, data) {
             var file_name = data.split('\n')[2].replace("OUTPUT_FILE=", "")
             if (fs.existsSync(path.join(__dirname, file_name))) {
+                bot.say({
+                    text: "Finished, uploading the file...",
+                    channel: message.channel_id // channel Id for #slack_integration
+                });
                 bot.api.files.upload({
                     file: fs.createReadStream(path.join(__dirname, file_name)),
-                    filename: file_name,
+                    filename: output_filename,
                     filetype: "xlsx",
-                    channels: message.channel_id
+                    channels: message.channel_id,
+
                 }, function (err, res) {
                     if (err) {
                         console.log("Failed to add file :(", err)
