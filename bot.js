@@ -15,22 +15,23 @@ var slackBot = slackController.spawn({
 // slackController.hears(['.*'], ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
 slackController.hears(['.*'], ['direct_message', 'direct_mention', 'other_event', 'file_shared'], function (bot, message) {
     slackController.log('Slack message received');
-    console.log('message', message);
+    console.log('message', message); 
+    bot.reply(message, "I'm here :) :hello-bear:");
     // bot.replyInThread(message, 'hahaha')
-    bot.api.files.upload({
-        file: fs.createReadStream("main.py"),
-        filename: "file1" + ".py",
-        filetype: "python",
-        channels: message.channel
-    }, function (err, res) {
-        if (err) {
-            console.log("Failed to add file :(", err)
-            bot.reply(message, 'Sorry, there has been an error: ' + err)
-        }
-    })
-    exec('chmod -R 777 criar_planilha.js', (err, stdout, stderr) => {console.log(stderr)});
-    exec('chmod -R 777 bot.js', (err, stdout, stderr) => {console.log(stderr)});
-    exec('chmod -R 777 *.*', (err, stdout, stderr) => {console.log(stderr)});
+    // bot.api.files.upload({
+    //     file: fs.createReadStream("main.py"),
+    //     filename: "file1" + ".py",
+    //     filetype: "python",
+    //     channels: message.channel
+    // }, function (err, res) {
+    //     if (err) {
+    //         console.log("Failed to add file :(", err)
+    //         bot.reply(message, 'Sorry, there has been an error: ' + err)
+    //     }
+    // })
+    // exec('chmod -R 777 criar_planilha.js', (err, stdout, stderr) => { console.log(stderr) });
+    // exec('chmod -R 777 bot.js', (err, stdout, stderr) => { console.log(stderr) });
+    // exec('chmod -R 777 *.*', (err, stdout, stderr) => { console.log(stderr) });
     // bot.send("Shutting down VM #34324....", "fdsafdsafdsa");
     // bot.send("Shutting down VM #34324....")
     // var slackMessage = 
@@ -51,22 +52,22 @@ slackController.on('file_shared', function (bot, message) {
         // console.log(response.file.title)
         console.log(response.file.filetype)
         if (response.file.title == "config_criar_planilha") {
-            const file = fs.createWriteStream(path.join(__dirname,"config_criar_planilha"));
-            console.log(path.join(__dirname,"config_criar_planilha"))
+            const file = fs.createWriteStream(path.join(__dirname, "config_criar_planilha"));
+            console.log(path.join(__dirname, "config_criar_planilha"))
             https.get(response.file.url_private_download, {
                 headers: {
                     'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
                 }
             }, function (response) {
                 response.pipe(file);
-                console.log(fs.existsSync(path.join(__dirname,"config_criar_planilha")))
+                console.log(fs.existsSync(path.join(__dirname, "config_criar_planilha")))
             });
             bot.say({
                 text: "Config file for 'Criar planilha' Received! :fbhappy:",
                 channel: message.channel_id // channel Id for #slack_integration
             });
         } else if (response.file.title == "config") {
-            const file = fs.createWriteStream(path.join(__dirname,"config"));
+            const file = fs.createWriteStream(path.join(__dirname, "config"));
             https.get(response.file.url_private_download, {
                 headers: {
                     'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
@@ -79,7 +80,7 @@ slackController.on('file_shared', function (bot, message) {
                 channel: message.channel_id // channel Id for #slack_integration
             });
         } else if (response.file.filetype == "csv") {
-            const file = fs.createWriteStream(path.join(__dirname,"a.csv"))
+            const file = fs.createWriteStream(path.join(__dirname, "a.csv"))
             https.get(response.file.url_private_download, {
                 headers: {
                     'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
@@ -116,20 +117,20 @@ function build(bot, message) {
         console.log(stdout)
         fs.readFile("config", { encoding: 'utf-8' }, function (err, data) {
             var file_name = data.split('\n')[2].replace("OUTPUT_FILE=", "")
-            if(fs.existsSync(path.join(__dirname, file_name))) {
-	            bot.api.files.upload({
-	                file: fs.createReadStream(path.join(__dirname, file_name)),
-	                filename: file_name,
-	                filetype: "xlsx",
-	                channels: message.channel_id
-	            }, function (err, res) {
-	                if (err) {
-	                    console.log("Failed to add file :(", err)
-	                    bot.reply(message, 'Sorry, there has been an error: ' + err)
-	                }
-	            })	
+            if (fs.existsSync(path.join(__dirname, file_name))) {
+                bot.api.files.upload({
+                    file: fs.createReadStream(path.join(__dirname, file_name)),
+                    filename: file_name,
+                    filetype: "xlsx",
+                    channels: message.channel_id
+                }, function (err, res) {
+                    if (err) {
+                        console.log("Failed to add file :(", err)
+                        bot.reply(message, 'Sorry, there has been an error: ' + err)
+                    }
+                })
             } else {
-            	console.log('file dont exists',path.join(__dirname, file_name))
+                console.log('file dont exists', path.join(__dirname, file_name))
             }
         });
 
@@ -139,9 +140,12 @@ function build(bot, message) {
 }
 
 // // Create an Express app
-// var app = express();
-// var port = process.env.PORT || 5000;
-// app.set('port', port);
-// app.listen(port, function () {
-//     console.log('Client server listening on port ' + port);
-// });
+var app = express();
+var port = process.env.PORT || 5000;
+app.set('port', port);
+app.get('/', (req, res) => {
+    res.send('working')
+})
+app.listen(port, function () {
+    console.log('Client server listening on port ' + port);
+});
