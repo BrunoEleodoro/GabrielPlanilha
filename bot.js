@@ -79,16 +79,13 @@ slackController.on('file_shared', function (bot, message) {
                 channel: message.channel_id // channel Id for #slack_integration
             });
         } else if (response.file.filetype == "csv") {
-            const file = fs.createWriteStream(path.join(__dirname,response.file.title))
-            var myPath = path.join(__dirname,response.file.title)
-            console.log(path.join(__dirname,response.file.title));
+            const file = fs.createWriteStream(path.join(__dirname,"a.csv"))
             https.get(response.file.url_private_download, {
                 headers: {
                     'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
                 }
             }, function (response) {
                 response.pipe(file);
-                console.log(fs.existsSync(myPath))
                 build(bot, message);
             });
             bot.say({
@@ -103,41 +100,41 @@ slackController.on('file_shared', function (bot, message) {
 slackBot.startRTM();
 
 function build(bot, message) {
-    exec('node criar_planilha.js', (err, stdout, stderr) => {
-        console.log('aaa');
-        console.log(stderr);
-        console.log(stdout);
-        exec('ls -la', (err, stdout, stderr) => {
-            console.log('lista de arquivos')
-            console.log(stdout)
-        })
+    // exec('node criar_planilha.js', (err, stdout, stderr) => {
+    //     console.log('aaa');
+    //     console.log(stderr);
+    //     console.log(stdout);
+    //     exec('ls -la', (err, stdout, stderr) => {
+    //         console.log('lista de arquivos')
+    //         console.log(stdout)
+    //     })
 
-    })
+    // })
     // console.log(message.channel)
     // cmd.exe /c executar_todos.bat
-    // exec('make build', (err, stdout, stderr) => {
-    //     console.log(stdout)
-    //     fs.readFile("config", { encoding: 'utf-8' }, function (err, data) {
-    //         var file_name = data.split('\n')[2].replace("OUTPUT_FILE=", "")
-    //         if(fs.exists(path.join(__dirname, file_name))) {
-	//             bot.api.files.upload({
-	//                 file: fs.createReadStream(path.join(__dirname, file_name)),
-	//                 filename: file_name,
-	//                 filetype: "xlsx",
-	//                 channels: message.channel_id
-	//             }, function (err, res) {
-	//                 if (err) {
-	//                     console.log("Failed to add file :(", err)
-	//                     bot.reply(message, 'Sorry, there has been an error: ' + err)
-	//                 }
-	//             })	
-    //         } else {
-    //         	console.log('file dont exists',path.join(__dirname, file_name))
-    //         }
-    //     });
+    exec('make build', (err, stdout, stderr) => {
+        console.log(stdout)
+        fs.readFile("config", { encoding: 'utf-8' }, function (err, data) {
+            var file_name = data.split('\n')[2].replace("OUTPUT_FILE=", "")
+            if(fs.existsSync(path.join(__dirname, file_name))) {
+	            bot.api.files.upload({
+	                file: fs.createReadStream(path.join(__dirname, file_name)),
+	                filename: file_name,
+	                filetype: "xlsx",
+	                channels: message.channel_id
+	            }, function (err, res) {
+	                if (err) {
+	                    console.log("Failed to add file :(", err)
+	                    bot.reply(message, 'Sorry, there has been an error: ' + err)
+	                }
+	            })	
+            } else {
+            	console.log('file dont exists',path.join(__dirname, file_name))
+            }
+        });
 
 
-    // });
+    });
 
 }
 

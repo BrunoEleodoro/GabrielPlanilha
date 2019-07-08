@@ -54,7 +54,7 @@ async function main() {
     var linhas_novas = []
     var titles = []
     var workbook = new Excel.Workbook();
-    if (fs.exists(path.join(__dirname, SOURCE_FILE))) {
+    if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
         await workbook.csv.readFile(path.join(__dirname, SOURCE_FILE))
             .then(function () {
                 var worksheet = workbook.worksheets[0];
@@ -105,7 +105,7 @@ async function main() {
 
     } else {
         console.log('file not found',path.join(__dirname, SOURCE_FILE))
-        console.log('try this one',SOURCE_FILE, fs.exists(SOURCE_FILE))
+        console.log('try this one',SOURCE_FILE, fs.existsSync(SOURCE_FILE))
     }
 
 }

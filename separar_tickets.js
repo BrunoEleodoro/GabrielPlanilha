@@ -81,6 +81,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var clientes = []
         var types = []
         var sevs = []
+        var days = []
 
 
         while (i <= worksheet.rowCount) {
@@ -90,6 +91,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
             var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
             var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
+            var data = worksheet.getCell(CREATED_AT + i).value
 
             if (assignee != null && assignee.includes(",")) {
                 var k = 0;
@@ -99,6 +101,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     clientes.push(client);
                     types.push(type);
                     sevs.push(sev);
+                    days.push(new Date(data.split(" ")[0]).getDate())
                     k++;
                 }
             } else if (assignee != null) {
@@ -106,6 +109,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 clientes.push(client);
                 types.push(type);
                 sevs.push(sev);
+                days.push(new Date(data.split(" ")[0]).getDate())
             }
 
             // if (labels != null && type != null && sev != null) {
@@ -238,23 +242,39 @@ workbook.xlsx.readFile(SOURCE_FILE)
             i++;
         }
 
-        
+
 
         worksheet.getRow(2).getCell(23).value = "Integrante ISM"
         worksheet.getRow(2).getCell(24).value = "Cliente"
         worksheet.getRow(2).getCell(25).value = "Type"
         worksheet.getRow(2).getCell(26).value = "Severidade"
         worksheet.getRow(2).getCell(27).value = "Media"
+        worksheet.getRow(2).getCell(28).value = "Maximo"
+        worksheet.getRow(2).getCell(29).value = "Minimo"
+        worksheet.getRow(2).getCell(30).value = "Day"
 
         var i = 0;
         while (i < clientes.length) {
             // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
             worksheet.getRow(i + 3).getCell(24).value = clientes[i]
             worksheet.getRow(i + 3).getCell(25).value = types[i]
-            worksheet.getRow(i + 3).getCell(26).value = "sev"+sevs[i]
+            worksheet.getRow(i + 3).getCell(26).value = "sev" + sevs[i]
             worksheet.getRow(i + 3).getCell(27).value = parseFloat(1)
+            worksheet.getRow(i + 3).getCell(28).value = " "
+            worksheet.getRow(i + 3).getCell(29).value = " "
+            worksheet.getRow(i + 3).getCell(30).value = days[i]
             i++;
         }
+
+        var i = 0;
+        while (i < integrantes_ism.length) {
+            // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
+            worksheet.getRow(i + 3).getCell(column_starts_at).value = integrantes_ism[i]
+            i++;
+        }
+
+
+
         // var i = 0;
         // while (i < todos_emails.length) {
         //     // worksheet.getCell(STORE_CLIENT_COLUMN + i).value
