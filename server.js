@@ -1,5 +1,5 @@
 require('dotenv').config({ path: 'config_grafana' })
-const pptrFirefox = require('puppeteer-firefox');
+const pptrFirefox = require('puppeteer');
 var Jimp = require('jimp');
 var browser, page;
 
@@ -8,7 +8,7 @@ const USERNAME_GRAFANA = process.env.USERNAME_GRAFANA
 const PASSWORD_GRAFANA = process.env.PASSWORD_GRAFANA
 
 async function main() {
-    browser = await pptrFirefox.launch({ ignoreHTTPSErrors: true, waitUntil: ['load', 'domcontentloaded'] });
+    browser = await pptrFirefox.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'], ignoreHTTPSErrors: true, waitUntil: ['load', 'domcontentloaded'] });
     page = await browser.newPage();
 
     await page.setViewport({ width: 1466, height: 1100 });

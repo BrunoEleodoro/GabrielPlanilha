@@ -1,6 +1,11 @@
 require("./bot.js")
 require("./bot_grafana.js")
 var express = require('express');
+const { exec } = require('child_process');
+
+exec("uname -r",(err, stdout, stderr) => {
+    console.log(stdout)
+})
 
 // // Create an Express app
 var app = express();
