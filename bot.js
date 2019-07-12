@@ -6,6 +6,12 @@ const https = require('https');
 var fs = require('fs')
 var path = require('path')
 const { exec } = require('child_process');
+var cron = require("node-cron");
+var request = require("request");
+
+cron.schedule('1-5 * * * *', () => {
+    request("https://ism-grafana.herokuapp.com");
+});
 
 // Configure your bot.
 var slackController = Botkit.slackbot({ clientSigningSecret: process.env.SLACK_SIGNING_SECRET });
