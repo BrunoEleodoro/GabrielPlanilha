@@ -8,12 +8,13 @@ var cron = require("node-cron");
 var request = require("request");
 const pptrFirefox = require('puppeteer');
 
-cron.schedule('1-5 * * * *', async () => {
+cron.schedule('*/5 * * * *', async () => {
     console.log('pingando....')
     var browser, page;
     browser = await pptrFirefox.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], ignoreHTTPSErrors: true, waitUntil: ['load', 'domcontentloaded'] });
     page = await browser.newPage();
     await page.goto("https://ism-grafana.herokuapp.com");
+    // await page.goto("https://ismmetrics.herokuapp.com/");
     browser.close();
 });
 
