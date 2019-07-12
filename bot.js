@@ -10,6 +10,7 @@ var cron = require("node-cron");
 var request = require("request");
 
 cron.schedule('1-5 * * * *', () => {
+    console.log('pingando....')
     request("https://ism-grafana.herokuapp.com");
 });
 
