@@ -8,7 +8,7 @@ var cron = require("node-cron");
 var request = require("request");
 const pptrFirefox = require('puppeteer');
 
-cron.schedule('1-5 * * * *', () => {
+cron.schedule('1-5 * * * *', async () => {
     console.log('pingando....')
     var browser, page;
     browser = await pptrFirefox.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], ignoreHTTPSErrors: true, waitUntil: ['load', 'domcontentloaded'] });
