@@ -8,6 +8,7 @@ var cron = require("node-cron");
 var request = require("request");
 const pptrFirefox = require('puppeteer');
 
+//
 cron.schedule('*/20 * * * *', async () => {
     console.log('pingando....')
     var browser, page;
