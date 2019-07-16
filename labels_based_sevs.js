@@ -23,6 +23,7 @@ const PROBLEMA_REPORTADO = process.env.PROBLEMA_REPORTADO
 const ANALISE_ACIONAMENTO = process.env.ANALISE_ACIONAMENTO
 const LABELS_ALEATORIAS = process.env.LABELS_ALEATORIAS
 const ACAO_ISM = process.env.ACAO_ISM
+const MEIO_COMUNICACAO = process.env.MEIO_COMUNICACAO
 
 const STORE_CREATED_BY_COLUMN = process.env.STORE_CREATED_BY_COLUMN
 const STORE_SHIFT = process.env.STORE_SHIFT
@@ -84,6 +85,10 @@ var service_line = [
     "oracle issue",
     "oracle support",
     "devops/bigdata issue",
+	"mainframe support",
+	"mainframe issue",
+	"producao support",
+	"tws support",
     "unix issue",
     "unix support"
 ]
@@ -94,9 +99,13 @@ var problema_reportado = [
     "printer issue",
     "restore request",
     "application issue",
+	"server down",
     "server reboot",
     "reboot server",
-    "validação de backup"
+	"problema de acesso",
+	"filesystem full",
+	"snapshot",
+	"validacao de backup"
 ]
 
 var analise_do_acionamento = [
@@ -111,6 +120,13 @@ var acao_ism = [
     "monitoracao/report",
     "acompanhar",
     "priorizar"
+]
+
+var meio_comunicacao = [
+    "e-mail",
+    "telefone",
+    "slack",
+    "sametime"
 ]
 
 function convert(input) {
@@ -134,6 +150,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(ANALISE_ACIONAMENTO + 1).value = "Análise do Acionamento"
         worksheet.getCell(LABELS_ALEATORIAS + 1).value = "Labels aleatorias"
         worksheet.getCell(ACAO_ISM + 1).value = "Ação ISM"
+        worksheet.getCell(MEIO_COMUNICACAO + 1).value = "Meio de comunicacão"
 
         i = 2
         while (i <= worksheet.rowCount) {
@@ -151,6 +168,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(ANALISE_ACIONAMENTO + i).value = " "
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = " "
                 worksheet.getCell(ACAO_ISM + i).value = " "
+                worksheet.getCell(MEIO_COMUNICACAO + i).value = " "
                 while (k < pieces.length) {
                     // if (pieces[k].trim().toLowerCase().includes("acionamento")) {
                     //     res += pieces[k].trim() + ", "
@@ -182,6 +200,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value + label + ", "
                         found = true;
                     }
+                    if (meio_comunicacao.indexOf(label) >= 0) {
+                        worksheet.getCell(MEIO_COMUNICACAO + i).value = worksheet.getCell(MEIO_COMUNICACAO + i).value + label + ", "
+                        found = true;
+                    }
 
                     if (!found) {
                         if (!label.trim().toLowerCase().includes(cliente.toLowerCase().trim()) &&
@@ -201,6 +223,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value.substr(0, worksheet.getCell(ANALISE_ACIONAMENTO + i).value.length - 2).trim()
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = worksheet.getCell(LABELS_ALEATORIAS + i).value.substr(0, worksheet.getCell(LABELS_ALEATORIAS + i).value.length - 2).trim()
                 worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value.substr(0, worksheet.getCell(ACAO_ISM + i).value.length - 2).trim()
+                worksheet.getCell(MEIO_COMUNICACAO + i).value = worksheet.getCell(MEIO_COMUNICACAO + i).value.substr(0, worksheet.getCell(MEIO_COMUNICACAO + i).value.length - 2).trim()
                 // worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res+","+res2
                 // worksheet.getCell(AREAS_ENVOLVIDAS + i).value = res
             }
