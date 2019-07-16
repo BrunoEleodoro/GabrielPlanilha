@@ -84,7 +84,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var types = []
         var sevs = []
         var days = []
-        var months = []
+        var months_years = []
         var years = []
 
 
@@ -106,8 +106,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     types.push(type);
                     sevs.push(sev);
                     days.push(new Date(data.split(" ")[0]).getDate())
-                    months.push(months_name[new Date(data.split(" ")[0]).getMonth()])
-                    years.push(new Date(data.split(" ")[0]).getFullYear())
+                    var month_name = months_name[new Date(data.split(" ")[0]).getMonth()]
+                    months_years.push(month_name + " " + new Date(data.split(" ")[0]).getFullYear())
                     k++;
                 }
             } else if (assignee != null) {
@@ -116,8 +116,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 types.push(type);
                 sevs.push(sev);
                 days.push(new Date(data.split(" ")[0]).getDate())
-                months.push(months_name[new Date(data.split(" ")[0]).getMonth()])
-                years.push(new Date(data.split(" ")[0]).getFullYear())
+                var month_name = months_name[new Date(data.split(" ")[0]).getMonth()]
+                months_years.push(month_name + " " + new Date(data.split(" ")[0]).getFullYear())
             }
 
             // if (labels != null && type != null && sev != null) {
@@ -260,8 +260,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getRow(2).getCell(28).value = "Maximo"
         worksheet.getRow(2).getCell(29).value = "Minimo"
         worksheet.getRow(2).getCell(30).value = "Day"
-        worksheet.getRow(2).getCell(31).value = "Month"
-        worksheet.getRow(2).getCell(32).value = "Year"
+        worksheet.getRow(2).getCell(31).value = "Month/Year"
 
         var i = 0;
         while (i < clientes.length) {
@@ -273,8 +272,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
             worksheet.getRow(i + 3).getCell(28).value = " "
             worksheet.getRow(i + 3).getCell(29).value = " "
             worksheet.getRow(i + 3).getCell(30).value = days[i]
-            worksheet.getRow(i + 3).getCell(31).value = months[i]
-            worksheet.getRow(i + 3).getCell(32).value = years[i]
+            worksheet.getRow(i + 3).getCell(31).value = months_years[i]
             i++;
         }
 
