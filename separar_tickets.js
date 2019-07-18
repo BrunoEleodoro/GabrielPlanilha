@@ -55,6 +55,7 @@ people["renan diego mafeis"] = "renandm@br.ibm.com"
 people["diego dayvison alves de araujo ferreira"] = "diegoaf@br.ibm.com"
 people["matheus reis villela"] = "mrvilela@br.ibm.com"
 people["lalisa viola faria santos"] = "lalisavi@br.ibm.com"
+people["mariana rangel vieira valim"] = "valimvrm@br.ibm.com"
 
 function replaceEmailToName(email) {
     email = email.toLowerCase()

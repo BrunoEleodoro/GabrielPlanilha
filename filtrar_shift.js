@@ -48,7 +48,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
         //setting the title of the column
         worksheet.getCell(STORE_SHIFT + 1).value = "shift"
-        
+
         while (i <= worksheet.rowCount) {
             var valor_celula_p = worksheet.getCell(CREATED_BY_COLUMN + i).value
             if (valor_celula_p != null) {
@@ -74,6 +74,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     shift = parseFloat("3")
                 } else if (valor_celula_p.includes("Lalisa Viola Faria Santos")) {
                     shift = parseFloat("3")
+                } else if (valor_celula_p.includes("Mariana Rangel Vieira Valim")) {
+                    shift = parseFloat("2")
                 }
 
                 worksheet.getCell(STORE_SHIFT + i).value = shift
