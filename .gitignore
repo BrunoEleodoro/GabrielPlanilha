@@ -12,3 +12,5 @@ ge4MonthEnd/*.*
 ge4NetworkStatus/*.*
 ge4UnixServerDetails/*.*
 config_grafana
+bot_kleber.js
+slack2

@@ -24,6 +24,10 @@ const ANALISE_ACIONAMENTO = process.env.ANALISE_ACIONAMENTO
 const LABELS_ALEATORIAS = process.env.LABELS_ALEATORIAS
 const ACAO_ISM = process.env.ACAO_ISM
 const MEIO_COMUNICACAO = process.env.MEIO_COMUNICACAO
+const SOLICITACOES = process.env.SOLICITACOES
+const QUEM_VOCE_ACIONOU = process.env.QUEM_VOCE_ACIONOU
+const QUEM_TE_ACIONOU = process.env.QUEM_TE_ACIONOU
+const LABELS_RELACIONADO_A_CHANGE = process.env.LABELS_RELACIONADO_A_CHANGE
 
 const STORE_CREATED_BY_COLUMN = process.env.STORE_CREATED_BY_COLUMN
 const STORE_SHIFT = process.env.STORE_SHIFT
@@ -64,48 +68,57 @@ var areas_envolvidas = [
 ]
 
 var service_line = [
-    "sql support",
-    "sql issue",
-    "sap support",
-    "sap issue",
-    "middleware support",
-    "middleware issue",
-    "iam support",
-    "iam issue",
-    "network support",
-    "network issue",
+    "adabas support",
+    "at&t support",
+    "automation support",
+    "baas support",
+    "cloud support",
+    "cms support",
+    "db2 support",
+    "devops/bigdata support",
+    "email/exchange support",
+    "exchange support",
     "firewall support",
-    "firewall issue",
-    "notes/exchange support",
-    "notes issue",
-    "backup support",
-    "backup issue",
-    "intel issue",
+    "gcc support",
+    "iam support",
     "intel support",
-    "oracle issue",
+    "mainframe support",
+    "middleware support",
+    "network support",
     "oracle support",
-    "devops/bigdata issue",
-	"mainframe support",
-	"mainframe issue",
-	"producao support",
-	"tws support",
-    "unix issue",
+    "producao support",
+    "production support",
+    "san disk support",
+    "sap support",
+    "tws support",
     "unix support"
 ]
 
 var problema_reportado = [
-    "job issue",
-    "script issue",
-    "printer issue",
-    "restore request",
     "application issue",
-	"server down",
-    "server reboot",
-    "reboot server",
-	"problema de acesso",
-	"filesystem full",
-	"snapshot",
-	"validacao de backup"
+    "banco de loja issue",
+    "ca application issue",
+    "certificado issue",
+    "disk full issue",
+    "ecommerce issue",
+    "email/exchange issue",
+    "filesystem full issue",
+    "high cpu workload issue",
+    "job issue",
+    "mainframe issue",
+    "monitoring issue",
+    "nota fiscal issue",
+    "peoplesoft app issue",
+    "performance issue",
+    "printer issue",
+    "roadnet issue",
+    "sap issue",
+    "server down issue",
+    "server inacessivel issue",
+    "soa application issue",
+    "softlayer issue",
+    "user access issue",
+    "odi application",
 ]
 
 var analise_do_acionamento = [
@@ -123,14 +136,60 @@ var acao_ism = [
 ]
 
 var meio_comunicacao = [
-    "e-mail",
-    "telefone",
-    "slack",
-    "sametime"
+    "acionamento via email",
+    "acionamento via sametime",
+    "acionamento via slack",
+    "acionamento via telefone ",
+]
+
+var solicitacoes = [
+    "backup request",
+    "execucao job backup reqst",
+    "execucao script request",
+    "iis request",
+    "job request",
+    "restore request",
+    "server reboot request",
+    "snapshot request",
+    "solicitacao status reqst",
+    "validacao ambiente reqst"
+]
+
+var quem_voce_acionou = [
+    "acionamento cliente",
+    "acionamento dpe",
+    "acionamento duty manager",
+    "acionamento gp",
+    "acionamento sam",
+    "acionamento service desk",
+    "acionamento sil",
+    "acionamento sme",
+    "acionamento tec br",
+    "acionamento tec in"
+]
+
+var quem_te_acionou = [
+    "acionado por cliente",
+    "acionado por dpe",
+    "acionado por duty manager",
+    "acionado por gp",
+    "acionado por sam",
+    "acionado por service desk",
+    "acionado por sil",
+    "acionado por sme",
+    "acionado por tec br",
+    "acionado por tec in"
+]
+
+var labels_relacionado_a_change = [
+    "acompanhar change",
+    "change fora do radar",
+    "change late task",
+    "extensao de janela change",
 ]
 
 function convert(input) {
-    if(input == null){ 
+    if (input == null) {
         return input
     }
     var iconv = require('iconv-lite');
@@ -151,6 +210,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(LABELS_ALEATORIAS + 1).value = "Labels aleatorias"
         worksheet.getCell(ACAO_ISM + 1).value = "Ação ISM"
         worksheet.getCell(MEIO_COMUNICACAO + 1).value = "Meio de comunicacão"
+        worksheet.getCell(SOLICITACOES + 1).value = "Solicitações"
+        worksheet.getCell(QUEM_VOCE_ACIONOU + 1).value = "Quem você acionou"
+        worksheet.getCell(QUEM_TE_ACIONOU + 1).value = "Quem te acionou"
+        worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + 1).value = "Labels relacionado a change"
 
         i = 2
         while (i <= worksheet.rowCount) {
@@ -169,6 +232,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = " "
                 worksheet.getCell(ACAO_ISM + i).value = " "
                 worksheet.getCell(MEIO_COMUNICACAO + i).value = " "
+                worksheet.getCell(SOLICITACOES + i).value = " "
+                worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = " "
+                worksheet.getCell(QUEM_TE_ACIONOU + i).value = " "
+                worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value = " "
                 while (k < pieces.length) {
                     // if (pieces[k].trim().toLowerCase().includes("acionamento")) {
                     //     res += pieces[k].trim() + ", "
@@ -176,9 +243,9 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     var found = false;
                     var label = pieces[k].trim().toLowerCase()
 
-                    if(label.includes("acionamento t")) {
+                    if (label.includes("acionamento t")) {
                         label = convert(label)
-                        label = label.replace("ý","é");
+                        label = label.replace("ý", "é");
                     }
                     if (areas_envolvidas.indexOf(label) >= 0) {
                         worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value + label + ", "
@@ -205,6 +272,23 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         found = true;
                     }
 
+                    if (solicitacoes.indexOf(label) >= 0) {
+                        worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value + label + ", "
+                        found = true;
+                    }
+                    if (quem_voce_acionou.indexOf(label) >= 0) {
+                        worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = worksheet.getCell(QUEM_VOCE_ACIONOU + i).value + label + ", "
+                        found = true;
+                    }
+                    if (quem_te_acionou.indexOf(label) >= 0) {
+                        worksheet.getCell(QUEM_TE_ACIONOU + i).value = worksheet.getCell(QUEM_TE_ACIONOU + i).value + label + ", "
+                        found = true;
+                    }
+                    if (labels_relacionado_a_change.indexOf(label) >= 0) {
+                        worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value = worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value + label + ", "
+                        found = true;
+                    }
+
                     if (!found) {
                         if (!label.trim().toLowerCase().includes(cliente.toLowerCase().trim()) &&
                             !label.trim().toLowerCase().includes("sev") &&
@@ -224,6 +308,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = worksheet.getCell(LABELS_ALEATORIAS + i).value.substr(0, worksheet.getCell(LABELS_ALEATORIAS + i).value.length - 2).trim()
                 worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value.substr(0, worksheet.getCell(ACAO_ISM + i).value.length - 2).trim()
                 worksheet.getCell(MEIO_COMUNICACAO + i).value = worksheet.getCell(MEIO_COMUNICACAO + i).value.substr(0, worksheet.getCell(MEIO_COMUNICACAO + i).value.length - 2).trim()
+                worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value.substr(0, worksheet.getCell(SOLICITACOES + i).value.length - 2).trim()
+                worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = worksheet.getCell(QUEM_VOCE_ACIONOU + i).value.substr(0, worksheet.getCell(QUEM_VOCE_ACIONOU + i).value.length - 2).trim()
+                worksheet.getCell(QUEM_TE_ACIONOU + i).value = worksheet.getCell(QUEM_TE_ACIONOU + i).value.substr(0, worksheet.getCell(QUEM_TE_ACIONOU + i).value.length - 2).trim()
+                worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value = worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value.substr(0, worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value.length - 2).trim()
                 // worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res+","+res2
                 // worksheet.getCell(AREAS_ENVOLVIDAS + i).value = res
             }
