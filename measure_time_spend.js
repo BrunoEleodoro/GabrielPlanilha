@@ -82,7 +82,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 t.setSeconds(seconds);
 
                 var finalTime = secondsToTime(seconds);
-                if (finalTime.h > 8) {
+                console.log(finalTime.h);
+                if (parseFloat(finalTime.h) > 8) {
                     finalTime = "08" + ":" + "00" + ":" + "00"
                 } else {
                     finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
