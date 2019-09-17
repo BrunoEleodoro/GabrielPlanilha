@@ -103,7 +103,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var months_years = []
         var years = []
         var titles = []
-
+        worksheet.getCell(STORE_QUANTIDADE_TICKETS + 1).value = "Quantidade de tickets"
         while (i <= worksheet.rowCount) {
 
             // var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
