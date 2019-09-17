@@ -82,7 +82,12 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 t.setSeconds(seconds);
 
                 var finalTime = secondsToTime(seconds);
-                finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                if (finalTime.h > 8) {
+                    finalTime = "08" + ":" + "00" + ":" + "00"
+                } else {
+                    finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                }
+
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
             }
             i++;
