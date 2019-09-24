@@ -88,7 +88,6 @@ const clientes_possiveis = [
     "MANGELS",
     "ZETRASOFT",
     "FAST SHOP",
-    "LEROY",
     "FIRST DATA",
     "BOA VISTA",
     "SPRINGER",
@@ -106,7 +105,8 @@ const clientes_possiveis = [
     "ORBITAL",
     "ASSAI",
     "CRDC",
-    "MERCEDES BENZ"
+	"BURGER KING",
+    "MERCEDES BENZ",
 ]
 
 // READ WORKBOOK
