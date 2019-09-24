@@ -50,28 +50,11 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
-var areas_envolvidas = [
-    "acionamento técnico ibm",
-    "acionamento técnico",
-    "acionamento tecnico",
-    "acionamento t",
-    "acionamento t√©cnico",
-    "acionamento cliente",
-    "acionamento sam",
-    "sam",
-    "acionamento sme",
-    "sme",
-    "acionamento dpe",
-    "dpe",
-    "acionamento dm",
-    "dm"
-]
-
 var service_line = [
     "adabas support",
     "at&t support",
     "automation support",
-    "baas support",
+    "backup support",
     "cloud support",
     "cms support",
     "db2 support",
@@ -91,7 +74,8 @@ var service_line = [
     "san disk support",
     "sap support",
     "tws support",
-    "unix support"
+	"people soft support"
+    "unix support",
 ]
 
 var problema_reportado = [
@@ -114,25 +98,48 @@ var problema_reportado = [
     "roadnet issue",
     "sap issue",
     "server down issue",
-    "server inacessivel issue",
+    "server hang issue",
     "soa application issue",
     "softlayer issue",
     "user access issue",
+	"tablespace issue",
+	"rubook application issue",
+	"server memory issue",
+	"backup issue",
+	"f5 issue",
+	"db issue",
+	"link issue",
+	"citrix issue",
+	"tasi issue",
+	"network issue",
+	"uat issue",
+	"firewall issue",
+	"chamado cancelado",
+	"ftp issue",
+	"rdf issue",
+	"shared id locked",
+	"lock no banco",
+	"site cliente fora",
+	"intranet prd app"
+	"replica de ficha",
+	"acesso a pasta de usuario",
     "odi application",
 ]
 
 var analise_do_acionamento = [
     "acionamento ism indevido",
     "indevido",
-    "severidade indevida",
+    "severidade indevido",
     "sem chamado",
-    "sla indevida"
+	"dentro do sla",
+	"sla breach",
+    "sla indevida",
 ]
 
 var acao_ism = [
     "monitoracao/report",
     "acompanhar",
-    "priorizar"
+    "priorizar",
 ]
 
 var meio_comunicacao = [
@@ -141,18 +148,18 @@ var meio_comunicacao = [
     "acionamento via slack",
     "acionamento via telefone ",
 ]
-
+	
 var solicitacoes = [
     "backup request",
-    "execucao job backup reqst",
-    "execucao script request",
-    "iis request",
-    "job request",
+    "execucao job backup",
+    "execucao script",
+    "stop/start service",
     "restore request",
-    "server reboot request",
-    "snapshot request",
-    "solicitacao status reqst",
-    "validacao ambiente reqst"
+    "server reboot",
+    "snapshot",
+    "solicitacao status",
+	"sap transport",
+    "validacao ambiente",
 ]
 
 var quem_voce_acionou = [
@@ -165,7 +172,8 @@ var quem_voce_acionou = [
     "acionamento sil",
     "acionamento sme",
     "acionamento tec br",
-    "acionamento tec in"
+    "acionamento tec in",
+	"acionamento tec local",
 ]
 
 var quem_te_acionou = [
@@ -178,14 +186,18 @@ var quem_te_acionou = [
     "acionado por sil",
     "acionado por sme",
     "acionado por tec br",
-    "acionado por tec in"
+    "acionado por tec in",
 ]
 
 var labels_relacionado_a_change = [
     "acompanhar change",
     "change fora do radar",
     "change late task",
-    "extensao de janela change",
+	"abertura de change",
+	"change fallback",
+	"aprovacao de change",
+	"change emergencial",
+	"extensao de janela change",
 ]
 
 function convert(input) {
