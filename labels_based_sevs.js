@@ -74,7 +74,7 @@ var service_line = [
     "san disk support",
     "sap support",
     "tws support",
-	"people soft support"
+    "people soft support",
     "unix support",
 ]
 
@@ -102,27 +102,27 @@ var problema_reportado = [
     "soa application issue",
     "softlayer issue",
     "user access issue",
-	"tablespace issue",
-	"rubook application issue",
-	"server memory issue",
-	"backup issue",
-	"f5 issue",
-	"db issue",
-	"link issue",
-	"citrix issue",
-	"tasi issue",
-	"network issue",
-	"uat issue",
-	"firewall issue",
-	"chamado cancelado",
-	"ftp issue",
-	"rdf issue",
-	"shared id locked",
-	"lock no banco",
-	"site cliente fora",
-	"intranet prd app"
-	"replica de ficha",
-	"acesso a pasta de usuario",
+    "tablespace issue",
+    "rubook application issue",
+    "server memory issue",
+    "backup issue",
+    "f5 issue",
+    "db issue",
+    "link issue",
+    "citrix issue",
+    "tasi issue",
+    "network issue",
+    "uat issue",
+    "firewall issue",
+    "chamado cancelado",
+    "ftp issue",
+    "rdf issue",
+    "shared id locked",
+    "lock no banco",
+    "site cliente fora",
+    "intranet prd app",
+    "replica de ficha",
+    "acesso a pasta de usuario",
     "odi application",
 ]
 
@@ -131,8 +131,8 @@ var analise_do_acionamento = [
     "indevido",
     "severidade indevido",
     "sem chamado",
-	"dentro do sla",
-	"sla breach",
+    "dentro do sla",
+    "sla breach",
     "sla indevida",
 ]
 
@@ -148,7 +148,7 @@ var meio_comunicacao = [
     "acionamento via slack",
     "acionamento via telefone ",
 ]
-	
+
 var solicitacoes = [
     "backup request",
     "execucao job backup",
@@ -158,7 +158,7 @@ var solicitacoes = [
     "server reboot",
     "snapshot",
     "solicitacao status",
-	"sap transport",
+    "sap transport",
     "validacao ambiente",
 ]
 
@@ -173,7 +173,7 @@ var quem_voce_acionou = [
     "acionamento sme",
     "acionamento tec br",
     "acionamento tec in",
-	"acionamento tec local",
+    "acionamento tec local",
 ]
 
 var quem_te_acionou = [
@@ -193,11 +193,11 @@ var labels_relacionado_a_change = [
     "acompanhar change",
     "change fora do radar",
     "change late task",
-	"abertura de change",
-	"change fallback",
-	"aprovacao de change",
-	"change emergencial",
-	"extensao de janela change",
+    "abertura de change",
+    "change fallback",
+    "aprovacao de change",
+    "change emergencial",
+    "extensao de janela change",
 ]
 
 function convert(input) {

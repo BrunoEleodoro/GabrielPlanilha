@@ -60,8 +60,6 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     shift = parseFloat("1")
                 } else if (valor_celula_p.includes("Otavio De Almeida Sambo")) {
                     shift = parseFloat("1")
-                } else if (valor_celula_p.includes("CATIA HARUME YAMAMOTO")) {
-                    shift = "OTHER"
                 } else if (valor_celula_p.includes("Jacqueline Cristina Da Silva")) {
                     shift = parseFloat("2")
                 } else if (valor_celula_p.includes("Gabriel Siqueira")) {
@@ -74,7 +72,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     shift = parseFloat("3")
                 } else if (valor_celula_p.includes("Lalisa Viola Faria Santos")) {
                     shift = parseFloat("3")
-                } else if (valor_celula_p.includes("Mariana Rangel Vieira Valim")) {
+                } else if (valor_celula_p.includes("Henrique Possari")) {
                     shift = parseFloat("2")
                 }
 
