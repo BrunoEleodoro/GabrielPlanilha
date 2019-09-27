@@ -91,7 +91,9 @@ var service_line = [
     "san disk support",
     "sap support",
     "tws support",
-    "people soft support",
+    "mss support",
+    "slq support",
+    "peoplesoft support",
     "unix support",
 ]
 
@@ -120,7 +122,7 @@ var problema_reportado = [
     "softlayer issue",
     "user access issue",
     "tablespace issue",
-    "rubook application issue",
+    "runbook application issue",
     "server memory issue",
     "backup issue",
     "f5 issue",
@@ -129,6 +131,7 @@ var problema_reportado = [
     "citrix issue",
     "tasi issue",
     "network issue",
+    "uat approval request",
     "uat issue",
     "firewall issue",
     "chamado cancelado",
@@ -139,8 +142,9 @@ var problema_reportado = [
     "site cliente fora",
     "intranet prd app",
     "replica de ficha",
-    "acesso a pasta de usuario",
-    "odi application",
+    "criacao de pasta",
+    "password reset",
+    "odi application issue",
 ]
 
 var analise_do_acionamento = [
@@ -150,7 +154,7 @@ var analise_do_acionamento = [
     "sem chamado",
     "dentro do sla",
     "sla breach",
-    "sla indevida",
+    "sla indevido",
 ]
 
 var acao_ism = [
@@ -163,7 +167,7 @@ var meio_comunicacao = [
     "acionamento via email",
     "acionamento via sametime",
     "acionamento via slack",
-    "acionamento via telefone ",
+    "acionamento via telefone",
 ]
 
 var solicitacoes = [
