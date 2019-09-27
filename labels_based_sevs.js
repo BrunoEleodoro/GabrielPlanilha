@@ -50,6 +50,23 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
+var areas_envolvidas = [
+    "acionamento técnico ibm",
+    "acionamento técnico",
+    "acionamento tecnico",
+    "acionamento t",
+    "acionamento t√©cnico",
+    "acionamento cliente",
+    "acionamento sam",
+    "sam",
+    "acionamento sme",
+    "sme",
+    "acionamento dpe",
+    "dpe",
+    "acionamento dm",
+    "dm"
+]
+
 var service_line = [
     "adabas support",
     "at&t support",
@@ -259,10 +276,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         label = convert(label)
                         label = label.replace("ý", "é");
                     }
-                    // if (areas_envolvidas.indexOf(label) >= 0) {
-                    //     worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value + label + ", "
-                    //     found = true;
-                    // }
+                    if (areas_envolvidas.indexOf(label) >= 0) {
+                        worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value + label + ", "
+                        found = true;
+                    }
                     if (service_line.indexOf(label) >= 0) {
                         worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value + label + ", "
                         found = true;
@@ -313,7 +330,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     k++;
                 }
-                // worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value.substr(0, worksheet.getCell(AREAS_ENVOLVIDAS + i).value.length - 2).trim()
+                worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value.substr(0, worksheet.getCell(AREAS_ENVOLVIDAS + i).value.length - 2).trim()
                 worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value.substr(0, worksheet.getCell(SERVICE_LINE + i).value.length - 2).trim()
                 worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value.substr(0, worksheet.getCell(PROBLEMA_REPORTADO + i).value.length - 2).trim()
                 worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value.substr(0, worksheet.getCell(ANALISE_ACIONAMENTO + i).value.length - 2).trim()
