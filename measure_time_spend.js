@@ -88,8 +88,10 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 } else {
                     finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
                 }
-
+                worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
+                worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';
+
             }
             i++;
         }
