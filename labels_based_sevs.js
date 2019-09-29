@@ -81,6 +81,7 @@ var service_line = [
     "firewall support",
     "gcc support",
     "iam support",
+    "iam  support",
     "intel support",
     "mainframe support",
     "middleware support",
@@ -92,7 +93,7 @@ var service_line = [
     "sap support",
     "tws support",
     "mss support",
-    "slq support",
+    "sql support",
     "peoplesoft support",
     "unix support",
 ]
@@ -139,11 +140,11 @@ var problema_reportado = [
     "rdf issue",
     "shared id locked",
     "lock no banco",
+    "vpn issue",
     "site cliente fora",
     "intranet prd app",
     "replica de ficha",
-    "criacao de pasta",
-    "password reset",
+    "acesso a pasta de usuario",
     "odi application issue",
 ]
 
@@ -180,6 +181,9 @@ var solicitacoes = [
     "snapshot",
     "solicitacao status",
     "sap transport",
+    "acompanhar restore",
+    "criacao de pasta",
+    "password reset",
     "validacao ambiente",
 ]
 
