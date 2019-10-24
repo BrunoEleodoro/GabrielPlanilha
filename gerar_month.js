@@ -64,13 +64,13 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
 
         while (i <= worksheet.rowCount) {
 
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
 
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
                 var date = pieces[0].trim();
                 if (parseFloat(date.split("/")[0]) > 12) {
-                    worksheet.getCell(STORE_CLOSED_AT + i).value = changeDayAndMonthPosition(date, "/") + " " + pieces[1]
+                    worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/") + " " + pieces[1]
                 }
                 // worksheet.getCell(STORE_MONTH + i).value = dayName
             }
@@ -82,7 +82,7 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
         var first_values = []
         i = 2;
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
                 var first = pieces[0].trim().split('/')[0];
@@ -142,7 +142,7 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
 
         i = 2;
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
                 var date = pieces[0].trim();
@@ -151,10 +151,10 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
                 var index2 = meses_permitidos.indexOf(date.split("/")[1])
 
                 if (index1 == -1 && index2 != -1) {
-                    worksheet.getCell(STORE_CLOSED_AT + i).value = changeDayAndMonthPosition(date, "/")
+                    worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/")
                 }
 
-                var date = new Date(worksheet.getCell(STORE_CLOSED_AT + i).value.split(" ")[0].trim())
+                var date = new Date(worksheet.getCell(CREATED_AT + i).value.split(" ")[0].trim())
                 var dayName = months[date.getMonth()];
                 worksheet.getCell(STORE_MONTH + i).value = dayName
             }
@@ -201,4 +201,4 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
         // }
         console.log('finalizado!');
         return workbook.xlsx.writeFile(path.join(__dirname, OUTPUT_FILE));
-    })
+    });
