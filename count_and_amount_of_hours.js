@@ -117,7 +117,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var time_worked = worksheet.getCell(STORE_WORKED_HOURS + i).value
 
             if (title != null) {
-                titles.push(title);
+                if (title.includes("(copy)")) {
+                    worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '0'
+                } else {
+                    worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '1'
+                }
             }
             // var index = clientes.indexOf(client);
             // if (client != null && index == -1) {
@@ -134,29 +138,29 @@ workbook.xlsx.readFile(SOURCE_FILE)
             i++;
 
         }
-        var titles_originals = JSON.parse(JSON.stringify(titles));
-        // console.log(titles)
+        // var titles_originals = JSON.parse(JSON.stringify(titles));
+        // // console.log(titles)
 
-        var repetidos = []
+        // var repetidos = []
 
-        var i = 0;
-        while (i < titles.length) {
-            var title = titles[i];
-            var res = check(titles_originals, title)
-            if (res.length > 0) {
-                repetidos[title] = res
-            }
-            // if (titles.indexOf(title) != null) {
-            //     if (repetidos[title] == null) {
-            //         repetidos[title] = 1;
-            //     } else {
-            //         repetidos[title] = repetidos[title] + 1
-            //     }
-            //     delete titles[titles.indexOf(title)]
-            //     // repetidos[title] = 1;
-            // }
-            i++;
-        }
+        // var i = 0;
+        // while (i < titles.length) {
+        //     var title = titles[i];
+        //     var res = check(titles_originals, title)
+        //     if (res.length > 0) {
+        //         repetidos[title] = res
+        //     }
+        //     // if (titles.indexOf(title) != null) {
+        //     //     if (repetidos[title] == null) {
+        //     //         repetidos[title] = 1;
+        //     //     } else {
+        //     //         repetidos[title] = repetidos[title] + 1
+        //     //     }
+        //     //     delete titles[titles.indexOf(title)]
+        //     //     // repetidos[title] = 1;
+        //     // }
+        //     i++;
+        // }
 
         // var i = 2;
         // while (i <= worksheet.rowCount) {
@@ -169,32 +173,32 @@ workbook.xlsx.readFile(SOURCE_FILE)
         //     i++;
         // }
 
-        var i = 0;
-        var keys = Object.keys(repetidos)
-        while (i < keys.length) {
-            var k = 0;
-            while (k < repetidos[keys[i]].length) {
-                var index_title_repetido = repetidos[keys[i]][k];
-                var client = worksheet.getCell(STORE_CLIENT_COLUMN + (index_title_repetido + 2)).value
-                var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + (index_title_repetido + 2)).value
-                var title = worksheet.getCell(STORE_TITLE_COLUMN + (index_title_repetido + 2)).value
-                var assignee = worksheet.getCell(CARD_ASSIGNEES + (index_title_repetido + 2)).value
-                var time_worked = worksheet.getCell(STORE_WORKED_HOURS + (index_title_repetido + 2)).value
+        // var i = 0;
+        // var keys = Object.keys(repetidos)
+        // while (i < keys.length) {
+        //     var k = 0;
+        //     while (k < repetidos[keys[i]].length) {
+        //         var index_title_repetido = repetidos[keys[i]][k];
+        //         var client = worksheet.getCell(STORE_CLIENT_COLUMN + (index_title_repetido + 2)).value
+        //         var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + (index_title_repetido + 2)).value
+        //         var title = worksheet.getCell(STORE_TITLE_COLUMN + (index_title_repetido + 2)).value
+        //         var assignee = worksheet.getCell(CARD_ASSIGNEES + (index_title_repetido + 2)).value
+        //         var time_worked = worksheet.getCell(STORE_WORKED_HOURS + (index_title_repetido + 2)).value
 
-                if (k > 2) {
-                    worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '0'
-                } else {
-                    if (client == "CARREFOUR" && labels.includes("issue")) {
-                        worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '1'
-                    } else {
-                        worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '0'
-                    }
-                }
+        //         if (k > 2) {
+        //             worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '0'
+        //         } else {
+        //             if (client == "CARREFOUR" && labels.includes("issue")) {
+        //                 worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '1'
+        //             } else {
+        //                 worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '0'
+        //             }
+        //         }
 
-                k++;
-            }
-            i++;
-        }
+        //         k++;
+        //     }
+        //     i++;
+        // }
 
         var i = 2;
         while (i <= worksheet.rowCount) {
@@ -207,8 +211,6 @@ workbook.xlsx.readFile(SOURCE_FILE)
             if (worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value == null || worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value == "") {
                 worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '1'
             }
-
-
             i++;
         }
         // console.log(repetidos)

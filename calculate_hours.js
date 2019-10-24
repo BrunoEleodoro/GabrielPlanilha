@@ -39,6 +39,9 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
+const OPERATIONAL_LEAD_TIME = process.env.OPERATIONAL_LEAD_TIME
+const TOTAL_WAITING_TIME = process.env.TOTAL_WAITING_TIME
+
 const STORE_WORKED_HOURS = process.env.STORE_WORKED_HOURS
 
 function secondsToTime(secs) {
@@ -69,21 +72,36 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(STORE_WORKED_HOURS + 1).value = "time worked"
 
         while (i <= worksheet.rowCount) {
-            var closed_at_date = worksheet.getCell(STORE_CLOSED_AT + i).value
-            var created_at_date = worksheet.getCell(CREATED_AT + i).value
-            if (closed_at_date != null && created_at_date != null) {
+            // var closed_at_date = worksheet.getCell(STORE_CLOSED_AT + i).value
+            // var created_at_date = worksheet.getCell(CREATED_AT + i).value
+            var lead_time = worksheet.getCell(OPERATIONAL_LEAD_TIME + i).value
+            var waiting_time = worksheet.getCell(TOTAL_WAITING_TIME + i).value
 
-                var startDate = new Date(created_at_date)
-                var endDate = new Date(closed_at_date)
+            if (lead_time != null && waiting_time != null) {
 
-                var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+                var result = parseFloat(lead_time) - parseFloat(waiting_time);
+                // var startDate = new Date(created_at_date)
+                // var endDate = new Date(closed_at_date)
 
-                var t = new Date(1970, 0, 1);
-                t.setSeconds(seconds);
+                // var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
 
+                // var t = new Date(1970, 0, 1);
+                // t.setSeconds(seconds);
+
+                // var finalTime = secondsToTime(seconds);
+                // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                // worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
+                var seconds = result * 60
                 var finalTime = secondsToTime(seconds);
-                finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                // console.log(finalTime.h);
+                if (parseFloat(finalTime.h) >= 8) {
+                    finalTime = "08" + ":" + "00" + ":" + "00"
+                } else {
+                    finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                }
+                worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
+                worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';
             }
             i++;
         }

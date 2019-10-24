@@ -69,7 +69,7 @@ async function main() {
                             titles.push(worksheet.getRow(1).getCell(SOURCE_COLUMNS_LIST[k]).value)
                         }
                         var value = worksheet.getRow(i).getCell(SOURCE_COLUMNS_LIST[k]).value
-                        linha_antiga.push(convert(value))
+                        linha_antiga.push(convert(value.toString()))
                         k++;
                     }
 
@@ -104,8 +104,8 @@ async function main() {
             });
 
     } else {
-        console.log('file not found',path.join(__dirname, SOURCE_FILE))
-        console.log('try this one',SOURCE_FILE, fs.existsSync(SOURCE_FILE))
+        console.log('file not found', path.join(__dirname, SOURCE_FILE))
+        console.log('try this one', SOURCE_FILE, fs.existsSync(SOURCE_FILE))
     }
 
 }

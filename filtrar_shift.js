@@ -73,7 +73,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 } else if (valor_celula_p.includes("Lalisa Viola Faria Santos")) {
                     shift = parseFloat("3")
                 } else if (valor_celula_p.includes("Henrique Possari")) {
-                    shift = parseFloat("2")
+                    shift = parseFloat("3")
                 }
 
                 worksheet.getCell(STORE_SHIFT + i).value = shift
