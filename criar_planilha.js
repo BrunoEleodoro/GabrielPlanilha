@@ -69,7 +69,10 @@ async function main() {
                             titles.push(worksheet.getRow(1).getCell(SOURCE_COLUMNS_LIST[k]).value)
                         }
                         var value = worksheet.getRow(i).getCell(SOURCE_COLUMNS_LIST[k]).value
-                        linha_antiga.push(convert(value.toString()))
+                        if (value != null) {
+                            linha_antiga.push(convert(value.toString()))
+                        }
+
                         k++;
                     }
 
