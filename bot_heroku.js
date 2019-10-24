@@ -99,7 +99,7 @@ slackController.on('file_shared', function (bot, message) {
 slackBot.startRTM();
 
 function build(bot, message, output_filename) {
-    exec('ls -la && make build', (err, stdout, stderr) => {
+    exec('ls -la && make build && ls -la', (err, stdout, stderr) => {
         console.log(stdout)
         fs.readFile("config", { encoding: 'utf-8' }, function (err, data) {
             var file_name = data.split('\n')[2].replace("OUTPUT_FILE=", "")
