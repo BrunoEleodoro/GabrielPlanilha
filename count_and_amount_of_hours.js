@@ -44,6 +44,7 @@ const STORE_WEEK_DAY = process.env.STORE_WEEK_DAY
 const STORE_MONTH = process.env.STORE_MONTH
 
 const STORE_QUANTIDADE_TICKETS = process.env.STORE_QUANTIDADE_TICKETS
+const QUANTIDADE_TICKETS_PER_USER = process.env.QUANTIDADE_TICKETS_PER_USER
 
 const SEV_SUMMARY_LABELS = process.env.SEV_SUMMARY_LABELS
 const SEV_SUMMARY_VALUES = process.env.SEV_SUMMARY_VALUES
@@ -104,6 +105,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         var years = []
         var titles = []
         worksheet.getCell(STORE_QUANTIDADE_TICKETS + 1).value = "Quantidade de tickets"
+        worksheet.getCell(QUANTIDADE_TICKETS_PER_USER + 1).value = "Quantidade de tickets per user"
         while (i <= worksheet.rowCount) {
 
             // var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
@@ -115,6 +117,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var title = worksheet.getCell(STORE_TITLE_COLUMN + i).value
             var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
             var time_worked = worksheet.getCell(STORE_WORKED_HOURS + i).value
+
+            worksheet.getCell(QUANTIDADE_TICKETS_PER_USER + i).value = '1'
 
             if (title != null) {
                 if (title.includes("(copy)")) {
