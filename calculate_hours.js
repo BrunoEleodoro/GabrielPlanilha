@@ -91,17 +91,20 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 // var finalTime = secondsToTime(seconds);
                 // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
                 // worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
-                var seconds = result * 60
-                var finalTime = secondsToTime(seconds);
-                // console.log(finalTime.h);
-                if (parseFloat(finalTime.h) >= 8) {
-                    // finalTime = "08" + ":" + "00" + ":" + "00"
-                    finalTime = "08"
-                } else {
-                    // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
-                    finalTime = finalTime.h.toString().padStart(2, '0');
-                }
+                // var seconds = result * 60
+                // var finalTime = secondsToTime(seconds);
+                // // console.log(finalTime.h);
+                // if (parseFloat(finalTime.h) >= 8) {
+                //     // finalTime = "08" + ":" + "00" + ":" + "00"
+                //     finalTime = "08"
+                // } else {
+                //     // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                //     finalTime = finalTime.h.toString().padStart(2, '0');
+                // }
                 // worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
+                var finalTime = ""
+                var hours = result / 60
+                finalTime = Math.round(hours * 100) / 100
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
                 // worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';
             }
