@@ -95,13 +95,15 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 var finalTime = secondsToTime(seconds);
                 // console.log(finalTime.h);
                 if (parseFloat(finalTime.h) >= 8) {
-                    finalTime = "08" + ":" + "00" + ":" + "00"
+                    // finalTime = "08" + ":" + "00" + ":" + "00"
+                    finalTime = "08"
                 } else {
-                    finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                    // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
+                    finalTime = finalTime.h.toString().padStart(2, '0');
                 }
-                worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
+                // worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
-                worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';
+                // worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';
             }
             i++;
         }

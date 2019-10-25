@@ -28,6 +28,8 @@ const STORE_SEVERITY_COLUNM = process.env.STORE_SEVERITY_COLUNM
 const STORE_CLOSED_AT = process.env.STORE_CLOSED_AT
 const STORE_WEEK_DAY = process.env.STORE_WEEK_DAY
 const STORE_MONTH = process.env.STORE_MONTH
+const STORE_DAY = process.env.STORE_DAY
+const STORE_YEAR = process.env.STORE_YEAR
 
 const SEV_SUMMARY_LABELS = process.env.SEV_SUMMARY_LABELS
 const SEV_SUMMARY_VALUES = process.env.SEV_SUMMARY_VALUES
@@ -51,14 +53,18 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
         //setting the title of the column
         worksheet.getCell(STORE_WEEK_DAY + 1).value = "week_day"
+        worksheet.getCell(STORE_DAY + 1).value = "Dia"
+        worksheet.getCell(STORE_YEAR + 1).value = "Ano"
 
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(CREATED_AT + i).value
+            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
                 var date = new Date(pieces[0])
                 var dayName = days[date.getDay()];
                 worksheet.getCell(STORE_WEEK_DAY + i).value = dayName
+                worksheet.getCell(STORE_DAY + i).value = date.getDay().toString().padStart(2, '0')
+                worksheet.getCell(STORE_YEAR + i).value = date.getFullYear()
             }
             i++;
         }
