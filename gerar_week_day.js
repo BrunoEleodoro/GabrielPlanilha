@@ -57,7 +57,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(STORE_YEAR + 1).value = "Ano"
 
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
                 var date = new Date(pieces[0])
