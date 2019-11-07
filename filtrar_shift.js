@@ -56,15 +56,18 @@ workbook.xlsx.readFile(SOURCE_FILE)
             if (created_at_value != null && created_at_value.includes("/")) {
                 var partes = created_at_value.split(" ");
                 var time = partes[1];
-                var pieces = parseFloat(time.split(":").join(","))
+                if (time != undefined) {
+                    var pieces = parseFloat(time.split(":").join(","))
 
-                if (pieces >= 0 && pieces <= 7.59) {
-                    worksheet.getCell(STORE_SHIFT + i).value = 3
-                } else if (pieces >= 8 && pieces <= 15.59) {
-                    worksheet.getCell(STORE_SHIFT + i).value = 1
-                } else if (pieces >= 16 && pieces <= 23.59) {
-                    worksheet.getCell(STORE_SHIFT + i).value = 2
+                    if (pieces >= 0 && pieces <= 7.59) {
+                        worksheet.getCell(STORE_SHIFT + i).value = 3
+                    } else if (pieces >= 8 && pieces <= 15.59) {
+                        worksheet.getCell(STORE_SHIFT + i).value = 1
+                    } else if (pieces >= 16 && pieces <= 23.59) {
+                        worksheet.getCell(STORE_SHIFT + i).value = 2
+                    }
                 }
+
                 //  > 00,00 e < 07,59 então adicionar "3" na coluna shift
                 //  > 08,00 e < 15,59 então adicionar "1" na coluna shift
                 //  > 16,00 e < 23,59 então adicionar "2" na coluna shift

@@ -151,7 +151,7 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
                 var index2 = meses_permitidos.indexOf(date.split("/")[1])
 
                 if (index1 == -1 && index2 != -1) {
-                    worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/")
+                    worksheet.getCell(CREATED_AT + i).value = changeDayAndMonthPosition(date, "/") + " " + pieces[1]
                 }
 
                 var date = new Date(worksheet.getCell(CREATED_AT + i).value.split(" ")[0].trim())

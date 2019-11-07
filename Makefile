@@ -22,10 +22,12 @@ build:
 	node calculate_hours.js
 	@echo "\033[0;32mCalculate Amount of tickets for each person...\033[0m" 
 	node count_and_amount_of_hours.js
-	@echo "\033[0;32mFix the wrong dates for created at...\033[0m" 
-	node corrigir_created_at.js
-	@echo "\033[0;32mGenerating shift...\033[0m" 
-	node filtrar_shift.js
+	
+	# @echo "\033[0;32mFix the wrong dates for created at...\033[0m" 
+	# node corrigir_created_at.js
+	# @echo "\033[0;32mGenerating shift...\033[0m" 
+	# node filtrar_shift.js
+
 	# @echo "\033[0;32mInverter datas...\033[0m" 
 	# node inverter_datas.js
 	# @echo "\033[0;32mLabels for each employee...\033[0m" 

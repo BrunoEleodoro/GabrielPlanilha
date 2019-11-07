@@ -17,17 +17,17 @@ const CLOSED_AT = process.env.CLOSED_AT
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
 const CARD_ASSIGNEES = process.env.CARD_ASSIGNEES
 
-const AREAS_ENVOLVIDAS = process.env.AREAS_ENVOLVIDAS
+const CATEGORIA = process.env.CATEGORIA
 const SERVICE_LINE = process.env.SERVICE_LINE
 const PROBLEMA_REPORTADO = process.env.PROBLEMA_REPORTADO
 const ANALISE_ACIONAMENTO = process.env.ANALISE_ACIONAMENTO
 const LABELS_ALEATORIAS = process.env.LABELS_ALEATORIAS
 const ACAO_ISM = process.env.ACAO_ISM
-const MEIO_COMUNICACAO = process.env.MEIO_COMUNICACAO
+const CANAL_ACIONAMENTO = process.env.CANAL_ACIONAMENTO
 const SOLICITACOES = process.env.SOLICITACOES
 const QUEM_VOCE_ACIONOU = process.env.QUEM_VOCE_ACIONOU
 const QUEM_TE_ACIONOU = process.env.QUEM_TE_ACIONOU
-const LABELS_RELACIONADO_A_CHANGE = process.env.LABELS_RELACIONADO_A_CHANGE
+const LABELS_CHAMADOS_INDEVIDOS = process.env.LABELS_CHAMADOS_INDEVIDOS
 
 const STORE_CREATED_BY_COLUMN = process.env.STORE_CREATED_BY_COLUMN
 const STORE_SHIFT = process.env.STORE_SHIFT
@@ -50,21 +50,20 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
-var areas_envolvidas = [
-    "acionamento técnico ibm",
-    "acionamento técnico",
-    "acionamento tecnico",
-    "acionamento t",
-    "acionamento t√©cnico",
-    "acionamento cliente",
-    "acionamento sam",
-    "sam",
-    "acionamento sme",
-    "sme",
-    "acionamento dpe",
-    "dpe",
-    "acionamento dm",
-    "dm"
+var categorias = [
+    "application",
+    "backup",
+    "billing",
+    "capacity",
+    "database",
+    "disk space",
+    "e-mail",
+    "infrastructury",
+    "network",
+    "security",
+    "servers",
+    "tools",
+    "user request",
 ]
 
 var service_line = [
@@ -76,76 +75,102 @@ var service_line = [
     "cms support",
     "db2 support",
     "devops/bigdata support",
-    "email/exchange support",
     "exchange support",
-    "firewall support",
+    "mss support",
     "gcc support",
     "iam support",
-    "iam  support",
     "intel support",
     "mainframe support",
     "middleware support",
     "network support",
     "oracle support",
-    "producao support",
+    "maximo support",
     "production support",
     "san disk support",
     "sap support",
     "tws support",
-    "mss support",
-    "sql support",
-    "peoplesoft support",
     "unix support",
+    "peoplesoft support",
+    "sql support"
 ]
 
 var problema_reportado = [
     "application issue",
-    "banco de loja issue",
     "ca application issue",
-    "certificado issue",
-    "disk full issue",
     "ecommerce issue",
-    "email/exchange issue",
-    "filesystem full issue",
-    "high cpu workload issue",
-    "job issue",
-    "mainframe issue",
-    "monitoring issue",
-    "nota fiscal issue",
-    "peoplesoft app issue",
-    "performance issue",
-    "printer issue",
-    "roadnet issue",
-    "sap issue",
-    "server down issue",
-    "server hang issue",
-    "soa application issue",
-    "softlayer issue",
-    "user access issue",
-    "tablespace issue",
-    "runbook application issue",
-    "server memory issue",
-    "backup issue",
-    "f5 issue",
-    "db issue",
-    "link issue",
-    "citrix issue",
-    "tasi issue",
-    "network issue",
-    "uat approval request",
-    "uat issue",
-    "firewall issue",
-    "chamado cancelado",
+    "f5 application issue",
     "ftp issue",
-    "rdf issue",
-    "shared id locked",
-    "lock no banco",
-    "vpn issue",
-    "site cliente fora",
+    "interface issue",
     "intranet prd app",
+    "odi application",
+    "peoplesoft app issue",
+    "peoplesoft trace request",
+    "rdf issue",
     "replica de ficha",
-    "acesso a pasta de usuario",
-    "odi application issue",
+    "roadnet issue",
+    "runbook application issue",
+    "soa application issue",
+    "stop/start service",
+    "tasi issue",
+    "tibico application",
+    "archieve issue",
+    "backup request",
+    "restore follow up",
+    "restore request",
+    "diferimento brf",
+    "invoice issue",
+    "lentidao no sap",
+    "printer issue",
+    "sap issue",
+    "sap transport",
+    "add disk approval",
+    "filesystem full issue",
+    "filesystem mount issue",
+    "performance issue",
+    "banco de loja issue",
+    "database creation",
+    "database down",
+    "database export request",
+    "database issue",
+    "database locked id",
+    "execucao script",
+    "job backup rerun",
+    "job issue",
+    "session kill request",
+    "tablespace issue",
+    "disk full issue",
+    "high cpu workload issue",
+    "increased disk space",
+    "email/exchange issue",
+    "parada eletrica",
+    "power outage issue",
+    "site cliente fora",
+    "link issue",
+    "vpn issue",
+    "antivirus issue",
+    "certified issue",
+    "firewall issue",
+    "firewall rule request",
+    "password reset",
+    "shared id locked",
+    "uat approval request",
+    "user access issue",
+    "server down issue",
+    "server hung",
+    "server issue",
+    "server reboot",
+    "snapshot request",
+    "citrix issue",
+    "mainframe issue",
+    "maximo issue",
+    "monitoring issue",
+    "softlayer issue",
+    "change open request",
+    "file creation",
+    "file transfer",
+    "file user access",
+    "status request",
+    "validacao ambiente",
 ]
 
 var analise_do_acionamento = [
@@ -164,11 +189,11 @@ var acao_ism = [
     "priorizar",
 ]
 
-var meio_comunicacao = [
+var canal_acionamento = [
     "acionamento via email",
     "acionamento via sametime",
     "acionamento via slack",
-    "acionamento via telefone",
+    "acionamento via telefone"
 ]
 
 var solicitacoes = [
@@ -197,8 +222,7 @@ var quem_voce_acionou = [
     "acionamento sil",
     "acionamento sme",
     "acionamento tec br",
-    "acionamento tec in",
-    "acionamento tec local",
+    "acionamento tec in"
 ]
 
 var quem_te_acionou = [
@@ -212,17 +236,24 @@ var quem_te_acionou = [
     "acionado por sme",
     "acionado por tec br",
     "acionado por tec in",
+    "acionado por gcc support",
+    "acionado por producao",
+    "acionamento indevido vvo",
+    "acionamento indevido gpa"
 ]
 
-var labels_relacionado_a_change = [
-    "acompanhar change",
-    "change fora do radar",
+var chamados_indevidos = [
+    "change follow up",
+    "change not reported",
     "change late task",
-    "abertura de change",
+    "extentend change windows",
+    "change checkpoint",
+    "change approval",
     "change fallback",
-    "aprovacao de change",
-    "change emergencial",
-    "extensao de janela change",
+    "change failed",
+    "change close task sam",
+    "change open request",
+    "emergency change",
 ]
 
 function convert(input) {
@@ -240,17 +271,17 @@ workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(WORKSHEET);
 
-        worksheet.getCell(AREAS_ENVOLVIDAS + 1).value = "Areas envolvidas"
+        worksheet.getCell(CATEGORIA + 1).value = "Categoria"
         worksheet.getCell(SERVICE_LINE + 1).value = "Service line"
         worksheet.getCell(PROBLEMA_REPORTADO + 1).value = "Problema reportado"
         worksheet.getCell(ANALISE_ACIONAMENTO + 1).value = "Análise do Acionamento"
         worksheet.getCell(LABELS_ALEATORIAS + 1).value = "Labels aleatorias"
         worksheet.getCell(ACAO_ISM + 1).value = "Ação ISM"
-        worksheet.getCell(MEIO_COMUNICACAO + 1).value = "Meio de comunicacão"
+        worksheet.getCell(CANAL_ACIONAMENTO + 1).value = "Canal de Acionamento"
         worksheet.getCell(SOLICITACOES + 1).value = "Solicitações"
         worksheet.getCell(QUEM_VOCE_ACIONOU + 1).value = "Quem você acionou"
         worksheet.getCell(QUEM_TE_ACIONOU + 1).value = "Quem te acionou"
-        worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + 1).value = "Labels relacionado a change"
+        worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + 1).value = "Labels para Chamados Indevidos"
 
         i = 2
         while (i <= worksheet.rowCount) {
@@ -262,17 +293,17 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 var pieces = valor_celula.split(",");
                 var k = 0;
                 var res = "";
-                worksheet.getCell(AREAS_ENVOLVIDAS + i).value = " "
+                worksheet.getCell(CATEGORIA + i).value = " "
                 worksheet.getCell(SERVICE_LINE + i).value = " "
                 worksheet.getCell(PROBLEMA_REPORTADO + i).value = " "
                 worksheet.getCell(ANALISE_ACIONAMENTO + i).value = " "
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = " "
                 worksheet.getCell(ACAO_ISM + i).value = " "
-                worksheet.getCell(MEIO_COMUNICACAO + i).value = " "
+                worksheet.getCell(CANAL_ACIONAMENTO + i).value = " "
                 worksheet.getCell(SOLICITACOES + i).value = " "
                 worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = " "
                 worksheet.getCell(QUEM_TE_ACIONOU + i).value = " "
-                worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value = " "
+                worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = " "
                 while (k < pieces.length) {
                     // if (pieces[k].trim().toLowerCase().includes("acionamento")) {
                     //     res += pieces[k].trim() + ", "
@@ -284,8 +315,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         label = convert(label)
                         label = label.replace("ý", "é");
                     }
-                    if (areas_envolvidas.indexOf(label) >= 0) {
-                        worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value + label + ", "
+                    if (categorias.indexOf(label) >= 0) {
+                        worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value + label + ", "
                         found = true;
                     }
                     if (service_line.indexOf(label) >= 0) {
@@ -304,8 +335,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value + label + ", "
                         found = true;
                     }
-                    if (meio_comunicacao.indexOf(label) >= 0) {
-                        worksheet.getCell(MEIO_COMUNICACAO + i).value = worksheet.getCell(MEIO_COMUNICACAO + i).value + label + ", "
+                    if (canal_acionamento.indexOf(label) >= 0) {
+                        worksheet.getCell(CANAL_ACIONAMENTO + i).value = worksheet.getCell(CANAL_ACIONAMENTO + i).value + label + ", "
                         found = true;
                     }
 
@@ -321,8 +352,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         worksheet.getCell(QUEM_TE_ACIONOU + i).value = worksheet.getCell(QUEM_TE_ACIONOU + i).value + label + ", "
                         found = true;
                     }
-                    if (labels_relacionado_a_change.indexOf(label) >= 0) {
-                        worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value = worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value + label + ", "
+                    if (chamados_indevidos.indexOf(label) >= 0) {
+                        worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value + label + ", "
                         found = true;
                     }
 
@@ -338,19 +369,19 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     k++;
                 }
-                worksheet.getCell(AREAS_ENVOLVIDAS + i).value = worksheet.getCell(AREAS_ENVOLVIDAS + i).value.substr(0, worksheet.getCell(AREAS_ENVOLVIDAS + i).value.length - 2).trim()
+                worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value.substr(0, worksheet.getCell(CATEGORIA + i).value.length - 2).trim()
                 worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value.substr(0, worksheet.getCell(SERVICE_LINE + i).value.length - 2).trim()
                 worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value.substr(0, worksheet.getCell(PROBLEMA_REPORTADO + i).value.length - 2).trim()
                 worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value.substr(0, worksheet.getCell(ANALISE_ACIONAMENTO + i).value.length - 2).trim()
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = worksheet.getCell(LABELS_ALEATORIAS + i).value.substr(0, worksheet.getCell(LABELS_ALEATORIAS + i).value.length - 2).trim()
                 worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value.substr(0, worksheet.getCell(ACAO_ISM + i).value.length - 2).trim()
-                worksheet.getCell(MEIO_COMUNICACAO + i).value = worksheet.getCell(MEIO_COMUNICACAO + i).value.substr(0, worksheet.getCell(MEIO_COMUNICACAO + i).value.length - 2).trim()
+                worksheet.getCell(CANAL_ACIONAMENTO + i).value = worksheet.getCell(CANAL_ACIONAMENTO + i).value.substr(0, worksheet.getCell(CANAL_ACIONAMENTO + i).value.length - 2).trim()
                 worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value.substr(0, worksheet.getCell(SOLICITACOES + i).value.length - 2).trim()
                 worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = worksheet.getCell(QUEM_VOCE_ACIONOU + i).value.substr(0, worksheet.getCell(QUEM_VOCE_ACIONOU + i).value.length - 2).trim()
                 worksheet.getCell(QUEM_TE_ACIONOU + i).value = worksheet.getCell(QUEM_TE_ACIONOU + i).value.substr(0, worksheet.getCell(QUEM_TE_ACIONOU + i).value.length - 2).trim()
-                worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value = worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value.substr(0, worksheet.getCell(LABELS_RELACIONADO_A_CHANGE + i).value.length - 2).trim()
+                worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value.substr(0, worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value.length - 2).trim()
                 // worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res+","+res2
-                // worksheet.getCell(AREAS_ENVOLVIDAS + i).value = res
+                // worksheet.getCell(CATEGORIA + i).value = res
             }
             i++;
         }
