@@ -171,6 +171,10 @@ var problema_reportado = [
     "file user access",
     "status request",
     "validacao ambiente",
+    "monitoracao/report",
+    "monitoracao/report",
+    "acompanhar",
+    "priorizar"
 ]
 
 var analise_do_acionamento = [
@@ -274,14 +278,14 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(CATEGORIA + 1).value = "Categoria"
         worksheet.getCell(SERVICE_LINE + 1).value = "Service line"
         worksheet.getCell(PROBLEMA_REPORTADO + 1).value = "Problema reportado"
-        worksheet.getCell(ANALISE_ACIONAMENTO + 1).value = "Análise do Acionamento"
+        // worksheet.getCell(ANALISE_ACIONAMENTO + 1).value = "Análise do Acionamento"
         worksheet.getCell(LABELS_ALEATORIAS + 1).value = "Labels aleatorias"
-        worksheet.getCell(ACAO_ISM + 1).value = "Ação ISM"
+        // worksheet.getCell(ACAO_ISM + 1).value = "Ação ISM"
         worksheet.getCell(CANAL_ACIONAMENTO + 1).value = "Canal de Acionamento"
-        worksheet.getCell(SOLICITACOES + 1).value = "Solicitações"
+        // worksheet.getCell(SOLICITACOES + 1).value = "Solicitações"
         worksheet.getCell(QUEM_VOCE_ACIONOU + 1).value = "Quem você acionou"
         worksheet.getCell(QUEM_TE_ACIONOU + 1).value = "Quem te acionou"
-        worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + 1).value = "Labels para Chamados Indevidos"
+        worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + 1).value = "Labels Relacionado a Change"
 
         i = 2
         while (i <= worksheet.rowCount) {
@@ -296,11 +300,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(CATEGORIA + i).value = " "
                 worksheet.getCell(SERVICE_LINE + i).value = " "
                 worksheet.getCell(PROBLEMA_REPORTADO + i).value = " "
-                worksheet.getCell(ANALISE_ACIONAMENTO + i).value = " "
+                // worksheet.getCell(ANALISE_ACIONAMENTO + i).value = " "
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = " "
-                worksheet.getCell(ACAO_ISM + i).value = " "
+                // worksheet.getCell(ACAO_ISM + i).value = " "
                 worksheet.getCell(CANAL_ACIONAMENTO + i).value = " "
-                worksheet.getCell(SOLICITACOES + i).value = " "
+                // worksheet.getCell(SOLICITACOES + i).value = " "
                 worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = " "
                 worksheet.getCell(QUEM_TE_ACIONOU + i).value = " "
                 worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = " "
@@ -327,23 +331,23 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value + label + ", "
                         found = true;
                     }
-                    if (analise_do_acionamento.indexOf(label) >= 0) {
-                        worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value + label + ", "
-                        found = true;
-                    }
-                    if (acao_ism.indexOf(label) >= 0) {
-                        worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value + label + ", "
-                        found = true;
-                    }
+                    // if (analise_do_acionamento.indexOf(label) >= 0) {
+                    //     worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value + label + ", "
+                    //     found = true;
+                    // }
+                    // if (acao_ism.indexOf(label) >= 0) {
+                    //     worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value + label + ", "
+                    //     found = true;
+                    // }
                     if (canal_acionamento.indexOf(label) >= 0) {
                         worksheet.getCell(CANAL_ACIONAMENTO + i).value = worksheet.getCell(CANAL_ACIONAMENTO + i).value + label + ", "
                         found = true;
                     }
 
-                    if (solicitacoes.indexOf(label) >= 0) {
-                        worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value + label + ", "
-                        found = true;
-                    }
+                    // if (solicitacoes.indexOf(label) >= 0) {
+                    //     worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value + label + ", "
+                    //     found = true;
+                    // }
                     if (quem_voce_acionou.indexOf(label) >= 0) {
                         worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = worksheet.getCell(QUEM_VOCE_ACIONOU + i).value + label + ", "
                         found = true;
@@ -372,11 +376,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value.substr(0, worksheet.getCell(CATEGORIA + i).value.length - 2).trim()
                 worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value.substr(0, worksheet.getCell(SERVICE_LINE + i).value.length - 2).trim()
                 worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value.substr(0, worksheet.getCell(PROBLEMA_REPORTADO + i).value.length - 2).trim()
-                worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value.substr(0, worksheet.getCell(ANALISE_ACIONAMENTO + i).value.length - 2).trim()
+                // worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value.substr(0, worksheet.getCell(ANALISE_ACIONAMENTO + i).value.length - 2).trim()
                 worksheet.getCell(LABELS_ALEATORIAS + i).value = worksheet.getCell(LABELS_ALEATORIAS + i).value.substr(0, worksheet.getCell(LABELS_ALEATORIAS + i).value.length - 2).trim()
-                worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value.substr(0, worksheet.getCell(ACAO_ISM + i).value.length - 2).trim()
+                // worksheet.getCell(ACAO_ISM + i).value = worksheet.getCell(ACAO_ISM + i).value.substr(0, worksheet.getCell(ACAO_ISM + i).value.length - 2).trim()
                 worksheet.getCell(CANAL_ACIONAMENTO + i).value = worksheet.getCell(CANAL_ACIONAMENTO + i).value.substr(0, worksheet.getCell(CANAL_ACIONAMENTO + i).value.length - 2).trim()
-                worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value.substr(0, worksheet.getCell(SOLICITACOES + i).value.length - 2).trim()
+                // worksheet.getCell(SOLICITACOES + i).value = worksheet.getCell(SOLICITACOES + i).value.substr(0, worksheet.getCell(SOLICITACOES + i).value.length - 2).trim()
                 worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = worksheet.getCell(QUEM_VOCE_ACIONOU + i).value.substr(0, worksheet.getCell(QUEM_VOCE_ACIONOU + i).value.length - 2).trim()
                 worksheet.getCell(QUEM_TE_ACIONOU + i).value = worksheet.getCell(QUEM_TE_ACIONOU + i).value.substr(0, worksheet.getCell(QUEM_TE_ACIONOU + i).value.length - 2).trim()
                 worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value.substr(0, worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value.length - 2).trim()

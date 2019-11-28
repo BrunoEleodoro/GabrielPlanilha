@@ -186,6 +186,12 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 if (type.toUpperCase().trim() == "CH") {
                     worksheet.getCell(STORE_SEVERITY_COLUNM + i).value = "N/A"
                 }
+                else if (type.toUpperCase().trim() == "SC") {
+                    worksheet.getCell(STORE_SEVERITY_COLUNM + i).value = "N/A"
+                }
+                else if (type.toUpperCase().trim() == "REPORT") {
+                    worksheet.getCell(STORE_SEVERITY_COLUNM + i).value = "N/A"
+                }
             }
             i++;
         }
