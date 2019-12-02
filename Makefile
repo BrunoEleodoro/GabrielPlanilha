@@ -24,6 +24,12 @@ build:
 	node count_and_amount_of_hours.js
 	@echo "\033[0;32mFix the wrong dates for created at...\033[0m" 
 	node corrigir_created_at.js
+	@echo "\033[0;32mFix the general format to numbers parseFloat...\033[0m" 
+	node corrigir_numeros.js
+	@echo "\033[0;32mGenerating Tribe...\033[0m" 
+	node gerar_tribe.js
+	@echo "\033[0;32mGenerating Horario Pico...\033[0m" 
+	node gerar_horario_pico.js
 	@echo "\033[0;32mGenerating shift...\033[0m" 
 	node filtrar_shift.js
 

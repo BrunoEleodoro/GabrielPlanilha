@@ -105,8 +105,13 @@ const clientes_possiveis = [
     "ORBITAL",
     "ASSAI",
     "CRDC",
-	"BURGER KING",
+    "BURGER KING",
     "MERCEDES BENZ",
+    "ATACADAO",
+    "IRM",
+    "TOYOTA",
+    "BRMALLS",
+    "brmalls"
 ]
 
 // READ WORKBOOK

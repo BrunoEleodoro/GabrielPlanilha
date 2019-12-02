@@ -59,11 +59,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 if (time != undefined) {
                     var pieces = parseFloat(time.split(":").join(","))
 
-                    if (pieces >= 0 && pieces <= 7.59) {
+                    if (pieces >= 0 && pieces <= 7.50) {
                         worksheet.getCell(STORE_SHIFT + i).value = 3
-                    } else if (pieces >= 8 && pieces <= 15.59) {
+                    } else if (pieces >= 7.51 && pieces <= 15.50) {
                         worksheet.getCell(STORE_SHIFT + i).value = 1
-                    } else if (pieces >= 16 && pieces <= 23.59) {
+                    } else if (pieces >= 15.51 && pieces <= 23.50) {
                         worksheet.getCell(STORE_SHIFT + i).value = 2
                     }
                 }

@@ -98,7 +98,7 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
             i++;
             // if (i > 30) { break }
         }
-        // console.log(JSON.stringify(first_parts), JSON.stringify(first_values))
+        console.log(JSON.stringify(first_parts), JSON.stringify(first_values))
 
         var maior_valor = 0;
         var index = 0;
@@ -119,26 +119,35 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
         // first_parts.splice(index)
         // first_values.splice(index)
 
-        var maior_valor = 0;
-        var index = 0;
-        i = 0;
-        while (i <= first_parts.length) {
-            var valor = first_values[i]
-            if (maior_valor < valor && valor != primeiro_maior_valor) {
-                index = i
-                maior_valor = valor
-            }
-            i++;
-        }
+        // var maior_valor = 0;
+        // var index = 0;
+        // i = 0;
+        // while (i <= first_parts.length) {
+        //     var valor = first_values[i]
+        //     if (maior_valor < valor && valor != primeiro_maior_valor) {
+        //         index = i
+        //         maior_valor = valor
+        //     }
+        //     i++;
+        // }
 
-        var segundo_maior_valor = maior_valor;
-        var segundo_maior_valor_index = index;
+        // var segundo_maior_valor = maior_valor;
+        // var segundo_maior_valor_index = index;
+
+        // console.log(first_parts[primeiro_maior_valor_index])
+        // console.log(first_parts[segundo_maior_valor_index])
+
+        var segundo_maior_valor = first_parts[primeiro_maior_valor_index] - 1;
+        if (segundo_maior_valor == 0) {
+            segundo_maior_valor = 12;
+        }
 
         var meses_permitidos = []
         meses_permitidos.push(first_parts[primeiro_maior_valor_index])
-        meses_permitidos.push(first_parts[segundo_maior_valor_index])
+        meses_permitidos.push(segundo_maior_valor.toString().padStart(2, '0'))
 
 
+        console.log(meses_permitidos);
 
         i = 2;
         while (i <= worksheet.rowCount) {

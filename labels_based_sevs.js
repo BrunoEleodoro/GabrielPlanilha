@@ -79,6 +79,7 @@ var service_line = [
     "mss support",
     "gcc support",
     "iam support",
+    "iam  support",
     "intel support",
     "mainframe support",
     "middleware support",
@@ -168,13 +169,18 @@ var problema_reportado = [
     "change open request",
     "file creation",
     "file transfer",
+    "file transfer request",
     "file user access",
     "status request",
     "validacao ambiente",
     "monitoracao/report",
     "monitoracao/report",
     "acompanhar",
-    "priorizar"
+    "priorizar",
+    "backup issue",
+    "network issue",
+    "tibco application",
+    "server memory issue"
 ]
 
 var analise_do_acionamento = [
@@ -243,7 +249,9 @@ var quem_te_acionou = [
     "acionado por gcc support",
     "acionado por producao",
     "acionamento indevido vvo",
-    "acionamento indevido gpa"
+    "acionamento indevido gpa",
+    "acionado por",
+    "acionado por gcc br"
 ]
 
 var chamados_indevidos = [
@@ -268,6 +276,20 @@ function convert(input) {
     var output = iconv.decode(input, "ISO-8859-1");
     // output = iconv.decode(output, "UTF-8");
     return output;
+}
+
+function checkIfCategoriaIsPresent(label) {
+    let i = 0;
+    var found = "";
+    while (i < categorias.length) {
+        var categoria = categorias[i];
+        if (label.toLowerCase().includes(categoria.toLowerCase())) {
+            found = categoria.toLowerCase()
+            break;
+        }
+        i++;
+    }
+    return found;
 }
 
 // READ WORKBOOK
@@ -319,9 +341,13 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         label = convert(label)
                         label = label.replace("ý", "é");
                     }
-                    if (categorias.indexOf(label) >= 0) {
-                        worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value + label + ", "
-                        found = true;
+                    var checkCategoria = checkIfCategoriaIsPresent(label);
+                    if (checkCategoria != "") {
+
+                        if (worksheet.getCell(CATEGORIA + i).value.length == 1) {
+                            worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value + checkCategoria + ", "
+                            found = true;
+                        }
                     }
                     if (service_line.indexOf(label) >= 0) {
                         worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value + label + ", "
