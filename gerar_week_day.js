@@ -61,9 +61,12 @@ workbook.xlsx.readFile(SOURCE_FILE)
             if (valor_celula != null) {
                 var pieces = valor_celula.split(" ")
                 var date = new Date(pieces[0])
+                // if (date.getDate().toString() == "0") {
+                //     console.log(date)
+                // }
                 var dayName = days[date.getDay()];
                 worksheet.getCell(STORE_WEEK_DAY + i).value = dayName
-                worksheet.getCell(STORE_DAY + i).value = date.getDay().toString().padStart(2, '0')
+                worksheet.getCell(STORE_DAY + i).value = date.getDate().toString().padStart(2, '0')
                 worksheet.getCell(STORE_YEAR + i).value = date.getFullYear()
             }
             i++;
