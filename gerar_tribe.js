@@ -40,7 +40,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
-        worksheet.getCell(TRIBE + i).value = "Tribo"
+        worksheet.getCell(TRIBE + 1).value = "Tribo"
         // while (i <= worksheet.rowCount) {
 
         //     worksheet.getCell(TOTAL_WAITING_TIME + i).value = parseFloat(worksheet.getCell(TOTAL_WAITING_TIME + i).value)
