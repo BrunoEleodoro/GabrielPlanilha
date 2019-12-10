@@ -49,8 +49,8 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 var partes = created_at_value.split(" ");
                 var time = partes[1];
                 if (time != undefined) {
-                    var pieces = parseFloat(time.split(":").join(","))
-
+                    var pieces = parseFloat(time.split(":").join("."))
+                    console.log(i, pieces)
                     if (pieces >= 23.50 && pieces < 0.10) {
                         worksheet.getCell(HORARIO_PICO + i).value = "00:00"
                     } else if (pieces >= 0.10 && pieces < 0.30) {
