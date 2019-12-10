@@ -59,7 +59,9 @@ async function main() {
             .then(function () {
                 var worksheet = workbook.worksheets[0];
                 var i = 2;
-                while (i <= worksheet.rowCount) {
+                console.log('line count', worksheet.rowCount)
+                var limite = (worksheet.rowCount + 1);
+                while (i <= limite) {
                     var linha_antiga = []
 
                     var k = 0;
