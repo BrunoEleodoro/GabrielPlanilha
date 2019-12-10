@@ -55,7 +55,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 ) {
                     // if the severity is NOT 1,2,3 or 4, them generate a random number for that 
                     var x = Math.floor((Math.random() * 4) + 1)
-                    if (worksheet.getCell(STORE_TYPE_COLUMN + i).value != "CH") {
+                    if (worksheet.getCell(STORE_TYPE_COLUMN + i).value != "CH" && worksheet.getCell(STORE_TYPE_COLUMN + i).value != "SC") {
                         worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value + ", sev" + parseFloat(x);
                     }
 
