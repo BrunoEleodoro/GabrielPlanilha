@@ -122,8 +122,14 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var k = 0;
             while (k < pessoas.length) {
                 var value = worksheet.getCell(CLIENTS_COLUMN + i).value
+                value = value.trim()
+                if (i == 6) {
+                    console.log(pessoa, value)
+                    console.log(pessoas_clientes[pessoa].indexOf(value))
+                }
                 var pessoa = pessoas[k]
-                if (pessoas_clientes[pessoa].indexOf(value) > 0) {
+
+                if (pessoas_clientes[pessoa].indexOf(value) >= 0) {
                     worksheet.getCell(TRIBE + i).value = pessoa
                     break;
                 }
