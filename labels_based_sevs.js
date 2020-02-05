@@ -384,6 +384,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     // }
                     var found = false;
                     var label = pieces[k].trim().toLowerCase()
+                    label = label.replace("  ", " ")
 
                     if (label.includes("acionamento t")) {
                         label = convert(label)
@@ -397,12 +398,16 @@ workbook.xlsx.readFile(SOURCE_FILE)
                             found = true;
                         }
                     }
+
                     if (service_line.indexOf(label) >= 0) {
                         worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value + label + ", "
                         found = true;
                     }
                     if (problema_reportado.indexOf(label) >= 0) {
                         worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value + label + ", "
+                        if (i == 2) {
+                            console.log('problema_reportado', label)
+                        }
                         found = true;
                     }
                     // if (analise_do_acionamento.indexOf(label) >= 0) {
@@ -434,7 +439,9 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value + label + ", "
                         found = true;
                     }
-
+                    if (i == 2) {
+                        console.log(label)
+                    }
                     if (!found) {
                         if (!label.trim().toLowerCase().includes(cliente.toLowerCase().trim()) &&
                             !label.trim().toLowerCase().includes("sev") &&
