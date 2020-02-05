@@ -50,82 +50,83 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
-var categorias = ["application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "application",
-    "backup",
-    "backup",
-    "backup",
-    "backup",
-    "capacity",
-    "capacity",
-    "capacity",
-    "capacity",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "database",
-    "disk space",
-    "disk space",
-    "disk space",
-    "e-mail",
-    "infrastructury",
-    "infrastructury",
-    "infrastructury",
-    "network",
-    "network",
-    "security",
-    "security",
-    "security",
-    "security",
-    "security",
-    "security",
-    "security",
-    "security",
-    "servers",
-    "servers",
-    "servers",
-    "servers",
-    "servers",
-    "servers",
-    "tools",
-    "tools",
-    "tools",
-    "tools",
-    "tools",
-    "user request",
-    "user request",
-    "user request",
-    "user request",
-    "user request",
-    "user request",]
+var categoria_problema = []
+categoria_problema["application issue"] = "application"
+categoria_problema["ca application issue"] = "application"
+categoria_problema["ecommerce issue"] = "application"
+categoria_problema["f5 application issue"] = "application"
+categoria_problema["ftp issue"] = "application"
+categoria_problema["interface issue"] = "application"
+categoria_problema["intranet prd app"] = "application"
+categoria_problema["odi application"] = "application"
+categoria_problema["peoplesoft app issue"] = "application"
+categoria_problema["peoplesoft trace request"] = "application"
+categoria_problema["rdf issue"] = "application"
+categoria_problema["replica de ficha"] = "application"
+categoria_problema["roadnet issue"] = "application"
+categoria_problema["runbook application issue"] = "application"
+categoria_problema["soa application issue"] = "application"
+categoria_problema["stop/start service"] = "application"
+categoria_problema["tasi issue"] = "application"
+categoria_problema["tibico application"] = "application"
+categoria_problema["diferimento brf"] = "application"
+categoria_problema["invoice issue"] = "application"
+categoria_problema["lentidao no sap"] = "application"
+categoria_problema["sap issue"] = "application"
+categoria_problema["sap transport"] = "application"
+categoria_problema["archieve issue"] = "backup"
+categoria_problema["backup request"] = "backup"
+categoria_problema["restore follow up"] = "backup"
+categoria_problema["restore request"] = "backup"
+categoria_problema["add disk approval"] = "capacity"
+categoria_problema["filesystem full issue"] = "capacity"
+categoria_problema["filesystem mount issue"] = "capacity"
+categoria_problema["performance issue"] = "capacity"
+categoria_problema["banco de loja issue"] = "database"
+categoria_problema["database creation"] = "database"
+categoria_problema["database down"] = "database"
+categoria_problema["database export request"] = "database"
+categoria_problema["database issue"] = "database"
+categoria_problema["database locked id"] = "database"
+categoria_problema["execucao script"] = "database"
+categoria_problema["job backup rerun"] = "database"
+categoria_problema["job issue"] = "database"
+categoria_problema["session kill request"] = "database"
+categoria_problema["tablespace issue"] = "database"
+categoria_problema["disk full issue"] = "disk space"
+categoria_problema["high cpu workload issue"] = "disk space"
+categoria_problema["increased disk space"] = "disk space"
+categoria_problema["email/exchange issue"] = "e-mail"
+categoria_problema["parada eletrica"] = "infrastructury"
+categoria_problema["power outage issue"] = "infrastructury"
+categoria_problema["site cliente fora"] = "infrastructury"
+categoria_problema["link issue"] = "network"
+categoria_problema["vpn issue"] = "network"
+categoria_problema["antivirus issue"] = "security"
+categoria_problema["certified issue"] = "security"
+categoria_problema["firewall issue"] = "security"
+categoria_problema["firewall rule request"] = "security"
+categoria_problema["password reset"] = "security"
+categoria_problema["shared id locked"] = "security"
+categoria_problema["uat approval request"] = "security"
+categoria_problema["user access issue"] = "security"
+categoria_problema["printer issue"] = "servers"
+categoria_problema["server down issue"] = "servers"
+categoria_problema["server hung"] = "servers"
+categoria_problema["server issue"] = "servers"
+categoria_problema["server reboot"] = "servers"
+categoria_problema["snapshot request"] = "servers"
+categoria_problema["citrix issue"] = "tools"
+categoria_problema["mainframe issue"] = "tools"
+categoria_problema["maximo issue"] = "tools"
+categoria_problema["monitoring issue"] = "tools"
+categoria_problema["softlayer issue"] = "tools"
+categoria_problema["change open request"] = "user request"
+categoria_problema["file creation"] = "user request"
+categoria_problema["file transfer"] = "user request"
+categoria_problema["file user access"] = "user request"
+categoria_problema["status request"] = "user request"
+categoria_problema["validacao ambiente"] = "user request"
 
 var service_line = ["adabas support",
     "at&t support",
@@ -390,14 +391,14 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         label = convert(label)
                         label = label.replace("ý", "é");
                     }
-                    var checkCategoria = checkIfCategoriaIsPresent(label);
-                    if (checkCategoria != "") {
+                    // var checkCategoria = checkIfCategoriaIsPresent(label);
+                    // if (checkCategoria != "") {
 
-                        if (worksheet.getCell(CATEGORIA + i).value.length == 1) {
-                            worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value + checkCategoria + ", "
-                            found = true;
-                        }
-                    }
+                    //     if (worksheet.getCell(CATEGORIA + i).value.length == 1) {
+                    //         worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value + checkCategoria + ", "
+                    //         found = true;
+                    //     }
+                    // }
 
                     if (service_line.indexOf(label) >= 0) {
                         worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value + label + ", "
@@ -405,6 +406,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     if (problema_reportado.indexOf(label) >= 0) {
                         worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value + label + ", "
+                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label]
                         if (i == 2) {
                             console.log('problema_reportado', label)
                         }
