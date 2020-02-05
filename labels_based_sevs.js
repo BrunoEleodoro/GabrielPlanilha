@@ -406,10 +406,9 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     if (problema_reportado.indexOf(label) >= 0) {
                         worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value + label + ", "
-                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label]
-                        if (i == 2) {
-                            console.log('problema_reportado', label)
-                        }
+                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label].toString()
+
+                        console.log('problema_reportado', label, categoria_problema[label])
                         found = true;
                     }
                     // if (analise_do_acionamento.indexOf(label) >= 0) {
@@ -456,7 +455,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     k++;
                 }
-                worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value.substr(0, worksheet.getCell(CATEGORIA + i).value.length - 2).trim()
+                // worksheet.getCell(CATEGORIA + i).value = worksheet.getCell(CATEGORIA + i).value.substr(0, worksheet.getCell(CATEGORIA + i).value.length - 2).trim()
                 worksheet.getCell(SERVICE_LINE + i).value = worksheet.getCell(SERVICE_LINE + i).value.substr(0, worksheet.getCell(SERVICE_LINE + i).value.length - 2).trim()
                 worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value.substr(0, worksheet.getCell(PROBLEMA_REPORTADO + i).value.length - 2).trim()
                 // worksheet.getCell(ANALISE_ACIONAMENTO + i).value = worksheet.getCell(ANALISE_ACIONAMENTO + i).value.substr(0, worksheet.getCell(ANALISE_ACIONAMENTO + i).value.length - 2).trim()
