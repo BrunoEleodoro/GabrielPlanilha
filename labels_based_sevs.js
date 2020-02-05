@@ -52,6 +52,7 @@ const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
 var categoria_problema = []
 categoria_problema["application issue"] = "application"
+categoria_problema["network issue"] = "network"
 categoria_problema["ca application issue"] = "application"
 categoria_problema["ecommerce issue"] = "application"
 categoria_problema["f5 application issue"] = "application"
@@ -158,6 +159,7 @@ var service_line = ["adabas support",
 var problema_reportado = [
     "application issue",
     "ca application issue",
+    "network issue",
     "ecommerce issue",
     "f5 application issue",
     "ftp issue",
