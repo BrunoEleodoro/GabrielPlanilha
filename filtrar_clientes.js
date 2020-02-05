@@ -111,7 +111,8 @@ const clientes_possiveis = [
     "IRM",
     "TOYOTA",
     "BRMALLS",
-    "brmalls"
+    "brmalls",
+    "PROXXI",
 ]
 
 // READ WORKBOOK
@@ -130,6 +131,19 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 while (k < clientes_possiveis.length) {
                     if (valor_celula_p.toLowerCase().includes(clientes_possiveis[k].toLowerCase())) {
                         possivel_cliente = clientes_possiveis[k].toUpperCase()
+                        if (possivel_cliente.trim().toUpperCase() == "DPSP") {
+                            possivel_cliente = "DROGARIA SP"
+                        } else if (possivel_cliente.trim().toUpperCase() == "GALGO") {
+                            possivel_cliente = "ANBIMA"
+                        } else if (possivel_cliente.trim().toUpperCase() == "FASTSHOP") {
+                            possivel_cliente = "APOLLO"
+                        } else if (possivel_cliente.trim().toUpperCase() == "CONFESOL") {
+                            possivel_cliente = "CRESOL"
+                        } else if (possivel_cliente.trim().toUpperCase() == "SAINT-GOBAIN") {
+                            possivel_cliente = "SAINT GOBAIN"
+                        } else if (possivel_cliente.trim().toUpperCase() == "DROGARIA ONFORE") {
+                            possivel_cliente = "ONOFRE"
+                        }
                         break
                     }
                     k++;
@@ -152,6 +166,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     if (possivel_cliente.trim().toUpperCase() == "CAR") {
                         possivel_cliente = "CARREFOUR"
                     }
+
 
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 } else {

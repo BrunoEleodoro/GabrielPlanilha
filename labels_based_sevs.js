@@ -50,24 +50,84 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
-var categorias = [
+var categorias = ["application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
+    "application",
     "application",
     "backup",
-    "billing",
+    "backup",
+    "backup",
+    "backup",
+    "capacity",
+    "capacity",
+    "capacity",
     "capacity",
     "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "database",
+    "disk space",
+    "disk space",
     "disk space",
     "e-mail",
     "infrastructury",
+    "infrastructury",
+    "infrastructury",
+    "network",
     "network",
     "security",
+    "security",
+    "security",
+    "security",
+    "security",
+    "security",
+    "security",
+    "security",
+    "servers",
+    "servers",
+    "servers",
+    "servers",
+    "servers",
     "servers",
     "tools",
+    "tools",
+    "tools",
+    "tools",
+    "tools",
     "user request",
-]
+    "user request",
+    "user request",
+    "user request",
+    "user request",
+    "user request",]
 
-var service_line = [
-    "adabas support",
+var service_line = ["adabas support",
     "at&t support",
     "automation support",
     "backup support",
@@ -79,20 +139,19 @@ var service_line = [
     "mss support",
     "gcc support",
     "iam support",
-    "iam  support",
     "intel support",
     "mainframe support",
     "middleware support",
     "network support",
     "oracle support",
     "maximo support",
+    "unix support",
+    "peoplesoft support",
+    "sql support",
     "production support",
     "san disk support",
     "sap support",
     "tws support",
-    "unix support",
-    "peoplesoft support",
-    "sql support"
 ]
 
 var problema_reportado = [
@@ -114,16 +173,15 @@ var problema_reportado = [
     "stop/start service",
     "tasi issue",
     "tibico application",
+    "diferimento brf",
+    "invoice issue",
+    "lentidao no sap",
+    "sap issue",
+    "sap transport",
     "archieve issue",
     "backup request",
     "restore follow up",
     "restore request",
-    "diferimento brf",
-    "invoice issue",
-    "lentidao no sap",
-    "printer issue",
-    "sap issue",
-    "sap transport",
     "add disk approval",
     "filesystem full issue",
     "filesystem mount issue",
@@ -156,6 +214,7 @@ var problema_reportado = [
     "shared id locked",
     "uat approval request",
     "user access issue",
+    "printer issue",
     "server down issue",
     "server hung",
     "server issue",
@@ -169,18 +228,9 @@ var problema_reportado = [
     "change open request",
     "file creation",
     "file transfer",
-    "file transfer request",
     "file user access",
     "status request",
     "validacao ambiente",
-    "monitoracao/report",
-    "monitoracao/report",
-    "acompanhar",
-    "priorizar",
-    "backup issue",
-    "network issue",
-    "tibco application",
-    "server memory issue"
 ]
 
 var analise_do_acionamento = [
@@ -203,7 +253,7 @@ var canal_acionamento = [
     "acionamento via email",
     "acionamento via sametime",
     "acionamento via slack",
-    "acionamento via telefone"
+    "acionamento via telefone",
 ]
 
 var solicitacoes = [
@@ -232,7 +282,7 @@ var quem_voce_acionou = [
     "acionamento sil",
     "acionamento sme",
     "acionamento tec br",
-    "acionamento tec in"
+    "acionamento tec in",
 ]
 
 var quem_te_acionou = [
@@ -250,8 +300,6 @@ var quem_te_acionou = [
     "acionado por producao",
     "acionamento indevido vvo",
     "acionamento indevido gpa",
-    "acionado por",
-    "acionado por gcc br"
 ]
 
 var chamados_indevidos = [
@@ -412,6 +460,16 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value = worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value.substr(0, worksheet.getCell(LABELS_CHAMADOS_INDEVIDOS + i).value.length - 2).trim()
                 // worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = res+","+res2
                 // worksheet.getCell(CATEGORIA + i).value = res
+
+                if (type == "CH") {
+                    worksheet.getCell(CATEGORIA + i).value = "N/A - CHANGE"
+                    worksheet.getCell(SERVICE_LINE + i).value = "N/A - CHANGE"
+                    worksheet.getCell(PROBLEMA_REPORTADO + i).value = "N/A - CHANGE"
+                } else if (type == "REPORT") {
+                    worksheet.getCell(CATEGORIA + i).value = "N/A - REPORT"
+                    worksheet.getCell(SERVICE_LINE + i).value = "N/A - REPORT"
+                    worksheet.getCell(PROBLEMA_REPORTADO + i).value = "N/A - REPORT"
+                }
             }
             i++;
         }
