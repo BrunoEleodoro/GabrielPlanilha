@@ -53,6 +53,7 @@ var HORARIO_INCIDENTE = process.env.HORARIO_INCIDENTE;
 var SLA_TICKET = process.env.SLA_TICKET;
 var HORARIO_ACIONAMENTO = process.env.HORARIO_ACIONAMENTO;
 var ISM_SOLICITOU = process.env.ISM_SOLICITOU;
+var SLA_TICKET_VENCIDO = process.env.SLA_TICKET_VENCIDO
 
 module.exports = {
     SOURCE_FILE,
@@ -108,4 +109,5 @@ module.exports = {
     SLA_TICKET,
     HORARIO_ACIONAMENTO,
     ISM_SOLICITOU,
+    SLA_TICKET_VENCIDO
 }
