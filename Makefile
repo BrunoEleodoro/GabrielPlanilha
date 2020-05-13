@@ -34,6 +34,8 @@ build:
 	node gerar_horario_pico.js
 	@echo "\033[0;32mGenerating shift...\033[0m" 
 	node filtrar_shift.js
+	@echo "\033[0;32mSLA Ticket Vencido...\033[0m" 
+	node sla_ticket_vencido.js
 
 	# @echo "\033[0;32mInverter datas...\033[0m" 
 	# node inverter_datas.js
