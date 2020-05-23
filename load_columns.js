@@ -1,6 +1,6 @@
 require('dotenv').config({ path: 'config' });
 
-var SOURCE_FILE= process.env.SOURCE_FILE;
+var SOURCE_FILE = process.env.SOURCE_FILE;
 var OUTPUT_FILE = process.env.OUTPUT_FILE;
 var WORKSHEET = process.env.WORKSHEET;
 var CREATED_BY_COLUMN = process.env.CREATED_BY_COLUMN;
@@ -54,6 +54,7 @@ var SLA_TICKET = process.env.SLA_TICKET;
 var HORARIO_ACIONAMENTO = process.env.HORARIO_ACIONAMENTO;
 var ISM_SOLICITOU = process.env.ISM_SOLICITOU;
 var SLA_TICKET_VENCIDO = process.env.SLA_TICKET_VENCIDO
+var TEMPO_ATENDIMENTO = process.env.TEMPO_ATENDIMENTO
 
 module.exports = {
     SOURCE_FILE,
@@ -109,5 +110,6 @@ module.exports = {
     SLA_TICKET,
     HORARIO_ACIONAMENTO,
     ISM_SOLICITOU,
-    SLA_TICKET_VENCIDO
+    SLA_TICKET_VENCIDO,
+    TEMPO_ATENDIMENTO
 }
