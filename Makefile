@@ -42,6 +42,8 @@ build:
 	node analise_prazo.js
 	@echo "\033[0;32mAnalise Tempo Total...\033[0m" 
 	node analise_tempo_total.js
+	@echo "\033[0;32mCalculo Base Claim...\033[0m" 
+	node calculo_base_claim.js
 
 	# @echo "\033[0;32mInverter datas...\033[0m" 
 	# node inverter_datas.js
