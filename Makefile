@@ -38,6 +38,8 @@ build:
 	node sla_ticket_vencido.js
 	@echo "\033[0;32mTempo Atendimento...\033[0m" 
 	node tempo_atendimento.js
+	@echo "\033[0;32mAnalise Prazo SLA...\033[0m" 
+	node analise_prazo.js
 
 	# @echo "\033[0;32mInverter datas...\033[0m" 
 	# node inverter_datas.js

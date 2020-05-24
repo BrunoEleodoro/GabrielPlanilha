@@ -32,7 +32,18 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var closed_at = worksheet.getCell(config.STORE_CLOSED_AT + i).value
             var horario_acionamento = worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
 
-            var hours = calculateHours(horario_acionamento, "DD/MM/YY HH:mm", "MM/DD/YY HH:mm", closed_at, "MM/DD/YYYY HH:mm", "DD/MM/YYYY HH:mm");
+            var hours = calculateHours(
+                horario_acionamento,
+                "DD/MM/YY HH:mm",
+                "MM/DD/YY HH:mm",
+
+                closed_at,
+                "MM/DD/YYYY HH:mm",
+                "DD/MM/YYYY HH:mm");
+
+            if (hours < 0) {
+                hours = hours * -1
+            }
 
             worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = hours
 
