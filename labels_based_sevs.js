@@ -57,7 +57,7 @@ categoria_problema["ca application issue"] = "application"
 categoria_problema["ecommerce issue"] = "application"
 categoria_problema["f5 application issue"] = "application"
 categoria_problema["ftp issue"] = "application"
-categoria_problema["interface issue"] = "application"
+// categoria_problema["interface issue"] = "application"
 categoria_problema["intranet prd app"] = "application"
 categoria_problema["odi application"] = "application"
 categoria_problema["peoplesoft app issue"] = "application"
@@ -76,58 +76,78 @@ categoria_problema["lentidao no sap"] = "application"
 categoria_problema["sap issue"] = "application"
 categoria_problema["sap transport"] = "application"
 categoria_problema["archieve issue"] = "backup"
-categoria_problema["backup request"] = "backup"
+categoria_problema["backup request"] = "user request"
 categoria_problema["restore follow up"] = "backup"
-categoria_problema["restore request"] = "backup"
+categoria_problema["restore request"] = "user request"
 categoria_problema["add disk approval"] = "capacity"
-categoria_problema["filesystem full issue"] = "capacity"
+// categoria_problema["filesystem full issue"] = "capacity"
 categoria_problema["filesystem mount issue"] = "capacity"
 categoria_problema["performance issue"] = "capacity"
 categoria_problema["banco de loja issue"] = "database"
-categoria_problema["database creation"] = "database"
+categoria_problema["database creation request"] = "database"
 categoria_problema["database down"] = "database"
-categoria_problema["database export request"] = "database"
+categoria_problema["database export request"] = "user request"
 categoria_problema["database issue"] = "database"
 categoria_problema["database locked id"] = "database"
 categoria_problema["execucao script"] = "database"
-categoria_problema["job backup rerun"] = "database"
-categoria_problema["job issue"] = "database"
+categoria_problema["job backup rerun"] = "user request"
+categoria_problema["job issue"] = "application"
 categoria_problema["session kill request"] = "database"
 categoria_problema["tablespace issue"] = "database"
-categoria_problema["disk full issue"] = "disk space"
-categoria_problema["high cpu workload issue"] = "disk space"
-categoria_problema["increased disk space"] = "disk space"
+// categoria_problema["disk full issue"] = "disk space"
+categoria_problema["high cpu workload issue"] = "capacity"
+categoria_problema["increased disk space"] = "capacity"
 categoria_problema["email/exchange issue"] = "e-mail"
 categoria_problema["parada eletrica"] = "infrastructury"
 categoria_problema["power outage issue"] = "infrastructury"
-categoria_problema["site cliente fora"] = "infrastructury"
+categoria_problema["site cliente fora"] = "application"
 categoria_problema["link issue"] = "network"
 categoria_problema["vpn issue"] = "network"
 categoria_problema["antivirus issue"] = "security"
 categoria_problema["certified issue"] = "security"
 categoria_problema["firewall issue"] = "security"
-categoria_problema["firewall rule request"] = "security"
-categoria_problema["password reset"] = "security"
+categoria_problema["firewall rule request"] = "user request"
+categoria_problema["password reset"] = "user request"
 categoria_problema["shared id locked"] = "security"
-categoria_problema["uat approval request"] = "security"
+categoria_problema["uat approval request"] = "user request"
 categoria_problema["user access issue"] = "security"
 categoria_problema["printer issue"] = "servers"
 categoria_problema["server down issue"] = "servers"
 categoria_problema["server hung"] = "servers"
 categoria_problema["server issue"] = "servers"
 categoria_problema["server reboot"] = "servers"
-categoria_problema["snapshot request"] = "servers"
-categoria_problema["citrix issue"] = "tools"
-categoria_problema["mainframe issue"] = "tools"
+categoria_problema["snapshot request"] = "user request"
+categoria_problema["citrix issue"] = "application"
+categoria_problema["mainframe issue"] = "application"
 categoria_problema["maximo issue"] = "tools"
 categoria_problema["monitoring issue"] = "tools"
-categoria_problema["softlayer issue"] = "tools"
+categoria_problema["softlayer issue"] = "network"
 categoria_problema["change open request"] = "user request"
-categoria_problema["file creation"] = "user request"
-categoria_problema["file transfer"] = "user request"
+categoria_problema["file creation request"] = "user request"
+categoria_problema["file creation request"] = "user request"
 categoria_problema["file user access"] = "user request"
 categoria_problema["status request"] = "user request"
 categoria_problema["validacao ambiente"] = "user request"
+categoria_problema["sharepoint issue"] = "application"
+categoria_problema["crtl m issue"] = "application"
+categoria_problema["backup issue"] = "backup issue"
+categoria_problema["space issue"] = "capacity"
+categoria_problema["server memory issue"] = "capacity"
+categoria_problema["sql issue"] = "database"
+categoria_problema["oracle issue"] = "database"
+categoria_problema["server unliked"] = "database"
+categoria_problema["voip issue"] = "network"
+categoria_problema["dns issue"] = "network"
+categoria_problema["server unreachable"] = "servers"
+categoria_problema["hardware issue"] = "servers"
+categoria_problema["server access issue"] = "servers"
+categoria_problema["user profile creation"] = "user request"
+categoria_problema["shared folder access"] = "user request"
+categoria_problema["info request"] = "user request"
+categoria_problema["shared folder creation"] = "user request"
+categoria_problema["validacao backup"] = "user request"
+categoria_problema["cancelamento de job"] = "user request"
+categoria_problema["vmware creation request"] = "user request"
 
 var service_line = ["adabas support",
     "at&t support",
@@ -151,7 +171,11 @@ var service_line = ["adabas support",
     "peoplesoft support",
     "sql support",
     "production support",
-    "san disk support",
+    "storage san support",
+    "adabas support",
+    "service now support",
+    "siebel support",
+    "as400 support",
     "sap support",
     "tws support",
 ]
@@ -163,7 +187,7 @@ var problema_reportado = [
     "ecommerce issue",
     "f5 application issue",
     "ftp issue",
-    "interface issue",
+    // "interface issue",
     "intranet prd app",
     "odi application",
     "peoplesoft app issue",
@@ -186,11 +210,11 @@ var problema_reportado = [
     "restore follow up",
     "restore request",
     "add disk approval",
-    "filesystem full issue",
+    // "filesystem full issue",
     "filesystem mount issue",
     "performance issue",
     "banco de loja issue",
-    "database creation",
+    "database creation request",
     "database down",
     "database export request",
     "database issue",
@@ -200,7 +224,7 @@ var problema_reportado = [
     "job issue",
     "session kill request",
     "tablespace issue",
-    "disk full issue",
+    // "disk full issue",
     "high cpu workload issue",
     "increased disk space",
     "email/exchange issue",
@@ -229,21 +253,31 @@ var problema_reportado = [
     "monitoring issue",
     "softlayer issue",
     "change open request",
-    "file creation",
-    "file transfer",
+    "file creation request",
+    "file transfer request",
     "file user access",
     "status request",
     "validacao ambiente",
-]
-
-var analise_do_acionamento = [
-    "acionamento ism indevido",
-    "indevido",
-    "severidade indevido",
-    "sem chamado",
-    "dentro do sla",
-    "sla breach",
-    "sla indevido",
+    "sharepoint issue",
+    "crtl m issue",
+    "backup issue",
+    "space issue",
+    "server memory issue",
+    "sql issue",
+    "oracle issue",
+    "server unliked",
+    "voip issue",
+    "dns issue",
+    "server unreachable",
+    "hardware issue",
+    "server access issue",
+    "user profile creation",
+    "shared folder access",
+    "info request",
+    "shared folder creation",
+    "validacao backup",
+    "cancelamento de job",
+    "vmware creation request",
 ]
 
 var acao_ism = [
@@ -254,7 +288,7 @@ var acao_ism = [
 
 var canal_acionamento = [
     "acionamento via email",
-    "acionamento via sametime",
+    "acionamento via crit",
     "acionamento via slack",
     "acionamento via telefone",
 ]
@@ -280,12 +314,17 @@ var quem_voce_acionou = [
     "acionamento dpe",
     "acionamento duty manager",
     "acionamento gp",
-    "acionamento sam",
+    "acionamento dpm",
     "acionamento service desk",
     "acionamento sil",
     "acionamento sme",
     "acionamento tec br",
     "acionamento tec in",
+    "acionamento imi",
+    "acionamento squad leader",
+    "acionamento gbs",
+    "acionamento tec local"
+
 ]
 
 var quem_te_acionou = [
@@ -293,7 +332,7 @@ var quem_te_acionou = [
     "acionado por dpe",
     "acionado por duty manager",
     "acionado por gp",
-    "acionado por sam",
+    "acionado por dpm",
     "acionado por service desk",
     "acionado por sil",
     "acionado por sme",
@@ -301,8 +340,11 @@ var quem_te_acionou = [
     "acionado por tec in",
     "acionado por gcc support",
     "acionado por producao",
-    "acionamento indevido vvo",
-    "acionamento indevido gpa",
+    "acionado por dpm",
+    "acionado por gbs",
+    "acionado por squad leader",
+    "acionado por imi",
+
 ]
 
 var chamados_indevidos = [
@@ -314,9 +356,10 @@ var chamados_indevidos = [
     "change approval",
     "change fallback",
     "change failed",
-    "change close task sam",
+    "change close task dpm",
     "change open request",
     "emergency change",
+    "change status"
 ]
 
 function convert(input) {

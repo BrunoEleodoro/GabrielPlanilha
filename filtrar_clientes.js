@@ -53,16 +53,15 @@ const clientes_possiveis = [
     "FLEURY",
     "GERDAU",
     "BRF",
-    "DPSP",
+    "DROGARIA SP",
     "COPERSUCAR",
     "TIGRE",
-    "DROGARIA ONOFRE",
     "ORBITALL",
     "LASA",
     "LEROY MERLIN",
     "RECORD",
     "SAINT-GOBAIN",
-    "INTERMEDICA",
+    "RIOGALEAO",
     "BCG",
     "GPA",
     "ADP",
@@ -141,8 +140,6 @@ workbook.xlsx.readFile(SOURCE_FILE)
                             possivel_cliente = "CRESOL"
                         } else if (possivel_cliente.trim().toUpperCase() == "SAINT-GOBAIN") {
                             possivel_cliente = "SAINT GOBAIN"
-                        } else if (possivel_cliente.trim().toUpperCase() == "DROGARIA ONFORE") {
-                            possivel_cliente = "ONOFRE"
                         }
                         break
                     }
