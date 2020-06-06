@@ -37,21 +37,28 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
         while (i <= worksheet.rowCount) {
 
             let card_assignee = worksheet.getCell(config.CARD_ASSIGNEES + i).value
+            let dia = worksheet.getCell(config.STORE_DAY + i).value
             let time_worked = worksheet.getCell(config.STORE_WORKED_HOURS + i).value
 
-            if (relations[card_assignee] == null) {
-                relations[card_assignee] = 0
+            if (relations[card_assignee + "/" + dia] == null) {
+                relations[card_assignee + "/" + dia] = 0
             }
-            relations[card_assignee] = relations[card_assignee] + time_worked
+            relations[card_assignee + "/" + dia] = relations[card_assignee + "/" + dia] + time_worked
 
             i++;
         }
+
+        //calcular com base no dia
+        // analise em tempo total tem que calcular com base no dia
+
 
         i = 2
         while (i <= worksheet.rowCount) {
 
             let card_assignee = worksheet.getCell(config.CARD_ASSIGNEES + i).value
-            worksheet.getCell(config.TEMPO_TOTAL_DIARIO_TRABALHADO + i).value = relations[card_assignee]
+            let dia = worksheet.getCell(config.STORE_DAY + i).value
+
+            worksheet.getCell(config.TEMPO_TOTAL_DIARIO_TRABALHADO + i).value = relations[card_assignee + "/" + dia]
 
             i++;
         }

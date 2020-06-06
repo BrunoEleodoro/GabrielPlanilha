@@ -4,6 +4,7 @@ const utf8 = require('utf8');
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 var not_allowed = [];
+var moment = require('moment')
 
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
@@ -41,9 +42,45 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const SOURCE_COLUMNS_LIST = process.env.SOURCE_COLUMNS_LIST
 const DESTINATION_COLUMNS_LIST = process.env.DESTINATION_COLUMNS_LIST
 
-
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+function calculateHours(startDate, endDate) {
+
+    var duration = moment.duration(endDate.diff(startDate));
+    var hours = duration.asHours();
+    // hours = moment(hours * 3600 * 1000).format('HH:mm')
+    return hours;
+}
+
+// return;
+
+function parseDateToMoment(monthName, valor_celula) {
+    var month = months.indexOf(monthName) + 1
+    if (valor_celula == "" || valor_celula == null) {
+        return moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
+    }
+    // var index = valor_celula.indexOf("0" + month + "/")
+    var index = valor_celula.toString().split(" ")[0].indexOf(month)
+    var data = ""
+
+    if (index == -1) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 0) {
+        data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    } else if (index == 3) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 4) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else {
+        data = moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
+    }
+    if (data.toString() == "Invalid date") {
+        data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    }
+
+    return data
+}
 
 // READ WORKBOOK
 workbook.xlsx.readFile(SOURCE_FILE)
@@ -57,17 +94,22 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(STORE_YEAR + 1).value = "Ano"
 
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(CREATED_AT + i).value
+            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var monthName = worksheet.getCell(STORE_MONTH + i).value
             if (valor_celula != null) {
-                var pieces = valor_celula.split(" ")
-                var date = new Date(pieces[0])
-                // if (date.getDate().toString() == "0") {
-                //     console.log(date)
-                // }
-                var dayName = days[date.getDay()];
+
+                var data = parseDateToMoment(monthName, valor_celula);
+                var dayName = days[data.day()];
+
                 worksheet.getCell(STORE_WEEK_DAY + i).value = dayName
-                worksheet.getCell(STORE_DAY + i).value = date.getDate().toString().padStart(2, '0')
-                worksheet.getCell(STORE_YEAR + i).value = date.getFullYear()
+                worksheet.getCell(STORE_DAY + i).value = data.date().toString().padStart(2, '0')
+                worksheet.getCell(STORE_YEAR + i).value = data.year()
+
+
+
+                // if (i % 10 == 0) {
+                //     break;
+                // }
             }
             i++;
         }

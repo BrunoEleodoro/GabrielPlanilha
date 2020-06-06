@@ -40,7 +40,8 @@ var pessoas = ["Daniella Yumi Itikawa",
     "Edmar Lauria Marques",
     "Geraldo Vicente Ferreira",
     "Marcelo Mendes Genaro",
-    "Paulinho Rossetti"
+    "Paulinho Rossetti",
+    "Lívio Teixeira"
 ]
 
 pessoas_clientes["Daniella Yumi Itikawa"] = [
@@ -51,6 +52,9 @@ pessoas_clientes["Daniella Yumi Itikawa"] = [
     "CARREFOUR",
     "CONSTRUDECOR",
     "UNILEVER",
+]
+pessoas_clientes["Lívio Teixeira"] = [
+    "CAIXA ECONOMICA",
 ]
 pessoas_clientes["Edmar Lauria Marques"] = [
     "BOA VISTA",
@@ -111,6 +115,7 @@ pessoas_clientes["Paulinho Rossetti"] = [
     "STELO",
     "ZETRASOFT",
     "PROXXI",
+    "RIOGALEAO",
 ]
 
 
