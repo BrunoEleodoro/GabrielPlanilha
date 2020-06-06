@@ -134,10 +134,12 @@ workbook.xlsx.readFile(SOURCE_FILE)
                             possivel_cliente = "DROGARIA SP"
                         } else if (possivel_cliente.trim().toUpperCase() == "GALGO") {
                             possivel_cliente = "ANBIMA"
-                        } else if (possivel_cliente.trim().toUpperCase() == "FASTSHOP") {
+                        } else if (possivel_cliente.trim().toUpperCase() == "FASTSHOP" || possivel_cliente.trim().toUpperCase() == "FAST SHOP") {
                             possivel_cliente = "APOLLO"
                         } else if (possivel_cliente.trim().toUpperCase() == "CONFESOL") {
                             possivel_cliente = "CRESOL"
+                        } else if (possivel_cliente.trim().toUpperCase() == "SAINT-GOBAIN") {
+                            possivel_cliente = "SAINT GOBAIN"
                         } else if (possivel_cliente.trim().toUpperCase() == "SAINT-GOBAIN") {
                             possivel_cliente = "SAINT GOBAIN"
                         }

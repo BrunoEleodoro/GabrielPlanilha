@@ -38,6 +38,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
 
             worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value = (time_worked / tempo_total)
 
+            /// mostrar em porcentagem 
             i++;
         }
 

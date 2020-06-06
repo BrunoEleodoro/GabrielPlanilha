@@ -14,7 +14,6 @@ function calculateHours(startDate, endDate) {
     // hours = moment(hours * 3600 * 1000).format('HH:mm')
     return hours;
 }
-
 // return;
 
 function parseDateToMoment(monthName, valor_celula) {
@@ -22,6 +21,7 @@ function parseDateToMoment(monthName, valor_celula) {
     if (valor_celula == "" || valor_celula == null) {
         return moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
     }
+    // var index = valor_celula.indexOf("0" + month + "/")
     var index = valor_celula.split(" ")[0].indexOf(month)
     var data = ""
 
@@ -29,6 +29,8 @@ function parseDateToMoment(monthName, valor_celula) {
         data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else if (index == 0) {
         data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    } else if (index == 3) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else if (index == 4) {
         data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else {
@@ -37,19 +39,36 @@ function parseDateToMoment(monthName, valor_celula) {
     if (data.toString() == "Invalid date") {
         data = moment(valor_celula, "MM/DD/YYYY HH:mm");
     }
-    console.log('valor_celula', valor_celula, index)
+
     return data
 }
 
-var horario_acionamento = "30/04/20 21:26"
-var sla_ticket = "02/05/20 09:56:00"
+var horario_acionamento = "4/29/20 18:14:00"
+var sla_ticket = "4/29/20 20:13:31"
+var horario_incident = "4/29/20 18:13:31"
 
 var horario_acionamento_date = parseDateToMoment("May", horario_acionamento);
 var sla_ticket_date = parseDateToMoment("May", sla_ticket);
+var horario_incident_date = parseDateToMoment("May", horario_incident);
+
+var sla_horario_acionamento = calculateHours(sla_ticket_date, horario_acionamento_date)
+var sla_horario_incident = calculateHours(sla_ticket_date, horario_incident_date);
 
 console.log(horario_acionamento_date)
 console.log(sla_ticket_date)
-console.log(horario_acionamento_date.isAfter(sla_ticket_date, 'seconds'))
+console.log(horario_incident_date)
+
+if (sla_horario_acionamento < 0) {
+    sla_horario_acionamento = sla_horario_acionamento * -1
+}
+if (sla_horario_incident < 0) {
+    sla_horario_incident = sla_horario_incident * -1
+}
+var horario_acionamento_incident = sla_horario_acionamento / sla_horario_incident
+console.log('horario_acionamento_incident', horario_acionamento_incident)
+
+// console.log(horario_acionamento_date.isAfter(sla_ticket_date, 'seconds'))
+
 
 // console.log(contents.toString().split("\n")[941].toString().split(",").length)
 // console.log(contents.toString().split("\n")[942].toString().split(",").length)

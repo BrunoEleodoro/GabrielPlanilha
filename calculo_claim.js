@@ -36,7 +36,12 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             let base_claim = worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value
 
             worksheet.getCell(config.CLAIM + i).value = (base_claim * 8)
+            // arredondar pra cima
 
+            // 8hrs = 100%
+            // xhrs = BASE_CALCULO_CLAIM <- convertido em porcentagem
+            // regra de 3
+            // pegar apenas uma casa decimal
             i++;
         }
 
