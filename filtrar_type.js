@@ -50,7 +50,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     type=  "REPORT"
 				} else if(valor_celula_p.toLowerCase().includes("sem chamado")) {
                     type=  "SC"
-                } 
+                }
                 worksheet.getCell(STORE_TYPE_COLUMN + i).value = type.toUpperCase()
             }
             i++;

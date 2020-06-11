@@ -455,7 +455,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     if (problema_reportado.indexOf(label) >= 0) {
                         worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value + label + ", "
-                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label].toString()
+                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label] != null ? categoria_problema[label].toString() : ""
 
                         console.log('problema_reportado', label, categoria_problema[label])
                         found = true;

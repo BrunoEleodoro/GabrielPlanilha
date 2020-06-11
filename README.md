@@ -22,7 +22,7 @@ https://nodejs.org/en/download/
 * ```config```
 
     All the project settings are inside that file, it means that you can controll all the code and make it work for any spreadsheet just changing the values in this file.
-    
+
 * ```filtrar_clientes.js```
 
     This is the script that will read the `blacklist.json` file and then filter the labels in the spreadsheet to retrive the client name.
@@ -60,39 +60,39 @@ SEV_SUMMARY_CLIENT_SEV4=AO
 ```
 
 * LABELS_COLUMN
-    
+
     Say to the script where to look for the `labels`, in this case, in the column `P`.
 
 * DESCRIPTION_COLUMN
-    
+
     Say to the script where to look for the `description`, in this case, in the column `K`.
-    
+
 * STORE_CLIENT_COLUMN
-    
+
     ![](https://github.com/BrunoEleodoro/GabrielPlanilha/blob/master/doc/Screen%20Shot%202019-06-22%20at%2000.21.32.png?raw=true)
 
     Say to the script where to **save** the client name, where to **store** the values. in this case `AF`
 
 * CLIENTS_COLUMN
-    
+
     If your spreadsheet already have a column with the client names already filled, so put the column name here.
 
 * SOURCE_FILE
-    
+
     The input filename, in this case `Metricas Maio.xlsx`
 
 * OUTPUT_FILE
-    
+
     The output filename, in this case `new.xlsx`
-    
+
     *It's recommended that you save in a different spreadsheet to prevent data loss. But if you want to proceed anyway, you can put the same name of the SOURCE_FILE, it means that when the script finish to run, the spreadsheet will be replaced with the new values*
 
 * WORKSHEET
-    
+
     the name of the worksheet that the script will read all the cells and columns, in this case `Dados`.
 
 * STORE_SEVERITY_COLUNM
-       
+
     Where the script will **save**, **store** the severity numbers, in this case `AH`
 
 The script have a functionallity that counts the amount of `sev1`, `sev2`, `sev3` and `sev4`. To control where this data will be **saved**, **stored** you have to change this two parameters.
