@@ -150,6 +150,24 @@ categoria_problema["cancelamento de job"] = "user request"
 categoria_problema["vmware creation request"] = "user request"
 categoria_problema["security issue"] = "security"
 
+categoria_problema["control m issue"] = "issue"
+categoria_problema["space issue"] = "issue"
+categoria_problema["oracle issue"] = "issue"
+categoria_problema["softlayer issue"] = "issue"
+categoria_problema["voip issue"] = "issue"
+categoria_problema["dns issue"] = "issue"
+categoria_problema["firewall rule creation"] = "firewall rule creation"
+categoria_problema["user profile creation"] = "user profile creation"
+categoria_problema["server unreachable"] = "server unreachable"
+categoria_problema["hardware issue"] = "hardware issue"
+categoria_problema["server access issue"] = "server access issue"
+categoria_problema["info request"] = "info request"
+categoria_problema["shared folder creation"] = "shared folder creation"
+categoria_problema["cancelamento de job"] = "cancelamento de job"
+categoria_problema["vmware creation"] = "vmware creation"
+categoria_problema["server unliked"] = "server unliked"
+categoria_problema["file transfer request"] = "file transfer request"
+
 var service_line = ["adabas support",
     "at&t support",
     "automation support",
@@ -214,6 +232,22 @@ var problema_reportado = [
     "restore follow up",
     "restore request",
     "add disk approval",
+    "control m issue",
+    "space issue",
+    "oracle issue",
+    "softlayer issue",
+    "voip issue",
+    "dns issue",
+    "firewall rule creation",
+    "user profile creation",
+    "server unreachable",
+    "hardware issue",
+    "server access issue",
+    "info request",
+    "shared folder creation",
+    "cancelamento de job",
+    "vmware creation",
+    "server unliked",
     // "filesystem full issue",
     "filesystem mount issue",
     "performance issue",
@@ -455,7 +489,9 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     }
                     if (problema_reportado.indexOf(label) >= 0) {
                         worksheet.getCell(PROBLEMA_REPORTADO + i).value = worksheet.getCell(PROBLEMA_REPORTADO + i).value + label + ", "
-                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label] != null ? categoria_problema[label].toString() : ""
+                        // worksheet.getCell(CATEGORIA + i).value = categoria_problema[label] != null ? categoria_problema[label].toString() : ""
+                        // console.log('oi beatriz', label)
+                        worksheet.getCell(CATEGORIA + i).value = categoria_problema[label].toString()
 
                         console.log('problema_reportado', label, categoria_problema[label])
                         found = true;
