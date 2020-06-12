@@ -61,6 +61,7 @@ const clientes_possiveis = [
     "LEROY MERLIN",
     "RECORD",
     "SAINT-GOBAIN",
+    "SAINT GOBAIN",
     "RIOGALEAO",
     "BCG",
     "GPA",
@@ -112,6 +113,7 @@ const clientes_possiveis = [
     "BRMALLS",
     "brmalls",
     "PROXXI",
+    "ANBIMA"
 ]
 
 // READ WORKBOOK
@@ -138,7 +140,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                             possivel_cliente = "APOLLO"
                         } else if (possivel_cliente.trim().toUpperCase() == "CONFESOL") {
                             possivel_cliente = "CRESOL"
-                        } else if (possivel_cliente.trim().toUpperCase() == "SAINT-GOBAIN") {
+                        } else if (possivel_cliente.trim().toUpperCase() == " SAINT GOBAIN" || possivel_cliente.trim().toUpperCase() == "SAINT GOBAIN") {
                             possivel_cliente = "SAINT GOBAIN"
                         } else if (possivel_cliente.trim().toUpperCase() == "SAINT-GOBAIN") {
                             possivel_cliente = "SAINT GOBAIN"

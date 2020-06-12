@@ -167,6 +167,7 @@ categoria_problema["cancelamento de job"] = "cancelamento de job"
 categoria_problema["vmware creation"] = "vmware creation"
 categoria_problema["server unliked"] = "server unliked"
 categoria_problema["file transfer request"] = "file transfer request"
+categoria_problema["monitoracao/report"] = "monitoracao/report"
 
 var service_line = ["adabas support",
     "at&t support",
@@ -209,6 +210,7 @@ var problema_reportado = [
     "f5 application issue",
     "ftp issue",
     "security issue",
+    "monitoracao/report",
     // "interface issue",
     "intranet prd app",
     "odi application",
@@ -319,7 +321,6 @@ var problema_reportado = [
 ]
 
 var acao_ism = [
-    "monitoracao/report",
     "acompanhar",
     "priorizar",
 ]
