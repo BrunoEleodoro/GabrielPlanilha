@@ -54,19 +54,20 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     !labels.toLowerCase().trim().includes("sev4")
                 ) {
                     // if the severity is NOT 1,2,3 or 4, them generate a random number for that 
-                    var x = Math.floor((Math.random() * 4) + 1)
-                    if (worksheet.getCell(STORE_TYPE_COLUMN + i).value != "CH" && worksheet.getCell(STORE_TYPE_COLUMN + i).value != "SC") {
-                        worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value + ", sev" + parseFloat(x);
+                    // var x = Math.floor((Math.random() * 4) + 1)
+                    if (worksheet.getCell(STORE_TYPE_COLUMN + i).value == "SR" || worksheet.getCell(STORE_TYPE_COLUMN + i).value == "IN") {
+
+                        //worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value + ", sev" + parseFloat(x);
                     }
 
 
                     // painting the cell when the severity is unknow
-                    worksheet.getCell(STORE_SEVERITY_COLUNM + i).fill = {
-                        type: 'pattern',
-                        pattern: 'solid',
-                        fgColor: { argb: 'FFFFFF00' },
-                        bgColor: { argb: 'aa00ff' }
-                    };
+                    // worksheet.getCell(STORE_SEVERITY_COLUNM + i).fill = {
+                    //     type: 'pattern',
+                    //     pattern: 'solid',
+                    //     fgColor: { argb: 'FFFFFF00' },
+                    //     bgColor: { argb: 'aa00ff' }
+                    // };
                 }
             }
             i++;

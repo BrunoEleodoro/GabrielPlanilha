@@ -494,7 +494,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                         // console.log('oi beatriz', label)
                         worksheet.getCell(CATEGORIA + i).value = categoria_problema[label].toString()
 
-                        console.log('problema_reportado', label, categoria_problema[label])
+                        // console.log('problema_reportado', label, categoria_problema[label])
                         found = true;
                     }
                     // if (analise_do_acionamento.indexOf(label) >= 0) {

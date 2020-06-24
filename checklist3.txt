@@ -1,25 +1,5 @@
 A FAZER: 
 
-Fazer a mesma regra de preenchimento, para todos os campos que de preenchimento obrigatório, que esteja em branco para ser preenchido como "Nao Informado". São estes:
-
-- Cliente (done)
-- Tipo do Chamado 
-- Severidade
-- Problema Reportado (preencher consecutivamente também o coluca categoria como não informado, pois o preenchimento dela depende do preenchimento do campo reportado).
-- Service Line
-- Horario do Incident
-- SLA do Ticket
-- Horario Acionamento ISM
-- ISM Solicitou Validacao?
-
------------
-
-Para ser corrigido com relação à Severidade
-Em alguma parte do código, ainda está funcionando aquela regra que fizemos no início de adicionar a severidade por ordem aleatória no final da primary labels, entretanto não está sendo lido na coluna severidade.
-Retirar esse código de auto-preenchimento na primary label.
-Se ele não identificar Sev1, Sev2, Sev3, Sev4 para os chamados do tipo SR e IN, colocar na coluna Severida a mensagem de "Nao Informado", pois ele continua fazendo o auto-preenchimento quando a pessoa esquece de colocar a severidade do card.
-
------------
 
 Para ser corrigido com relação ao Dia da Semana.
 Reparei que para os dias 15 e 16 de Junho ele não reconheceu o dia para todos os cards. Em alguns eles preencheu automaticamente e em outros não. 
@@ -93,9 +73,6 @@ Na coluna AD (Horario do Incident) o bot não puxou os dados desta coluna. Todas
 Acredito que por este motivo, as demais colunas que utilizam como base de calculo esta coluna deram erro de preenchimento.
 Na coluna AE (SLA do Ticket) ele também não puxou os números que estão registrados no card, ou ele formatou para um algo diferente de data. Esse campo é preenchido manualmente, então não precisa ser convertido. Verificar se ele está puxando os dados da coluna certa.
 
-------------------------
-
-Na coluna AL e AM formatar para aparecer com 2 digitos os números
 
 -------------------------
 
@@ -123,3 +100,32 @@ Grupo Simoes  = Paulinho Rosseti
 Caixa Economica = Livio Teixeira
 
 (DONE!!)
+
+--------
+
+Fazer a mesma regra de preenchimento, para todos os campos que de preenchimento obrigatório, que esteja em branco para ser preenchido como "Nao Informado". São estes:
+
+- Cliente (done)
+- Tipo do Chamado 
+- Severidade
+- Problema Reportado (preencher consecutivamente também o coluca categoria como não informado, pois o preenchimento dela depende do preenchimento do campo reportado).
+- Service Line
+- Horario do Incident
+- SLA do Ticket
+- Horario Acionamento ISM
+- ISM Solicitou Validacao?
+
+---------
+
+Para ser corrigido com relação à Severidade
+Em alguma parte do código, ainda está funcionando aquela regra que fizemos no início de adicionar a severidade por ordem aleatória no final da primary labels, entretanto não está sendo lido na coluna severidade.
+
+Retirar esse código de auto-preenchimento na primary label.
+
+Se ele não identificar Sev1, Sev2, Sev3, Sev4 para os chamados do tipo SR e IN, colocar na coluna Severida a mensagem de "Nao Informado", pois ele continua fazendo o auto-preenchimento quando a pessoa esquece de colocar a severidade do card.
+
+-----------
+
+------------------------
+
+Na coluna AL e AM formatar para aparecer com 2 digitos os números

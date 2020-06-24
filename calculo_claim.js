@@ -35,7 +35,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
 
             let base_claim = worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value
 
-            worksheet.getCell(config.CLAIM + i).value = (base_claim * 8)
+            worksheet.getCell(config.CLAIM + i).value = parseFloat((base_claim * 8)).toFixed(2)
             // arredondar pra cima
 
             // 8hrs = 100%
