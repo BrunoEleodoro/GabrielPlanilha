@@ -71,7 +71,7 @@ function decimalToHours(str) {
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
-        worksheet.getCell(config.TEMPO_ATENDIMENTO + 1).value = "Tempo de Atendimeto ISM"
+        worksheet.getCell(config.TEMPO_ATENDIMENTO + 1).value = "Tempo de Atendimento ISM"
         var i = 2
         while (i <= worksheet.rowCount) {
             var closed_at = worksheet.getCell(config.STORE_CLOSED_AT + i).value

@@ -29,7 +29,7 @@ function calculateHours(startDate, startDateFormat1, startDateFormat2, endDate, 
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
-        worksheet.getCell(config.TEMPO_TOTAL_DIARIO_TRABALHADO + 1).value = "TEMPO TOTAL DIARIO TRABALHADO"
+        worksheet.getCell(config.TEMPO_TOTAL_DIARIO_TRABALHADO + 1).value = "Tempo Total Diario Trabalhado"
 
         var relations = []
 

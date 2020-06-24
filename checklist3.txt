@@ -74,10 +74,7 @@ Acredito que por este motivo, as demais colunas que utilizam como base de calcul
 Na coluna AE (SLA do Ticket) ele também não puxou os números que estão registrados no card, ou ele formatou para um algo diferente de data. Esse campo é preenchido manualmente, então não precisa ser convertido. Verificar se ele está puxando os dados da coluna certa.
 
 
--------------------------
 
-Na coluna AI (Tempo de Atendimento ISM), coluna AK (TEMPO Total Diario Trabalhado), coluna AL (base de calculo Claim) e coluna AM (CLAIM), formatar a célula para o formato em que o excel consiga somar os números, assim como está configurado na coluna time worked (coluna Z)
-Aproveita e corrige a coluna AK "TEMPO TOTAL DIARIO TRABALHADO" para "Tempo Total Diario Trabalhado"
 
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
@@ -129,3 +126,9 @@ Se ele não identificar Sev1, Sev2, Sev3, Sev4 para os chamados do tipo SR e IN,
 ------------------------
 
 Na coluna AL e AM formatar para aparecer com 2 digitos os números
+
+-------------------------
+
+Na coluna AI (Tempo de Atendimento ISM), coluna AK (TEMPO Total Diario Trabalhado), coluna AL (base de calculo Claim) e coluna AM (CLAIM), formatar a célula para o formato em que o excel consiga somar os números, assim como está configurado na coluna time worked (coluna Z)
+
+Aproveita e corrige a coluna AK "TEMPO TOTAL DIARIO TRABALHADO" para "Tempo Total Diario Trabalhado"
