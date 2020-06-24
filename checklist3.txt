@@ -6,33 +6,6 @@ Reparei que para os dias 15 e 16 de Junho ele não reconheceu o dia para todos o
 Na coluna O, que corresponde ao dia Dia, também tem 2 entradas do dia 15 e 16 que não foi reconhecida pelo BOT. Acredito que por isso que deu pau nas demais entradas, (linha 702 e 715 coluna O)
 na coluna Q (Ano) também não foi preenchido como 2020, por que o bot não reconheceu esses dias 15 e 16.
 
-----------------
-
-Verificar se a associação de problema reportado x categoria foi feito corretamente de acordo com o informado abaixo.
-Ex. Verifiquei que o problema "Oracle Issue" foi categorizado como "issue" ao invés de ter sido categorizado como "database"
-Ex2. Sever access issue, shared folder creation dentre outros não tiveram sua categoria associada.
-Provavelmente faltou fazer essa parte da configuração.
-labels para acrescentar com suas respectivas categorias
-- categoria_problema["sharepoint issue"] = "application"
-- categoria_problema["crtl m issue"] = "application"
-- categoria_problema["backup issue"] = "backup issue"
-- categoria_problema["space issue"] = "capacity"
-- categoria_problema["server memory issue"] = "capacity"
-- categoria_problema["sql issue"] = "database"
-- categoria_problema["oracle issue"] = "database"
-- categoria_problema["server unliked"] = "database"
-- categoria_problema["voip issue"] = "network"
-- categoria_problema["dns issue"] = "network"
-- categoria_problema["server unreachable"] = "servers"
-- categoria_problema["hardware issue"] = "servers"
-- categoria_problema["server access issue"] = "servers"
-- categoria_problema["user profile creation"] = "user request"
-- categoria_problema["shared folder access"] = "user request"
-- categoria_problema["info request"] = "user request"
-- categoria_problema["shared folder creation"] = "user request"
-- categoria_problema["validacao backup"] = "user request"
-- categoria_problema["cancelamento de job"] = "user request"
-- categoria_problema["vmware creation request"] = "user request"
 
 ----------------
 
@@ -132,3 +105,33 @@ Na coluna AL e AM formatar para aparecer com 2 digitos os números
 Na coluna AI (Tempo de Atendimento ISM), coluna AK (TEMPO Total Diario Trabalhado), coluna AL (base de calculo Claim) e coluna AM (CLAIM), formatar a célula para o formato em que o excel consiga somar os números, assim como está configurado na coluna time worked (coluna Z)
 
 Aproveita e corrige a coluna AK "TEMPO TOTAL DIARIO TRABALHADO" para "Tempo Total Diario Trabalhado"
+
+
+----------------
+
+Verificar se a associação de problema reportado x categoria foi feito corretamente de acordo com o informado abaixo.
+Ex. Verifiquei que o problema "Oracle Issue" foi categorizado como "issue" ao invés de ter sido categorizado como "database"
+Ex2. Sever access issue, shared folder creation dentre outros não tiveram sua categoria associada.
+Provavelmente faltou fazer essa parte da configuração.
+labels para acrescentar com suas respectivas categorias
+- categoria_problema["sharepoint issue"] = "application"
+- categoria_problema["crtl m issue"] = "application"
+- categoria_problema["backup issue"] = "backup issue"
+- categoria_problema["space issue"] = "capacity"
+- categoria_problema["server memory issue"] = "capacity"
+- categoria_problema["sql issue"] = "database"
+- categoria_problema["oracle issue"] = "database"
+- categoria_problema["server unliked"] = "database"
+- categoria_problema["voip issue"] = "network"
+- categoria_problema["dns issue"] = "network"
+- categoria_problema["server unreachable"] = "servers"
+- categoria_problema["hardware issue"] = "servers"
+- categoria_problema["server access issue"] = "servers"
+- categoria_problema["user profile creation"] = "user request"
+- categoria_problema["shared folder access"] = "user request"
+- categoria_problema["info request"] = "user request"
+- categoria_problema["shared folder creation"] = "user request"
+- categoria_problema["validacao backup"] = "user request"
+- categoria_problema["cancelamento de job"] = "user request"
+- categoria_problema["vmware creation request"] = "user request"
+

@@ -72,6 +72,8 @@ function parseDateToMoment(monthName, valor_celula) {
         data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else if (index == 4) {
         data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 1) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else {
         data = moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
     }
