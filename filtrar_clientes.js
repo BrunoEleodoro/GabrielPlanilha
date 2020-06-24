@@ -84,7 +84,7 @@ const clientes_possiveis = [
     "WPP",
     "CEBRACE",
     "MULTIPLUS",
-    "CONFESOL",
+    "CRESOL",
     "MANGELS",
     "ZETRASOFT",
     "FAST SHOP",
@@ -113,7 +113,10 @@ const clientes_possiveis = [
     "BRMALLS",
     "brmalls",
     "PROXXI",
-    "ANBIMA"
+    "ANBIMA",
+    "BANRISUL",
+    "GRUPO SIMOES",
+    "CAIXA ECONOMICA"
 ]
 
 // READ WORKBOOK
@@ -158,17 +161,23 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     // removing the blank space from the beggining and from the end
                     valor_client = valor_client.trim()
                     possivel_cliente = valor_client
+                    var noClient = true
                     if (possivel_cliente.trim().toUpperCase() == "MBB" || possivel_cliente.trim().toUpperCase() == "MER") {
                         possivel_cliente = "MERCEDES BENZ"
+                        noClient = false
                     }
                     if (possivel_cliente.trim().toUpperCase() == "RRC") {
                         possivel_cliente = "RECORD"
+                        noClient = false
                     }
                     if (possivel_cliente.trim().toUpperCase() == "CAR") {
                         possivel_cliente = "CARREFOUR"
+                        noClient = false
                     }
 
-
+                    if (noClient) {
+                        possivel_cliente = "Nao Informado"
+                    }
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 } else {
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()

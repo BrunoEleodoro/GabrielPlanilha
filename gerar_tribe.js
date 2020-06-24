@@ -59,6 +59,7 @@ pessoas_clientes["Lívio Teixeira"] = [
 pessoas_clientes["Edmar Lauria Marques"] = [
     "BOA VISTA",
     "BURGUER KING",
+    "BURGER KING",
     "FIAT",
     "GERDAU",
     "HONDA",
@@ -67,6 +68,7 @@ pessoas_clientes["Edmar Lauria Marques"] = [
     "MERCEDES BENZ",
     "PESA",
     "RIOCARD",
+    "BANRISUL"
 ]
 pessoas_clientes["Geraldo Vicente Ferreira"] = [
     "ALPARGATAS",
@@ -116,6 +118,7 @@ pessoas_clientes["Paulinho Rossetti"] = [
     "ZETRASOFT",
     "PROXXI",
     "RIOGALEAO",
+    "GRUPO SIMOES"
 ]
 
 

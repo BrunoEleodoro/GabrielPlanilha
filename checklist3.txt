@@ -1,0 +1,125 @@
+A FAZER: 
+
+Fazer a mesma regra de preenchimento, para todos os campos que de preenchimento obrigatório, que esteja em branco para ser preenchido como "Nao Informado". São estes:
+
+- Cliente (done)
+- Tipo do Chamado 
+- Severidade
+- Problema Reportado (preencher consecutivamente também o coluca categoria como não informado, pois o preenchimento dela depende do preenchimento do campo reportado).
+- Service Line
+- Horario do Incident
+- SLA do Ticket
+- Horario Acionamento ISM
+- ISM Solicitou Validacao?
+
+-----------
+
+Para ser corrigido com relação à Severidade
+Em alguma parte do código, ainda está funcionando aquela regra que fizemos no início de adicionar a severidade por ordem aleatória no final da primary labels, entretanto não está sendo lido na coluna severidade.
+Retirar esse código de auto-preenchimento na primary label.
+Se ele não identificar Sev1, Sev2, Sev3, Sev4 para os chamados do tipo SR e IN, colocar na coluna Severida a mensagem de "Nao Informado", pois ele continua fazendo o auto-preenchimento quando a pessoa esquece de colocar a severidade do card.
+
+-----------
+
+Para ser corrigido com relação ao Dia da Semana.
+Reparei que para os dias 15 e 16 de Junho ele não reconheceu o dia para todos os cards. Em alguns eles preencheu automaticamente e em outros não. 
+Na coluna O, que corresponde ao dia Dia, também tem 2 entradas do dia 15 e 16 que não foi reconhecida pelo BOT. Acredito que por isso que deu pau nas demais entradas, (linha 702 e 715 coluna O)
+na coluna Q (Ano) também não foi preenchido como 2020, por que o bot não reconheceu esses dias 15 e 16.
+
+----------------
+
+Verificar se a associação de problema reportado x categoria foi feito corretamente de acordo com o informado abaixo.
+Ex. Verifiquei que o problema "Oracle Issue" foi categorizado como "issue" ao invés de ter sido categorizado como "database"
+Ex2. Sever access issue, shared folder creation dentre outros não tiveram sua categoria associada.
+Provavelmente faltou fazer essa parte da configuração.
+labels para acrescentar com suas respectivas categorias
+- categoria_problema["sharepoint issue"] = "application"
+- categoria_problema["crtl m issue"] = "application"
+- categoria_problema["backup issue"] = "backup issue"
+- categoria_problema["space issue"] = "capacity"
+- categoria_problema["server memory issue"] = "capacity"
+- categoria_problema["sql issue"] = "database"
+- categoria_problema["oracle issue"] = "database"
+- categoria_problema["server unliked"] = "database"
+- categoria_problema["voip issue"] = "network"
+- categoria_problema["dns issue"] = "network"
+- categoria_problema["server unreachable"] = "servers"
+- categoria_problema["hardware issue"] = "servers"
+- categoria_problema["server access issue"] = "servers"
+- categoria_problema["user profile creation"] = "user request"
+- categoria_problema["shared folder access"] = "user request"
+- categoria_problema["info request"] = "user request"
+- categoria_problema["shared folder creation"] = "user request"
+- categoria_problema["validacao backup"] = "user request"
+- categoria_problema["cancelamento de job"] = "user request"
+- categoria_problema["vmware creation request"] = "user request"
+
+----------------
+
+Foi solicitado para que fosse incluso essas novas Labels em problema reportado, a grande maioria foi adicionada, mas outras não foram reconhecidas. Verificar no código se faltou alguma da lista.
+Inclusão dos seguintes labels:
+- Control M Issue
+- Space Issue
+- Oracle Issue
+- Softlayer Issue
+- Voip Issue
+- DNS Issue
+- Firewall Rule Creation
+- User Profile Creation
+- Server Unreachable
+- Hardware Issue
+- Server Access Issue
+- Info Request
+- Shared Folder Creation
+- Cancelamento de Job
+- VMWare Creation
+- Server Unliked
+Service lines que não foram reconhecidas pelo BOT
+- SAN Disk Support
+- GBS Support
+- Suporte Local
+- Notes Support
+Fazer a substituição e deleção da label que iria para a coluna label aleatória
+SAP Support virou Basis Support - ele já reconhece isso, as que ele encontrar como SAP Support, fazer a substituição por Basis Support e deletar da coluna labels aleatórias o SAP Support.
+O mesmo aplica-se para Backup Support, que foi mudado para Storage Baas.
+Problema Reportados que não foram reconhecidas pelo BOT - PS: Lembrar de relacionar as categorias do mesmo.
+- Server Unlinked
+- Odi Application Issue
+A label acionado por GCC Support também não foi reconhecido pelo BOT. Essa label deve ser relaciona a coluna "quem te acionou" (coluna W).
+
+------------------------
+
+Na coluna AD (Horario do Incident) o bot não puxou os dados desta coluna. Todas as células vieram em branco.
+Acredito que por este motivo, as demais colunas que utilizam como base de calculo esta coluna deram erro de preenchimento.
+Na coluna AE (SLA do Ticket) ele também não puxou os números que estão registrados no card, ou ele formatou para um algo diferente de data. Esse campo é preenchido manualmente, então não precisa ser convertido. Verificar se ele está puxando os dados da coluna certa.
+
+------------------------
+
+Na coluna AL e AM formatar para aparecer com 2 digitos os números
+
+-------------------------
+
+Na coluna AI (Tempo de Atendimento ISM), coluna AK (TEMPO Total Diario Trabalhado), coluna AL (base de calculo Claim) e coluna AM (CLAIM), formatar a célula para o formato em que o excel consiga somar os números, assim como está configurado na coluna time worked (coluna Z)
+Aproveita e corrige a coluna AK "TEMPO TOTAL DIARIO TRABALHADO" para "Tempo Total Diario Trabalhado"
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+DONE:
+
+
+Na coluna Clientes, esse aqui não foi reconhecido pelo BOT. Já apaguei a labelo Confesol do Bluesight. 
+Agora o cliente chama Cresol - CONFESOL = CRESOL 
+
+Adicionar novos clientes e associar esse cliente ao Tribe leader
+Banrisul = Edmar Lauria Marques
+Grupo Simoes  = Paulinho Rosseti
+Caixa Economica = Livio Teixeira
+
+(DONE!!)
