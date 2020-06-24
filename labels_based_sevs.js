@@ -128,13 +128,7 @@ categoria_problema["file creation request"] = "user request"
 categoria_problema["file user access"] = "user request"
 categoria_problema["status request"] = "user request"
 categoria_problema["validacao ambiente"] = "user request"
-categoria_problema["sharepoint issue"] = "application"
-categoria_problema["crtl m issue"] = "application"
 categoria_problema["backup issue"] = "backup issue"
-categoria_problema["space issue"] = "capacity"
-categoria_problema["server memory issue"] = "capacity"
-categoria_problema["sql issue"] = "database"
-categoria_problema["oracle issue"] = "database"
 categoria_problema["server unliked"] = "database"
 categoria_problema["voip issue"] = "network"
 categoria_problema["dns issue"] = "network"
@@ -145,29 +139,30 @@ categoria_problema["user profile creation"] = "user request"
 categoria_problema["shared folder access"] = "user request"
 categoria_problema["info request"] = "user request"
 categoria_problema["shared folder creation"] = "user request"
-categoria_problema["validacao backup"] = "user request"
 categoria_problema["cancelamento de job"] = "user request"
 categoria_problema["vmware creation request"] = "user request"
 categoria_problema["security issue"] = "security"
 
 categoria_problema["control m issue"] = "issue"
 categoria_problema["space issue"] = "issue"
-categoria_problema["oracle issue"] = "issue"
 categoria_problema["softlayer issue"] = "issue"
-categoria_problema["voip issue"] = "issue"
-categoria_problema["dns issue"] = "issue"
 categoria_problema["firewall rule creation"] = "firewall rule creation"
-categoria_problema["user profile creation"] = "user profile creation"
-categoria_problema["server unreachable"] = "server unreachable"
-categoria_problema["hardware issue"] = "hardware issue"
-categoria_problema["server access issue"] = "server access issue"
-categoria_problema["info request"] = "info request"
-categoria_problema["shared folder creation"] = "shared folder creation"
-categoria_problema["cancelamento de job"] = "cancelamento de job"
 categoria_problema["vmware creation"] = "vmware creation"
-categoria_problema["server unliked"] = "server unliked"
 categoria_problema["file transfer request"] = "file transfer request"
 categoria_problema["monitoracao/report"] = "monitoracao/report"
+
+categoria_problema["sharepoint issue"] = "application"
+categoria_problema["crtl m issue"] = "application"
+categoria_problema["space issue"] = "capacity"
+categoria_problema["oracle issue"] = "database"
+categoria_problema["server unreachable"] = "servers"
+categoria_problema["hardware issue"] = "servers"
+categoria_problema["server access issue"] = "servers"
+categoria_problema["user profile creation"] = "user request"
+categoria_problema["info request"] = "user request"
+categoria_problema["shared folder creation"] = "user request"
+categoria_problema["validacao backup"] = "user request"
+categoria_problema["cancelamento de job"] = "user request"
 
 var service_line = ["adabas support",
     "at&t support",
@@ -302,8 +297,8 @@ var problema_reportado = [
     "crtl m issue",
     "backup issue",
     "space issue",
-    "server memory issue",
-    "sql issue",
+
+
     "oracle issue",
     "server unliked",
     "voip issue",
