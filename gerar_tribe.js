@@ -118,7 +118,8 @@ pessoas_clientes["Paulinho Rossetti"] = [
     "ZETRASOFT",
     "PROXXI",
     "RIOGALEAO",
-    "GRUPO SIMOES"
+    "GRUPO SIMOES",
+    "IRM"
 ]
 
 
