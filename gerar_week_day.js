@@ -5,6 +5,7 @@ var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 var not_allowed = [];
 var moment = require('moment')
+const config = require('./load_columns');
 
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
@@ -96,7 +97,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(STORE_YEAR + 1).value = "Ano"
 
         while (i <= worksheet.rowCount) {
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(config.CREATED_AT + i).value
             var monthName = worksheet.getCell(STORE_MONTH + i).value
             if (valor_celula != null) {
 
