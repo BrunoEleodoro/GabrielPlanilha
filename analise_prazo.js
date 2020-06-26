@@ -80,9 +80,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var horario_acionamento_date = parseDateToMoment(monthName, horario_acionamento);
             var horario_incident_date = parseDateToMoment(monthName, horario_incident)
 
-            console.log('sla_ticket_date', sla_ticket_date);
-            console.log('horario_acionamento_date', horario_acionamento_date);
-            console.log('horario_incident_date', horario_incident_date);
+            // console.log('sla_ticket_date', sla_ticket_date);
+            // console.log('horario_acionamento_date', horario_acionamento_date);
+            // console.log('horario_incident_date', horario_incident_date);
 
             var sla_horario_acionamento = calculateHours(sla_ticket_date, horario_acionamento_date)
             var sla_horario_incident = calculateHours(sla_ticket_date, horario_incident_date);
@@ -143,9 +143,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             // res = res + " / " + horario_acionamento_incident
             // console.log(i, res);
             worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = res
-            if (i == 3) {
-                break;
-            }
+            // if (i == 3) {
+            //     break;
+            // }
             i++;
         }
 
