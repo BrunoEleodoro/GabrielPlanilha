@@ -35,6 +35,18 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             worksheet.getCell(config.ISM_SOLICITOU + i).value = verifyNa(worksheet, config.ISM_SOLICITOU + i)
             worksheet.getCell(config.TRIBE + i).value = verifyNa(worksheet, config.TRIBE + i)
 
+            var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
+            var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
+
+            if (severidade == "N/A") {
+                if (type == "CH") {
+                    worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = "N/A - CHANGE"
+                } else if (type == "REPORT") {
+                    worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = "N/A - REPORT"
+                } else if (type == "SC") {
+                    worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = "N/A - SEM CHAMADO"
+                }
+            }
             i++;
         }
 
