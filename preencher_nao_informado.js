@@ -48,6 +48,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = label
                 worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
                 worksheet.getCell(config.SLA_TICKET + i).value = label
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = label
                 worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
                 worksheet.getCell(config.ISM_SOLICITOU + i).value = label
                 worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = label
