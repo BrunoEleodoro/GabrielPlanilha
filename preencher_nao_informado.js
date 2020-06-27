@@ -15,6 +15,19 @@ function verifyNa(worksheet, key) {
     return worksheet.getCell(key).value
 }
 
+function verifyAnalise(worksheet, key) {
+    if (worksheet.getCell(key).value == null) {
+        return "Análise impossível de ser feita"
+    }
+    if (worksheet.getCell(key).value.toString().trim() == "") {
+        return "Análise impossível de ser feita"
+    }
+    if (worksheet.getCell(key).value.toString().toLowerCase().trim() == "nan") {
+        return "Análise impossível de ser feita"
+    }
+    return worksheet.getCell(key).value
+}
+
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
@@ -30,6 +43,15 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             worksheet.getCell(config.CATEGORIA + i).value = verifyNa(worksheet, config.CATEGORIA + i)
             worksheet.getCell(config.SERVICE_LINE + i).value = verifyNa(worksheet, config.SERVICE_LINE + i)
             worksheet.getCell(config.TRIBE + i).value = verifyNa(worksheet, config.TRIBE + i)
+
+            worksheet.getCell(config.HORARIO_INCIDENTE + i).value = verifyNa(worksheet, config.HORARIO_INCIDENTE + i)
+            worksheet.getCell(config.SLA_TICKET + i).value = verifyNa(worksheet, config.SLA_TICKET + i)
+            worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = verifyNa(worksheet, config.HORARIO_ACIONAMENTO + i)
+            worksheet.getCell(config.ISM_SOLICITOU + i).value = verifyNa(worksheet, config.ISM_SOLICITOU + i)
+
+            worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.HORARIO_INCIDENTE + i)
+            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyAnalise(worksheet, config.SLA_TICKET + i)
+            worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.HORARIO_ACIONAMENTO + i)
 
             var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
             var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
@@ -54,6 +76,8 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = label
                 worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
             }
+
+
             // Horário do Incident,
             // SLA do ticket
             // Horário Acionamento ISM
