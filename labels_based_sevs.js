@@ -163,8 +163,16 @@ categoria_problema["info request"] = "user request"
 categoria_problema["shared folder creation"] = "user request"
 categoria_problema["validacao backup"] = "user request"
 categoria_problema["cancelamento de job"] = "user request"
+categoria_problema["server memory issue"] = "capacity"
+categoria_problema["sql issue"] = "database"
+categoria_problema["server unlinked"] = "application"
+categoria_problema["odi application issue"] = "application"
 
-var service_line = ["adabas support",
+var service_line = [
+    "adabas support",
+    "gbs support",
+    "san disk support",
+    "suporte local",
     "at&t support",
     "automation support",
     "storage baas",
@@ -198,6 +206,10 @@ var service_line = ["adabas support",
 ]
 
 var problema_reportado = [
+    "server memory issue",
+    "sql issue",
+    "server unlinked",
+    "odi application issue",
     "application issue",
     "ca application issue",
     "network issue",
@@ -325,6 +337,7 @@ var canal_acionamento = [
     "acionamento via crit",
     "acionamento via slack",
     "acionamento via telefone",
+    "acionamento indevido"
 ]
 
 var solicitacoes = [
@@ -378,6 +391,7 @@ var quem_te_acionou = [
     "acionado por gbs",
     "acionado por squad leader",
     "acionado por imi",
+    "acionado por gcc br"
 
 ]
 
