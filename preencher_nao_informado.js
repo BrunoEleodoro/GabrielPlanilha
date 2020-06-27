@@ -49,9 +49,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = verifyNa(worksheet, config.HORARIO_ACIONAMENTO + i)
             worksheet.getCell(config.ISM_SOLICITOU + i).value = verifyNa(worksheet, config.ISM_SOLICITOU + i)
 
-            worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.HORARIO_INCIDENTE + i)
-            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyAnalise(worksheet, config.SLA_TICKET + i)
-            worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.HORARIO_ACIONAMENTO + i)
+            worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.SLA_TICKET_VENCIDO + i)
+            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyAnalise(worksheet, config.TEMPO_ATENDIMENTO + i)
+            worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.ANALISE_PRAZO_ACIONAMENTO + i)
 
             var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
             var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
