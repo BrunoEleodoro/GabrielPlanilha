@@ -36,7 +36,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             let time_worked = worksheet.getCell(config.STORE_WORKED_HOURS + i).value
             let tempo_total = worksheet.getCell(config.TEMPO_TOTAL_DIARIO_TRABALHADO + i).value
 
-            worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value = parseFloat((time_worked / tempo_total)).toFixed(2) + "%"
+            worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value = parseFloat((time_worked / tempo_total)).toFixed(2)
 
             /// mostrar em porcentagem 
             i++;
