@@ -103,6 +103,7 @@ const clientes_possiveis = [
     "PESA",
     "MULTI VAREJO",
     "ORBITAL",
+    "MULTIPLOS CLIENTES",
     "ASSAI",
     "CRDC",
     "BURGER KING",
@@ -177,6 +178,12 @@ workbook.xlsx.readFile(SOURCE_FILE)
 
                     if (noClient) {
                         possivel_cliente = "Nao Informado"
+                        worksheet.getCell(STORE_CLIENT_COLUMN + i).fill = {
+                            type: 'pattern',
+                            pattern: 'solid',
+                            fgColor: { argb: 'FFFFFF00' },
+                            bgColor: { argb: 'aa00ff' }
+                        };
                     }
                     worksheet.getCell(STORE_CLIENT_COLUMN + i).value = possivel_cliente.toUpperCase()
                 } else {

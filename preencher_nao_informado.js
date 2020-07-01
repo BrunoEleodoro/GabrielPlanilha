@@ -3,12 +3,23 @@ const config = require('./load_columns');
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 
+function highlight(worksheet, key) {
+    worksheet.getCell(key).fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFFFFF00' },
+        bgColor: { argb: 'aa00ff' }
+    };
+}
+
 function verifyNa(worksheet, key) {
     if (worksheet.getCell(key).value == null) {
+        highlight(worksheet, key)
         return "Nao Informado"
     }
 
     if (worksheet.getCell(key).value.toString().trim() == "") {
+        highlight(worksheet, key)
         return "Nao Informado"
     }
 
@@ -17,12 +28,15 @@ function verifyNa(worksheet, key) {
 
 function verifyAnalise(worksheet, key) {
     if (worksheet.getCell(key).value == null) {
+        highlight(worksheet, key)
         return "Análise impossível de ser feita"
     }
     if (worksheet.getCell(key).value.toString().trim() == "") {
+        highlight(worksheet, key)
         return "Análise impossível de ser feita"
     }
     if (worksheet.getCell(key).value.toString().toLowerCase().trim() == "nan") {
+        highlight(worksheet, key)
         return "Análise impossível de ser feita"
     }
     return worksheet.getCell(key).value
@@ -58,6 +72,14 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var label = "";
 
             if (severidade == "N/A") {
+                worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).fill = undefined;
+                worksheet.getCell(config.HORARIO_INCIDENTE + i).fill = undefined;
+                worksheet.getCell(config.SLA_TICKET + i).fill = undefined;
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).fill = undefined;
+                worksheet.getCell(config.HORARIO_ACIONAMENTO + i).fill = undefined;
+                worksheet.getCell(config.ISM_SOLICITOU + i).fill = undefined;
+                worksheet.getCell(config.TEMPO_ATENDIMENTO + i).fill = undefined;
+                worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).fill = undefined;
                 if (type == "CH") {
                     label = "N/A - CHANGE"
                 } else if (type == "REPORT") {
