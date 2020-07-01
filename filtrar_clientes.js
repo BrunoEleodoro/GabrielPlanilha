@@ -95,7 +95,7 @@ const clientes_possiveis = [
     "ESSILOR",
     "PROFARMA",
     "STELO",
-    "FASTSHOP",
+    "APOLLO",
     "ALPARGATAS",
     "BANCO PINE",
     "SANTA HELENA",
