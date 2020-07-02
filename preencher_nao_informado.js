@@ -27,17 +27,22 @@ function verifyNa(worksheet, key) {
 }
 
 function verifyAnalise(worksheet, key) {
+
     if (worksheet.getCell(key).value == null) {
-        highlight(worksheet, key)
+        // highlight(worksheet, key)
         return "Análise impossível de ser feita"
     }
     if (worksheet.getCell(key).value.toString().trim() == "") {
-        highlight(worksheet, key)
+        // highlight(worksheet, key)
         return "Análise impossível de ser feita"
     }
     if (worksheet.getCell(key).value.toString().toLowerCase().trim() == "nan") {
-        highlight(worksheet, key)
+        // highlight(worksheet, key)
         return "Análise impossível de ser feita"
+    }
+
+    if (key.includes(config.SLA_TICKET_VENCIDO)) {
+        console.log(worksheet.getCell(key).value)
     }
     return worksheet.getCell(key).value
 }
