@@ -55,54 +55,54 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
         while (i <= worksheet.rowCount) {
 
             // let base_claim = worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value
-            worksheet.getCell(config.CLIENTS_COLUMN + i).value = verifyNa(worksheet, config.CLIENTS_COLUMN + i)
-            worksheet.getCell(config.STORE_TYPE_COLUMN + i).value = verifyNa(worksheet, config.STORE_TYPE_COLUMN + i)
-            worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = verifyNa(worksheet, config.STORE_SEVERITY_COLUNM + i)
-            worksheet.getCell(config.PROBLEMA_REPORTADO + i).value = verifyNa(worksheet, config.PROBLEMA_REPORTADO + i)
-            worksheet.getCell(config.CATEGORIA + i).value = verifyNa(worksheet, config.CATEGORIA + i)
-            worksheet.getCell(config.SERVICE_LINE + i).value = verifyNa(worksheet, config.SERVICE_LINE + i)
-            worksheet.getCell(config.TRIBE + i).value = verifyNa(worksheet, config.TRIBE + i)
+            // worksheet.getCell(config.CLIENTS_COLUMN + i).value = verifyNa(worksheet, config.CLIENTS_COLUMN + i)
+            // worksheet.getCell(config.STORE_TYPE_COLUMN + i).value = verifyNa(worksheet, config.STORE_TYPE_COLUMN + i)
+            // worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = verifyNa(worksheet, config.STORE_SEVERITY_COLUNM + i)
+            // worksheet.getCell(config.PROBLEMA_REPORTADO + i).value = verifyNa(worksheet, config.PROBLEMA_REPORTADO + i)
+            // worksheet.getCell(config.CATEGORIA + i).value = verifyNa(worksheet, config.CATEGORIA + i)
+            // worksheet.getCell(config.SERVICE_LINE + i).value = verifyNa(worksheet, config.SERVICE_LINE + i)
+            // worksheet.getCell(config.TRIBE + i).value = verifyNa(worksheet, config.TRIBE + i)
 
-            worksheet.getCell(config.HORARIO_INCIDENTE + i).value = verifyNa(worksheet, config.HORARIO_INCIDENTE + i)
-            worksheet.getCell(config.SLA_TICKET + i).value = verifyNa(worksheet, config.SLA_TICKET + i)
-            worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = verifyNa(worksheet, config.HORARIO_ACIONAMENTO + i)
-            worksheet.getCell(config.ISM_SOLICITOU + i).value = verifyNa(worksheet, config.ISM_SOLICITOU + i)
+            // worksheet.getCell(config.HORARIO_INCIDENTE + i).value = verifyNa(worksheet, config.HORARIO_INCIDENTE + i)
+            // worksheet.getCell(config.SLA_TICKET + i).value = verifyNa(worksheet, config.SLA_TICKET + i)
+            // worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = verifyNa(worksheet, config.HORARIO_ACIONAMENTO + i)
+            // worksheet.getCell(config.ISM_SOLICITOU + i).value = verifyNa(worksheet, config.ISM_SOLICITOU + i)
 
-            worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.SLA_TICKET_VENCIDO + i)
-            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyAnalise(worksheet, config.TEMPO_ATENDIMENTO + i)
-            worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.ANALISE_PRAZO_ACIONAMENTO + i)
+            // worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.SLA_TICKET_VENCIDO + i)
+            // worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyAnalise(worksheet, config.TEMPO_ATENDIMENTO + i)
+            // worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.ANALISE_PRAZO_ACIONAMENTO + i)
 
-            var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
-            var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
-            var label = "";
+            // var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
+            // var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
+            // var label = "";
 
-            if (severidade == "N/A") {
-                worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).fill = undefined;
-                worksheet.getCell(config.HORARIO_INCIDENTE + i).fill = undefined;
-                worksheet.getCell(config.SLA_TICKET + i).fill = undefined;
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).fill = undefined;
-                worksheet.getCell(config.HORARIO_ACIONAMENTO + i).fill = undefined;
-                worksheet.getCell(config.ISM_SOLICITOU + i).fill = undefined;
-                worksheet.getCell(config.TEMPO_ATENDIMENTO + i).fill = undefined;
-                worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).fill = undefined;
-                if (type == "CH") {
-                    label = "N/A - CHANGE"
-                } else if (type == "REPORT") {
-                    label = "N/A - REPORT"
-                } else if (type == "SC") {
-                    label = "N/A - SEM CHAMADO"
-                }
-            }
-            if (label != "") {
-                worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = label
-                worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
-                worksheet.getCell(config.SLA_TICKET + i).value = label
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = label
-                worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
-                worksheet.getCell(config.ISM_SOLICITOU + i).value = label
-                worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = label
-                worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
-            }
+            // if (severidade == "N/A") {
+            //     worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).fill = undefined;
+            //     worksheet.getCell(config.HORARIO_INCIDENTE + i).fill = undefined;
+            //     worksheet.getCell(config.SLA_TICKET + i).fill = undefined;
+            //     worksheet.getCell(config.SLA_TICKET_VENCIDO + i).fill = undefined;
+            //     worksheet.getCell(config.HORARIO_ACIONAMENTO + i).fill = undefined;
+            //     worksheet.getCell(config.ISM_SOLICITOU + i).fill = undefined;
+            //     worksheet.getCell(config.TEMPO_ATENDIMENTO + i).fill = undefined;
+            //     worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).fill = undefined;
+            //     if (type == "CH") {
+            //         label = "N/A - CHANGE"
+            //     } else if (type == "REPORT") {
+            //         label = "N/A - REPORT"
+            //     } else if (type == "SC") {
+            //         label = "N/A - SEM CHAMADO"
+            //     }
+            // }
+            // if (label != "") {
+            //     worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = label
+            //     worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
+            //     worksheet.getCell(config.SLA_TICKET + i).value = label
+            //     worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = label
+            //     worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
+            //     worksheet.getCell(config.ISM_SOLICITOU + i).value = label
+            //     worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = label
+            //     worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
+            // }
 
 
             // Horário do Incident,

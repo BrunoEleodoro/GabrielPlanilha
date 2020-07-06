@@ -5,7 +5,8 @@ var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
 var not_allowed = [];
 var path = require('path')
-
+const config = require('./load_columns');
+const moment = require('moment');
 // CONTROLLERS
 const LABELS_COLUMN = process.env.LABELS_COLUMN
 const SOURCE_FILE = process.env.SOURCE_FILE
@@ -48,7 +49,38 @@ function changeDayAndMonthPosition(date, separator) {
     return newDate
 }
 
-const moment = require('moment');
+
+
+function parseDateToMoment(monthName, valor_celula) {
+    var month = months.indexOf(monthName) + 1
+    if (valor_celula == "" || valor_celula == null) {
+        return moment("00/00/0000 00:00", "DD/MM/YYYY HH:mm");
+    }
+    // var index = valor_celula.indexOf("0" + month + "/")
+    var index = valor_celula.split(" ")[0].indexOf(month)
+    var data = ""
+
+    if (index == -1) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 0) {
+        data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    } else if (index == 3) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 4) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 1) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else {
+        data = moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
+    }
+    if (data.toString() == "Invalid date") {
+        data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    }
+
+    return data
+}
+
+
 
 // READ WORKBOOK
 workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
@@ -56,20 +88,28 @@ workbook.xlsx.readFile(path.join(__dirname, SOURCE_FILE))
 
         var worksheet = workbook.getWorksheet(WORKSHEET);
         var i = 2;
+        const d = new Date();
 
         //setting the title of the column
         worksheet.getCell(STORE_MONTH + 1).value = "month"
 
         while (i <= worksheet.rowCount) {
 
-            var valor_celula = worksheet.getCell(STORE_CLOSED_AT + i).value
+            var valor_celula = worksheet.getCell(CREATED_AT + i).value
             if (valor_celula != null) {
+                var currentMonth = months[d.getMonth()]
                 var data = moment(valor_celula, "DD/MM/YYYY HH:mm");
                 if (data.toString() == "Invalid date") {
                     data = moment(valor_celula, "MM/DD/YYYY HH:mm");
                 }
 
-                // console.log('monthName', valor_celula, )
+                var card_identifier = worksheet.getCell("AN" + i).value
+                if (card_identifier == "07m4ea") {
+                    var data2 = parseDateToMoment(currentMonth, valor_celula)
+
+                    console.log('monthName', valor_celula, months[data2.month()])
+                }
+
                 worksheet.getCell(STORE_MONTH + i).value = months[data.month()]
             }
             // if (i % 5 == 0) {
