@@ -2,7 +2,6 @@ require('dotenv').config({ path: 'config_criar_planilha' })
 const utf8 = require('utf8');
 
 var Excel = require('exceljs');
-var workbook = new Excel.Workbook();
 var not_allowed = [];
 
 var fs = require('fs')
@@ -49,71 +48,65 @@ function convert(input) {
     return output;
 }
 
-// READ WORKBOOK
+let criar_planilha = {}
+criar_planilha["created by"] = "A"
+criar_planilha["title"] = "C"
+criar_planilha["primary labels"] = "E"
+criar_planilha["created at"] = "H"
+criar_planilha["card assignees"] = "K"
+criar_planilha["closed at"] = "S"
+criar_planilha["total waiting time (minutes)"] = "T"
+criar_planilha["operational lead time (minutes)"] = "U"
+criar_planilha["custom_field_1"] = "AD"
+criar_planilha["custom_field_2"] = "AE"
+criar_planilha["custom_field_3"] = "AF"
+criar_planilha["custom_field_4"] = "AG"
+criar_planilha["custom_field_5"] = "AH"
+criar_planilha["card identifier"] = "AN"
+
 async function main() {
-    var linhas_novas = []
-    var titles = []
+    var XLSX = require('xlsx');
+    var workbook = XLSX.readFile(path.join(__dirname, SOURCE_FILE));
+    var sheet_name_list = workbook.SheetNames;
+    var fs = require('fs');
+
+    const csv = require('csvtojson')
+    csv()
+        .fromFile(path.join(__dirname, SOURCE_FILE))
+        .then((jsonObj) => {
+            fs.writeFileSync('planilha.json', JSON.stringify(jsonObj))
+        })
+
+    var data = JSON.parse(fs.readFileSync('planilha.json'))
+    console.log(data.length)
     var workbook = new Excel.Workbook();
-    if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
-        await workbook.csv.readFile(path.join(__dirname, SOURCE_FILE))
-            .then(function () {
-                var worksheet = workbook.worksheets[0];
-                var i = 2;
-                console.log('line count', worksheet.rowCount)
-                var limite = (worksheet.rowCount + 1);
-                while (i <= limite) {
-                    var linha_antiga = []
-
-                    var k = 0;
-                    while (k < SOURCE_COLUMNS_LIST.length) {
-                        //getting the titles
-                        if (i == 2) {
-                            titles.push(worksheet.getRow(1).getCell(SOURCE_COLUMNS_LIST[k]).value)
-                        }
-                        var value = worksheet.getRow(i).getCell(SOURCE_COLUMNS_LIST[k]).value
-                        if (value != null) {
-                            linha_antiga.push(convert(value.toString()))
-                        } else {
-                            linha_antiga.push(value)
-                        }
-
+    workbook.xlsx.writeFile(OUTPUT_FILE)
+        .then(function () {
+            var worksheet = workbook.addWorksheet("Dados");
+            var i = 0;
+            while (i < data.length) {
+                if (i == 0) {
+                    let k = 0;
+                    let keys = Object.keys(criar_planilha);
+                    while (k < keys.length) {
+                        worksheet.getRow(i + 1).getCell(criar_planilha[keys[k]]).value = keys[k]
                         k++;
                     }
-
-                    linhas_novas.push(linha_antiga);
-                    i++;
-                }
-                return 'finalizado'
-            })
-
-        var workbook = new Excel.Workbook();
-        workbook.xlsx.writeFile(OUTPUT_FILE)
-            .then(function () {
-                var worksheet = workbook.addWorksheet("Dados");
-                var i = 2;
-                while (i <= linhas_novas.length) {
-
-                    var k = 0;
-                    while (k < DESTINATION_COLUMNS_LIST.length) {
-                        //writing the titles
-                        if (i == 2) {
-                            worksheet.getRow(1).getCell(DESTINATION_COLUMNS_LIST[k]).value = titles[k]
-                        }
-
-                        var value = linhas_novas[i - 2][k]
-                        worksheet.getRow(i).getCell(DESTINATION_COLUMNS_LIST[k]).value = value
+                } else {
+                    let k = 0;
+                    let keys = Object.keys(criar_planilha);
+                    while (k < keys.length) {
+                        worksheet.getRow(i + 1).getCell(criar_planilha[keys[k]]).value = data[i][keys[k]]
                         k++;
                     }
-                    i++;
                 }
-                console.log('finalizado!');
-                return workbook.xlsx.writeFile(OUTPUT_FILE);
-            });
+                // worksheet.getRow(i).getCell(DESTINATION_COLUMNS_LIST[k]).value = value
 
-    } else {
-        console.log('file not found', path.join(__dirname, SOURCE_FILE))
-        console.log('try this one', SOURCE_FILE, fs.existsSync(SOURCE_FILE))
-    }
+                i++;
+            }
+
+            return workbook.xlsx.writeFile(OUTPUT_FILE);
+        });
 
 }
 
