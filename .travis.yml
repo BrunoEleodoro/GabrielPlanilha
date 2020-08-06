@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "latest"
+os:
+  - linux
+  
+script:
+  - ls
+  - git status
+  - GIT_LOG="$(git log -1 | grep Author)"
+  - echo $GIT_LOG
+  - if [[ "$GIT_LOG" != *"travis@travis.org"* ]]; then sh deploy.sh; else echo 0; fi 

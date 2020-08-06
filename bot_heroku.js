@@ -34,7 +34,7 @@ slackController.on('file_shared', function (bot, message) {
 
     bot.api.files.info({ file: message.file_id }, (err, response) => {
         // console.log(response.file.title)
-        console.log(response.file.filetype)
+        console.log(response)
         if (response.file.title == "config_criar_planilha") {
             const file = fs.createWriteStream(path.join(__dirname, "config_criar_planilha"));
             console.log(path.join(__dirname, "config_criar_planilha"))
