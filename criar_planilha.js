@@ -65,13 +65,13 @@ criar_planilha["custom_field_5"] = "AH"
 criar_planilha["card identifier"] = "AN"
 
 var XLSX = require('xlsx');
-var workbook = XLSX.readFile(path.join(__dirname, SOURCE_FILE));
+var workbook = XLSX.readFile(SOURCE_FILE);
 var sheet_name_list = workbook.SheetNames;
 var fs = require('fs');
 
 const csv = require('csvtojson')
 csv()
-    .fromFile(path.join(__dirname, SOURCE_FILE))
+    .fromFile(SOURCE_FILE)
     .then((jsonObj) => {
         fs.writeFileSync('planilha.json', JSON.stringify(jsonObj))
     })
