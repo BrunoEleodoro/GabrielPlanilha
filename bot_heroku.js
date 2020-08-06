@@ -63,33 +63,33 @@ slackController.on('file_shared', function (bot, message) {
                 text: "Config file for all the scripts Received! :fbhappy:",
                 channel: message.channel_id // channel Id for #slack_integration
             });
-        } else if (response.file.filetype == "csv") {
-            if (response.file.title.includes("metrics_")) {
-                var output_filename = response.file.title;
-                output_filename = output_filename.split(".")[0];
-                output_filename = output_filename.split("metrics_");
-                output_filename = output_filename[1].toString().trim().split("-")
-                output_filename = output_filename[2] + "-" + output_filename[1] + "-" + output_filename[0]
-                output_filename = "Metricas_" + output_filename + ".xlsx"
-                const file = fs.createWriteStream(path.join(__dirname, "a.csv"))
-                https.get(response.file.url_private_download, {
-                    headers: {
-                        'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
-                    }
-                }, function (response) {
-                    response.pipe(file);
-                    build(bot, message, output_filename);
-                });
-                bot.say({
-                    text: "Received! :fbhappy: \nProcessing file and collecting metrics... :construction-2:",
-                    channel: message.channel_id // channel Id for #slack_integration
-                });
-            } else {
-                bot.say({
-                    text: "Invalid file name :sad1: ",
-                    channel: message.channel_id // channel Id for #slack_integration
-                });
-            }
+        } else if (response.file.title.includes(".csv")) {
+            // if (response.file.title.includes("metrics_")) {
+            var output_filename = response.file.title;
+            output_filename = output_filename.split(".")[0];
+            output_filename = output_filename.split("metrics_");
+            output_filename = output_filename[1].toString().trim().split("-")
+            output_filename = output_filename[2] + "-" + output_filename[1] + "-" + output_filename[0]
+            output_filename = "Metricas_" + output_filename + ".xlsx"
+            const file = fs.createWriteStream(path.join(__dirname, "a.csv"))
+            https.get(response.file.url_private_download, {
+                headers: {
+                    'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
+                }
+            }, function (response) {
+                response.pipe(file);
+                build(bot, message, output_filename);
+            });
+            bot.say({
+                text: "Received! :fbhappy: \nProcessing file and collecting metrics... :construction-2:",
+                channel: message.channel_id // channel Id for #slack_integration
+            });
+            // } else {
+            //     bot.say({
+            //         text: "Invalid file name :sad1: ",
+            //         channel: message.channel_id // channel Id for #slack_integration
+            //     });
+            // }
 
         }
 
