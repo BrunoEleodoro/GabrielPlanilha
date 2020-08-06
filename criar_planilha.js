@@ -64,43 +64,43 @@ criar_planilha["custom_field_4"] = "AG"
 criar_planilha["custom_field_5"] = "AH"
 criar_planilha["card identifier"] = "AN"
 
-var XLSX = require('xlsx');
-var workbook = XLSX.readFile(SOURCE_FILE);
-var sheet_name_list = workbook.SheetNames;
 var fs = require('fs');
 
 const csv = require('csvtojson')
-csv()
-    .fromFile(SOURCE_FILE)
-    .then((jsonObj) => {
-        fs.writeFileSync('planilha.json', JSON.stringify(jsonObj))
-    })
+if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
+    csv()
+        .fromFile(SOURCE_FILE)
+        .then((data) => {
+            console.log(data.length)
+            var workbook = new Excel.Workbook();
+            workbook.xlsx.writeFile(OUTPUT_FILE)
+                .then(function () {
+                    var worksheet = workbook.addWorksheet("Dados");
+                    var i = 0;
+                    while (i < data.length) {
+                        if (i == 0) {
+                            let k = 0;
+                            let keys = Object.keys(criar_planilha);
+                            while (k < keys.length) {
+                                worksheet.getRow(i + 1).getCell(criar_planilha[keys[k]]).value = keys[k]
+                                k++;
+                            }
+                        } else {
+                            let k = 0;
+                            let keys = Object.keys(criar_planilha);
+                            while (k < keys.length) {
+                                worksheet.getRow(i + 1).getCell(criar_planilha[keys[k]]).value = data[i][keys[k]]
+                                k++;
+                            }
+                        }
+                        i++;
+                    }
+                    //another try
+                    return workbook.xlsx.writeFile(OUTPUT_FILE);
+                });
+        })
 
-var data = JSON.parse(fs.readFileSync('planilha.json'))
-console.log(data.length)
-var workbook = new Excel.Workbook();
-workbook.xlsx.writeFile(OUTPUT_FILE)
-    .then(function () {
-        var worksheet = workbook.addWorksheet("Dados");
-        var i = 0;
-        while (i < data.length) {
-            if (i == 0) {
-                let k = 0;
-                let keys = Object.keys(criar_planilha);
-                while (k < keys.length) {
-                    worksheet.getRow(i + 1).getCell(criar_planilha[keys[k]]).value = keys[k]
-                    k++;
-                }
-            } else {
-                let k = 0;
-                let keys = Object.keys(criar_planilha);
-                while (k < keys.length) {
-                    worksheet.getRow(i + 1).getCell(criar_planilha[keys[k]]).value = data[i][keys[k]]
-                    k++;
-                }
-            }
-            i++;
-        }
-        //another try
-        return workbook.xlsx.writeFile(OUTPUT_FILE);
-    });
+} else {
+    console.log('file not found', path.join(__dirname, SOURCE_FILE))
+    console.log('try this one', SOURCE_FILE, fs.existsSync(SOURCE_FILE))
+}
