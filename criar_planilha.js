@@ -67,14 +67,9 @@ criar_planilha["card identifier"] = "AN"
 var fs = require('fs');
 
 const csv = require('csvtojson')
-if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
-    csv()
-        .fromFile(path.join(__dirname, SOURCE_FILE))
-        .then((data) => {
-            console.log(data.length)
-            fs.writeFileSync('planilha.json', JSON.stringify(data))
-        })
-    let data = JSON.parse(fs.readFileSync('planilha.json'))
+
+async function main() {
+    let data = await convertCSVTOJSON()
     var workbook = new Excel.Workbook();
     workbook.xlsx.writeFile(OUTPUT_FILE)
         .then(function () {
@@ -101,7 +96,25 @@ if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
             //another try
             return workbook.xlsx.writeFile(OUTPUT_FILE);
         });
+}
+
+function convertCSVTOJSON() {
+    return new Promise((resolve, reject) => {
+        csv()
+            .fromFile(path.join(__dirname, SOURCE_FILE))
+            .then((data) => {
+                console.log(data.length)
+                resolve(data)
+            })
+    })
+}
+
+if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
+    console.log('file exists')
+    main();
 } else {
     console.log('file not found', path.join(__dirname, SOURCE_FILE))
     console.log('try this one', SOURCE_FILE, fs.existsSync(SOURCE_FILE))
 }
+
+
