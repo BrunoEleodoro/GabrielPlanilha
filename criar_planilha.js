@@ -64,22 +64,17 @@ criar_planilha["custom_field_4"] = "AG"
 criar_planilha["custom_field_5"] = "AH"
 criar_planilha["card identifier"] = "AN"
 
+var fs = require('fs');
 
-async function main() {
-    var XLSX = require('xlsx');
-    var workbook = XLSX.readFile(path.join(__dirname, SOURCE_FILE));
-    var sheet_name_list = workbook.SheetNames;
-    var fs = require('fs');
-
-    const csv = require('csvtojson')
+const csv = require('csvtojson')
+if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
     csv()
-        .fromFile(path.join(__dirname, SOURCE_FILE))
-        .then((jsonObj) => {
-            fs.writeFileSync('planilha.json', JSON.stringify(jsonObj))
+        .fromFile(SOURCE_FILE)
+        .then((data) => {
+            console.log(data.length)
+            fs.writeFileSync('planilha.json', JSON.stringify(data))
         })
-
-    var data = JSON.parse(fs.readFileSync('planilha.json'))
-    console.log(data.length)
+    let data = JSON.parse(fs.readFileSync('planilha.json'))
     var workbook = new Excel.Workbook();
     workbook.xlsx.writeFile(OUTPUT_FILE)
         .then(function () {
@@ -101,14 +96,12 @@ async function main() {
                         k++;
                     }
                 }
-                // worksheet.getRow(i).getCell(DESTINATION_COLUMNS_LIST[k]).value = value
-
                 i++;
             }
-
+            //another try
             return workbook.xlsx.writeFile(OUTPUT_FILE);
         });
-
+} else {
+    console.log('file not found', path.join(__dirname, SOURCE_FILE))
+    console.log('try this one', SOURCE_FILE, fs.existsSync(SOURCE_FILE))
 }
-
-main();
