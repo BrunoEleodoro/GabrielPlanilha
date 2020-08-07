@@ -64,6 +64,7 @@ slackController.on('file_shared', function (bot, message) {
                 channel: message.channel_id // channel Id for #slack_integration
             });
         } else if (response.file.title.includes(".csv")) {
+            console.log('response.file.url_private_download', response.file.url_private_download)
             // if (response.file.title.includes("metrics_")) {
             var output_filename = response.file.title;
             output_filename = output_filename.split(".")[0];
@@ -99,7 +100,7 @@ slackController.on('file_shared', function (bot, message) {
 slackBot.startRTM();
 
 function build(bot, message, output_filename) {
-    console.log('', fs.existsSync(path.join(__dirname, output_filename)))
+    console.log('', fs.existsSync(path.join(__dirname, output_filename)), fs.existsSync(output_filename))
     exec('ls -la && make build && ls -la', (err, stdout, stderr) => {
         console.log(stdout)
         fs.readFile("config", { encoding: 'utf-8' }, function (err, data) {
