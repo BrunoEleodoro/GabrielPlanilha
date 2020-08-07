@@ -69,7 +69,7 @@ var fs = require('fs');
 const csv = require('csvtojson')
 if (fs.existsSync(path.join(__dirname, SOURCE_FILE))) {
     csv()
-        .fromFile(SOURCE_FILE)
+        .fromFile(path.join(__dirname, SOURCE_FILE))
         .then((data) => {
             console.log(data.length)
             fs.writeFileSync('planilha.json', JSON.stringify(data))
