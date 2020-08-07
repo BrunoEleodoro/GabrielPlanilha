@@ -36,6 +36,8 @@ function parseDateToMoment(monthName, valor_celula) {
         data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else if (index == 4) {
         data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    } else if (index == 1) {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
     } else {
         data = moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
     }
@@ -56,16 +58,23 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var sla_ticket = worksheet.getCell(config.SLA_TICKET + i).value
             var monthName = worksheet.getCell(config.STORE_MONTH + i).value
 
+            var horario_acionamento_date = parseDateToMoment(monthName, horario_acionamento);
+            var sla_ticket_date = parseDateToMoment(monthName, sla_ticket);
+
             // console.log(`(${horario_acionamento_date} > ${sla_ticket_date}`, (horario_acionamento_date > sla_ticket_date))
 
 
             // if (horario_acionamento_date > sla_ticket_date) {
-            // console.log('horario_acionamento_date', horario_acionamento_date, sla_ticket_date, horario_acionamento_date.isAfter(sla_ticket_date, 'hour'))
-            let analise = worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value
-            if (analise && analise != "Análise impossível de ser feita" && analise != "Solicitado prioridade com SLA vencido") {
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade Dentro do SLA"
+            console.log('horario_acionamento_date', horario_acionamento_date, sla_ticket_date, horario_acionamento_date.isAfter(sla_ticket_date, 'hour'))
+
+            if (horario_acionamento_date.toString() != "Invalid date" && horario_acionamento_date.toString() != "Invalid date") {
+                if (horario_acionamento_date.isAfter(sla_ticket_date, 'seconds')) {
+                    worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade com SLA Vencido"
+                } else {
+                    worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade Dentro do SLA"
+                }
             } else {
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade com SLA Vencido"
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Nan"
             }
             // if (i % 10 == 0) {
             //     break;
