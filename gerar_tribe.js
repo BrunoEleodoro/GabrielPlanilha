@@ -80,7 +80,8 @@ pessoas_clientes["Edmar Lauria Marques"] = [
     "MERCEDES",
     "PESA",
     "RIOCARD",
-    "UNILEVER"
+    "UNILEVER",
+    "GERDAU REMOTAS"
 ]
 pessoas_clientes["Fabiano Gonçalves"] = [
     "ALPARGATAS",
