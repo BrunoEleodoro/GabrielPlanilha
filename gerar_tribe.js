@@ -60,6 +60,7 @@ pessoas_clientes["Marcia Y Couto"] = [
     "TICKET",
     "TOYOTA",
     "ZETRASOFT",
+    "GALGO"
 ]
 pessoas_clientes["Lívio Teixeira"] = [
     "CAIXA ECONOMICA"
