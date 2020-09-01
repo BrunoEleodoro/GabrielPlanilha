@@ -68,8 +68,9 @@ slackController.on('file_shared', function (bot, message) {
             // if (response.file.title.includes("metrics_")) {
             var output_filename = response.file.title;
             output_filename = output_filename.split(".")[0];
-            output_filename = output_filename.split("metrics_");
-            output_filename = output_filename[1].toString().trim().split("-")
+            output_filename = output_filename.split("_squad")[0];
+            output_filename = output_filename.split("_");
+            // output_filename = output_filename[1].toString().trim().split("-")
             output_filename = output_filename[2] + "-" + output_filename[1] + "-" + output_filename[0]
             output_filename = "Metricas_" + output_filename + ".xlsx"
             const file = fs.createWriteStream(path.join(__dirname, "a.csv"))
@@ -77,8 +78,8 @@ slackController.on('file_shared', function (bot, message) {
                 headers: {
                     'Authorization': 'Bearer ' + process.env.SLACK_TOKEN
                 }
-            }, function (response) {
-                response.pipe(file);
+            }, function (response2) {
+                response2.pipe(file);
                 build(bot, message, output_filename);
             });
             bot.say({
