@@ -103,7 +103,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 // }
                 // worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
                 var finalTime = ""
-                var hours = result / 60
+                var hours = result
                 finalTime = Math.round(hours * 100) / 100
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
                 // worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';

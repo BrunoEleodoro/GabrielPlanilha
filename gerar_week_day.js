@@ -81,6 +81,9 @@ function parseDateToMoment(monthName, valor_celula) {
     if (data.toString() == "Invalid date") {
         data = moment(valor_celula, "MM/DD/YYYY HH:mm");
     }
+    if (data.toString() == "Invalid date") {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    }
 
     return data
 }
@@ -107,8 +110,6 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 worksheet.getCell(STORE_WEEK_DAY + i).value = dayName
                 worksheet.getCell(STORE_DAY + i).value = data.date().toString().padStart(2, '0')
                 worksheet.getCell(STORE_YEAR + i).value = data.year()
-
-
 
                 // if (i % 10 == 0) {
                 //     break;

@@ -89,6 +89,7 @@ const clientes_possiveis = [
     "MANGELS",
     "ZETRASOFT",
     "FAST SHOP",
+    "FAST SHOP ",
     "FIRST DATA",
     "BOA VISTA",
     "SPRINGER",

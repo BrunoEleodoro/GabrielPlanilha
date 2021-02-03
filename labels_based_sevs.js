@@ -146,9 +146,9 @@ categoria_problema["security issue"] = "security"
 categoria_problema["control m issue"] = "issue"
 categoria_problema["space issue"] = "issue"
 categoria_problema["softlayer issue"] = "issue"
-categoria_problema["firewall rule creation"] = "firewall rule creation"
+categoria_problema["firewall rule creation"] = "user request"
 categoria_problema["vmware creation"] = "vmware creation"
-categoria_problema["file transfer request"] = "file transfer request"
+categoria_problema["file transfer request"] = "user request"
 categoria_problema["monitoracao/report"] = "monitoracao/report"
 
 categoria_problema["sharepoint issue"] = "application"
@@ -202,7 +202,8 @@ var service_line = [
     "basis support",
     "tws support",
     "tss support",
-    "notes support"
+    "notes support",
+    "imi support"
 ]
 
 var problema_reportado = [
@@ -337,7 +338,8 @@ var canal_acionamento = [
     "acionamento via crit",
     "acionamento via slack",
     "acionamento via telefone",
-    "acionamento indevido"
+    "acionamento indevido",
+    "acionamento hypercare"
 ]
 
 var solicitacoes = [

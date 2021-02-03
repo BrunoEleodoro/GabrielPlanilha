@@ -59,8 +59,7 @@ pessoas_clientes["Marcia Y Couto"] = [
     "SENIOR",
     "TICKET",
     "TOYOTA",
-    "ZETRASOFT",
-    "GALGO"
+    "ZETRASOFT"
 ]
 pessoas_clientes["Lívio Teixeira"] = [
     "CAIXA ECONOMICA"
@@ -80,6 +79,7 @@ pessoas_clientes["Edmar Lauria Marques"] = [
     "HONDA",
     "MERCEDES",
     "PESA",
+    "WPP",
     "RIOCARD",
     "UNILEVER",
     "GERDAU REMOTAS"
@@ -107,6 +107,7 @@ pessoas_clientes["Fabiano Gonçalves"] = [
     "SPRINGER",
     "TIGRE",
     "VIA VAREJO",
+    "GALGO"
 ]
 pessoas_clientes["Geraldo Vicente Ferreira"] = [
     "SANTANDER",
