@@ -77,6 +77,7 @@ categoria_problema["sap issue"] = "application"
 categoria_problema["sap transport"] = "application"
 categoria_problema["archieve issue"] = "backup"
 categoria_problema["backup request"] = "user request"
+categoria_problema["logs request"] = "user request"
 categoria_problema["restore follow up"] = "backup"
 categoria_problema["restore request"] = "user request"
 categoria_problema["add disk approval"] = "capacity"
@@ -310,8 +311,6 @@ var problema_reportado = [
     "crtl m issue",
     "backup issue",
     "space issue",
-
-
     "oracle issue",
     "server unliked",
     "voip issue",
@@ -326,6 +325,7 @@ var problema_reportado = [
     "validacao backup",
     "cancelamento de job",
     "vmware creation request",
+    "logs request",
 ]
 
 var acao_ism = [
