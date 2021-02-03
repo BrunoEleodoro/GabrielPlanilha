@@ -51,8 +51,8 @@ const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 const clientes_possiveis = [
     "CARREFOUR",
     "FLEURY",
-    "GERDAU",
     "GERDAU REMOTAS",
+    "GERDAU",
     "BRF",
     "DROGARIA SP",
     "COPERSUCAR",
@@ -142,8 +142,6 @@ workbook.xlsx.readFile(SOURCE_FILE)
                             possivel_cliente = "DROGARIA SP"
                         } else if (possivel_cliente.trim().toUpperCase() == "GALGO") {
                             possivel_cliente = "GALGO"
-                        } else if (possivel_cliente.trim().toUpperCase() == "FASTSHOP" || possivel_cliente.trim().toUpperCase() == "FAST SHOP") {
-                            possivel_cliente = "APOLLO"
                         } else if (possivel_cliente.trim().toUpperCase() == "CONFESOL") {
                             possivel_cliente = "CRESOL"
                         } else if (possivel_cliente.trim().toUpperCase() == " SAINT GOBAIN" || possivel_cliente.trim().toUpperCase() == "SAINT GOBAIN") {
