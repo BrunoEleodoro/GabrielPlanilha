@@ -339,7 +339,7 @@ var canal_acionamento = [
     "acionamento via slack",
     "acionamento via telefone",
     "acionamento indevido",
-    "acionamento hypercare"
+    "acionamento de hypercare"
 ]
 
 var solicitacoes = [
