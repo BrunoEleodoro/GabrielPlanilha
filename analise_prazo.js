@@ -59,6 +59,9 @@ function parseDateToMoment(monthName, valor_celula) {
     if (data.toString() == "Invalid date") {
         data = moment(valor_celula, "MM/DD/YYYY HH:mm");
     }
+    if (data.toString() == "Invalid date") {
+        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    }
 
     return data
 }
