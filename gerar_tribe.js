@@ -71,6 +71,7 @@ pessoas_clientes["IBM Infra"] = [
     "IRM"
 ]
 pessoas_clientes["Edmar Lauria Marques"] = [
+    "FIDELITY NATIONAL",
     "BANRISUL",
     "BOA VISTA",
     "BRF",
