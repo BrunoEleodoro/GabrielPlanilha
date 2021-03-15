@@ -49,6 +49,8 @@ const SEV_SUMMARY_CLIENT_SEV3 = process.env.SEV_SUMMARY_CLIENT_SEV3
 const SEV_SUMMARY_CLIENT_SEV4 = process.env.SEV_SUMMARY_CLIENT_SEV4
 
 const clientes_possiveis = [
+    "GERDAU MEXICO",
+    "GERDAU PERU",
     "FIDELITY NATIONAL",
     "CARREFOUR",
     "FLEURY",

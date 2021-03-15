@@ -143,6 +143,7 @@ categoria_problema["shared folder creation"] = "user request"
 categoria_problema["cancelamento de job"] = "user request"
 categoria_problema["vmware creation request"] = "user request"
 categoria_problema["security issue"] = "security"
+categoria_problema["printer creation request"] = "user request"
 
 categoria_problema["control m issue"] = "issue"
 categoria_problema["space issue"] = "issue"
@@ -208,6 +209,7 @@ var service_line = [
 ]
 
 var problema_reportado = [
+    "printer creation request",
     "server memory issue",
     "sql issue",
     "server unlinked",
