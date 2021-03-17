@@ -83,6 +83,8 @@ pessoas_clientes["Edmar Lauria Marques"] = [
     "WPP",
     "RIOCARD",
     "UNILEVER",
+    "GERDAU SIDERPERU",
+    "GERDAU GLN",
     "GERDAU REMOTAS",
     "GERDAU MEXICO",
     "GERDAU PERU",
