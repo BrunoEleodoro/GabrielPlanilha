@@ -189,6 +189,8 @@ var service_line = [
     "intel support",
     "mainframe support",
     "middleware support",
+    "capacity support",
+    "openshift support",
     "network support",
     "oracle support",
     "maximo support",

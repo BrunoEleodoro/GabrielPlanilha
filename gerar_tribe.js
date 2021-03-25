@@ -8,6 +8,7 @@ const STORE_PRIMARY_LABELS_COLUMN = process.env.STORE_PRIMARY_LABELS_COLUMN
 const STORE_TYPE_COLUMN = process.env.STORE_TYPE_COLUMN
 const DESCRIPTION_COLUMN = process.env.DESCRIPTION_COLUMN
 const STORE_CLIENT_COLUMN = process.env.STORE_CLIENT_COLUMN
+const PRIMARY_LABELS_COLUMN = process.env.PRIMARY_LABELS_COLUMN
 const CLIENTS_COLUMN = process.env.CLIENTS_COLUMN
 const SOURCE_FILE = process.env.SOURCE_FILE
 const OUTPUT_FILE = process.env.OUTPUT_FILE
@@ -37,7 +38,6 @@ var pessoas = ["Marcia Y Couto",
     "Paulinho Rossetti",
     "Multiplos Clientes",
     "Lívio Teixeira",
-    "IBM Infra",
 ]
 pessoas_clientes["Marcia Y Couto"] = [
     "ADP",
@@ -68,7 +68,9 @@ pessoas_clientes["Multiplos Clientes"] = [
     "MULTIPLOS CLIENTES"
 ]
 pessoas_clientes["IBM Infra"] = [
-    "IRM"
+    "IRM",
+    "IBM INFRA",
+    "IBM Infra",
 ]
 pessoas_clientes["Edmar Lauria Marques"] = [
     "FIDELITY NATIONAL",
@@ -85,6 +87,7 @@ pessoas_clientes["Edmar Lauria Marques"] = [
     "UNILEVER",
     "GERDAU SIDERPERU",
     "GERDAU GLN",
+    "GERDAU GSA",
     "GERDAU REMOTAS",
     "GERDAU MEXICO",
     "GERDAU PERU",
@@ -92,6 +95,7 @@ pessoas_clientes["Edmar Lauria Marques"] = [
 pessoas_clientes["Fabiano Gonçalves"] = [
     "ALPARGATAS",
     "APOLLO",
+    "FAST SHOP",
     "BRMALLS",
     "CARREFOUR",
     "CMOC",
@@ -136,23 +140,17 @@ workbook.xlsx.readFile(SOURCE_FILE)
             while (k < pessoas.length) {
                 var value = worksheet.getCell(CLIENTS_COLUMN + i).value
                 value = value.trim()
-                if (i == 6) {
-                    console.log(pessoa, value)
-                    console.log(pessoas_clientes[pessoa].indexOf(value))
-                }
                 var pessoa = pessoas[k]
                 if (pessoas_clientes[pessoa].indexOf(value) >= 0) {
                     worksheet.getCell(TRIBE + i).value = pessoa
                     break;
                 }
+                if(worksheet.getCell("E" + i).value.includes("IBM Infra")) {
+                    worksheet.getCell(TRIBE + i).value = "IBM Infra" 
+                    break;
+                }
                 k++;
             }
-            //     worksheet.getCell(TOTAL_WAITING_TIME + i).value = parseFloat(worksheet.getCell(TOTAL_WAITING_TIME + i).value)
-            //     worksheet.getCell(OPERATIONAL_LEAD_TIME + i).value = parseFloat(worksheet.getCell(OPERATIONAL_LEAD_TIME + i).value)
-            //     worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = parseFloat(worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value)
-            //     worksheet.getCell(STORE_DAY + i).value = parseFloat(worksheet.getCell(STORE_DAY + i).value)
-            //     worksheet.getCell(STORE_YEAR + i).value = parseFloat(worksheet.getCell(STORE_YEAR + i).value)
-            //     worksheet.getCell(QUANTIDADE_TICKETS_PER_USER + i).value = parseFloat(worksheet.getCell(QUANTIDADE_TICKETS_PER_USER + i).value)
             i++;
         }
         console.log('finalizado!');

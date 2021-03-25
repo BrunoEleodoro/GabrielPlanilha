@@ -49,6 +49,8 @@ function convert(input) {
 }
 
 let criar_planilha = {}
+
+/*
 criar_planilha["created by"] = "A"
 criar_planilha["title"] = "C"
 criar_planilha["primary labels"] = "E"
@@ -62,6 +64,22 @@ criar_planilha["custom_field_2"] = "AE"
 criar_planilha["custom_field_3"] = "AF"
 criar_planilha["custom_field_4"] = "AG"
 criar_planilha["custom_field_5"] = "AH"
+criar_planilha["card identifier"] = "AN"
+*/
+
+criar_planilha["created by"] = "A"
+criar_planilha["title"] = "C"
+criar_planilha["primary labels"] = "E"
+criar_planilha["created at"] = "H"
+criar_planilha["card assignees"] = "K"
+criar_planilha["closed at"] = "S"
+criar_planilha["total waiting time (Hours)"] = "T"
+criar_planilha["operational lead time (Hours)"] = "U"
+criar_planilha["Horario do Incidente"] = "AD"
+criar_planilha["SLA do Ticket"] = "AE"
+criar_planilha["Horario Acionamento ISM"] = "AF"
+criar_planilha["ISM Solicitou Validacao?"] = "AG"
+criar_planilha["SLA do Ticket Vencido?"] = "AH"
 criar_planilha["card identifier"] = "AN"
 
 var fs = require('fs');
