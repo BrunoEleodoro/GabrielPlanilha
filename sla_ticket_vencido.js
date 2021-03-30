@@ -68,7 +68,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
 
 
             // if (horario_acionamento_date > sla_ticket_date) {
-            console.log('horario_acionamento_date', horario_acionamento_date, sla_ticket_date, horario_acionamento_date.isAfter(sla_ticket_date, 'hour'))
+            console.log('horario_acionamento_date', horario_acionamento, horario_acionamento_date, sla_ticket_date, horario_acionamento_date.isAfter(sla_ticket_date, 'hour'))
 
             if (horario_acionamento_date.toString() != "Invalid date" && horario_acionamento_date.toString() != "Invalid date") {
                 if (horario_acionamento_date.isAfter(sla_ticket_date, 'seconds')) {
