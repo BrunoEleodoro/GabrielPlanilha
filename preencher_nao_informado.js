@@ -47,6 +47,27 @@ function verifyAnalise(worksheet, key) {
     return worksheet.getCell(key).value
 }
 
+function verifyTempoAtendimento(worksheet, key) {
+
+    if (worksheet.getCell(key).value == null) {
+        // highlight(worksheet, key)
+        return "0"
+    }
+    if (worksheet.getCell(key).value.toString().trim() == "") {
+        // highlight(worksheet, key)
+        return "0"
+    }
+    if (worksheet.getCell(key).value.toString().toLowerCase().trim() == "nan") {
+        // highlight(worksheet, key)
+        return "0"
+    }
+
+    if (key.includes(config.SLA_TICKET_VENCIDO)) {
+        console.log(worksheet.getCell(key).value)
+    }
+    return worksheet.getCell(key).value
+}
+
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
@@ -69,7 +90,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             worksheet.getCell(config.ISM_SOLICITOU + i).value = verifyNa(worksheet, config.ISM_SOLICITOU + i)
 
             worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.SLA_TICKET_VENCIDO + i)
-            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyAnalise(worksheet, config.TEMPO_ATENDIMENTO + i)
+            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyTempoAtendimento(worksheet, config.TEMPO_ATENDIMENTO + i)
             worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.ANALISE_PRAZO_ACIONAMENTO + i)
 
             var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
