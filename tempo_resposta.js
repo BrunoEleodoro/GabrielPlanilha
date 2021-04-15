@@ -91,11 +91,15 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             if (hours < 0) {
                 hours = hours * -1
             }
-            
+
             // worksheet.getCell(config.TEMPO_ATENDIMENTO + i).numFmt = 'hh:mm';
             //worksheet.getCell(config.TEMPO_RESPOSTA + i).value = hours.toFixed(2)
-            worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'h:mm:ss';
-            worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + decimalToHours(hours.toFixed(2)) + "\",\"0:05\"),1)" }
+            if (hours >= 24) {
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "24:00:00"; 
+            } else {
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'h:mm:ss';
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + decimalToHours(hours.toFixed(2)) + "\",\"0:05\"),1)" }
+            }
 
             i++;
         }
