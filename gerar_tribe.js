@@ -38,6 +38,7 @@ var pessoas = ["Marcia Y Couto",
     "Paulinho Rossetti",
     "Multiplos Clientes",
     "Lívio Teixeira",
+    "IBM Infra"
 ]
 pessoas_clientes["Marcia Y Couto"] = [
     "ADP",

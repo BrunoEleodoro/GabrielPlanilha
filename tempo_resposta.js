@@ -74,37 +74,28 @@ function decimalToHours(str) {
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
-        worksheet.getCell(config.TEMPO_ATENDIMENTO + 1).value = "Tempo de Atendimento IBM"
+        worksheet.getCell(config.TEMPO_RESPOSTA + 1).value = "Tempo de Resposta ISM"
         var i = 2
         while (i <= worksheet.rowCount) {
-            var card_identifier = worksheet.getCell("AN" + i).value;
-            var closed_at = worksheet.getCell(config.STORE_CLOSED_AT + i).value
+            var created_at = worksheet.getCell(config.CREATED_AT + i).value
             var horario_acionamento = worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
-            var horario_encerramento = worksheet.getCell(config.HORARIO_ENCERRAMENTO + i).value
             var monthName = worksheet.getCell(config.STORE_MONTH + i).value
 
-            var horario_encerramento_date = parseDateToMoment(monthName, horario_encerramento);
             var horario_acionamento_date = parseDateToMoment(monthName, horario_acionamento);
-            var closed_at_date = parseDateToMoment(monthName, closed_at);
-
-            var keys = ["#0a84t9", "#09ty4g", "#09vzqq", "#09u3t1", "#09ueus", "#09uj0e", "#09ukfj", "#09ulap", "#09uoi1", "#09urs5", "#09uu9y", "#09uy2g", "#09uy73", "#09vbnd", "#09vbr0", "#09vcu1", "#09vv8o", "#09vvvh"]
-            if (keys.includes(card_identifier)) {
-                console.log(card_identifier, horario_encerramento_date, horario_acionamento_date, closed_at_date);
-            }
+            var created_at = parseDateToMoment(monthName, created_at);
 
             var hours = calculateHours(
-                horario_encerramento_date,
-                horario_acionamento_date);
+                horario_acionamento_date,
+                created_at);
 
             if (hours < 0) {
                 hours = hours * -1
             }
-            hours = parseFloat(hours);
-            //worksheet.getCell(config.TEMPO_ATENDIMENTO + i).numFmt = 'hh:mm';
-            worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = hours.toFixed(2)
-            //worksheet.getCell(config.TEMPO_ATENDIMENTO + i).numFmt = 'h:mm:ss';
-            //worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = { formula: "MOD(MROUND(\"" + decimalToHours(hours.toFixed(2)) + "\",\"0:30\"),1)" }
             
+            // worksheet.getCell(config.TEMPO_ATENDIMENTO + i).numFmt = 'hh:mm';
+            //worksheet.getCell(config.TEMPO_RESPOSTA + i).value = hours.toFixed(2)
+            worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'h:mm:ss';
+            worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + decimalToHours(hours.toFixed(2)) + "\",\"0:05\"),1)" }
 
             i++;
         }

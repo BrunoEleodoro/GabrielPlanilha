@@ -1,0 +1,15 @@
+Primeiro ponto
+criar uma coluna chamada Tempo de resposta ISM ( tempo de acionamento ism - created at)
+arredondar esse campo para 5 min em 5 min
+
+Segundo Ponto
+Tempo de Atendimento ISM
+Trocar a formula de closed at - tempo de atendimento ISM para Hora encerramento ISM - Tempo Acionamento ISM
+Arrendondar de 30min em 30min
+
+Terceiro Ponto 
+Criar uma coluna chamada Complexide do Problema
+Enviar no formato do código para o gabriel fazer a correlação do problema reportado com o grau de complexidade.
+
+Outras melhorias 
+Colocar 0 como melhoria nos campos número no script do kibana... na do BOT não precisa

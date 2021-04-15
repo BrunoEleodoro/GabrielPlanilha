@@ -5,6 +5,7 @@ var workbook = new Excel.Workbook();
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
+        worksheet.getCell(config.HORARIO_ENCERRAMENTO+ 1).value = "Hora de Encerramento"
         worksheet.getCell(config.HORARIO_INCIDENTE + 1).value = "Horario do Incidente"
         worksheet.getCell(config.SLA_TICKET + 1).value = "SLA do Ticket"
         worksheet.getCell(config.HORARIO_ACIONAMENTO + 1).value = "Horario Acionamento ISM "

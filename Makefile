@@ -44,10 +44,14 @@ build:
 	node analise_tempo_total.js
 	@echo "\033[0;32mCalculo Base Claim...\033[0m" 
 	node calculo_base_claim.js
+	@echo "\033[0;32mTempo de resposta...\033[0m" 
+	node tempo_resposta.js
 	@echo "\033[0;32mCalculo Claim...\033[0m" 
 	node calculo_claim.js
 	@echo "\033[0;32mPreencher Nao informado...\033[0m" 
 	node preencher_nao_informado.js
+	@echo "\033[0;32mComplexidade...\033[0m" 
+	node complexidade.js
 
 	# @echo "\033[0;32mInverter datas...\033[0m" 
 	# node inverter_datas.js
