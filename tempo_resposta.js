@@ -71,12 +71,38 @@ function decimalToHours(str) {
     return horas + ":" + minutos
 }
 
+function convertToHHMM(value) {
+    var decimalTimeString = value;
+    var decimalTime = parseFloat(decimalTimeString);
+    decimalTime = decimalTime * 60 * 60;
+    var hours = Math.floor((decimalTime / (60 * 60)));
+    decimalTime = decimalTime - (hours * 60 * 60);
+    var minutes = Math.floor((decimalTime / 60));
+    decimalTime = decimalTime - (minutes * 60);
+    var seconds = Math.round(decimalTime);
+    if(hours < 10)
+    {
+      hours = "0" + hours;
+    }
+    if(minutes < 10)
+    {
+      minutes = "0" + minutes;
+    }
+    if(seconds < 10)
+    {
+      seconds = "0" + seconds;
+    }
+    return "" + hours + ":" + minutes + ":" + seconds;
+  }
+
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
         worksheet.getCell(config.TEMPO_RESPOSTA + 1).value = "Tempo de Resposta ISM"
         var i = 2
+        var relacao_title_resposta = {};
         while (i <= worksheet.rowCount) {
+            var title = worksheet.getCell(config.TITLE_COLUMN + i).value
             var created_at = worksheet.getCell(config.CREATED_AT + i).value
             var horario_acionamento = worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
             var monthName = worksheet.getCell(config.STORE_MONTH + i).value
@@ -98,9 +124,27 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "24:00:00"; 
             } else {
                 worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'h:mm:ss';
-                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + decimalToHours(hours.toFixed(2)) + "\",\"0:05\"),1)" }
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + convertToHHMM(hours.toFixed(2)) + "\",\"0:05\"),1)" }
+            }
+            // se nao tem copy
+            if(!title.includes("copy"))  {
+                relacao_title_resposta[title] = worksheet.getCell(config.TEMPO_RESPOSTA + i).value 
             }
 
+            i++;
+        }
+       
+        // 
+        i = 2
+        while (i <= worksheet.rowCount) {
+            var title = worksheet.getCell(config.TITLE_COLUMN + i).value
+            if(title.includes("copy")){
+                let clean_title = title.replaceAll("(copy)", "").trim()
+                let tempo_resposta = relacao_title_resposta[clean_title];
+                if(tempo_resposta) {
+                    worksheet.getCell(config.TEMPO_RESPOSTA + i).value = tempo_resposta;
+                }
+            }
             i++;
         }
 

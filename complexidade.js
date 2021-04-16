@@ -109,11 +109,11 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             let problema_reportado = worksheet.getCell(config.PROBLEMA_REPORTADO + i).value;
             let type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value;
             worksheet.getCell(config.COMPLEXIDADE + i).value = problema_complexidade[problema_reportado]
-            if (type == "CH") {
+            if (type.toUpperCase() == "CH") {
                 worksheet.getCell(config.COMPLEXIDADE + i).value = "media";
-            } else if (type == "REPORT") {
+            } else if (type.toUpperCase() == "REPORT") {
                 worksheet.getCell(config.COMPLEXIDADE + i).value = "baixa";
-            } else if (type == "SC") {
+            } else if (type.toUpperCase() == "SC") {
                 worksheet.getCell(config.COMPLEXIDADE + i).value = "baixa";
             }
             i++;
