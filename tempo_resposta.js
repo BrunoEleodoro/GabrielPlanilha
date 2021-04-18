@@ -21,31 +21,35 @@ function calculateHours(startDate, endDate) {
 // return;
 
 function parseDateToMoment(monthName, valor_celula) {
-    var month = months.indexOf(monthName) + 1
-    if (valor_celula == "" || valor_celula == null) {
-        return moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
+    let data = "";
+    if(valor_celula.split(" ").length > 0) {
+        data = moment(valor_celula.split(" ")[1], "HH:mm")
     }
-    // var index = valor_celula.indexOf("0" + month + "/")
-    var index = valor_celula.split(" ")[0].indexOf(month)
-    var data = ""
+    // var month = months.indexOf(monthName) + 1
+    // if (valor_celula == "" || valor_celula == null) {
+    //     return moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
+    // }
+    // // var index = valor_celula.indexOf("0" + month + "/")
+    // var index = valor_celula.split(" ")[0].indexOf(month)
+    // var data = ""
 
-    if (index == -1) {
-        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
-    } else if (index == 0) {
-        data = moment(valor_celula, "MM/DD/YYYY HH:mm");
-    } else if (index == 3) {
-        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
-    } else if (index == 4) {
-        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
-    } else {
-        data = moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
-    }
-    if (data.toString() == "Invalid date") {
-        data = moment(valor_celula, "MM/DD/YYYY HH:mm");
-    }
-    if (data.toString() == "Invalid date") {
-        data = moment(valor_celula, "DD/MM/YYYY HH:mm");
-    }
+    // if (index == -1) {
+    //     data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    // } else if (index == 0) {
+    //     data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    // } else if (index == 3) {
+    //     data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    // } else if (index == 4) {
+    //     data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    // } else {
+    //     data = moment("00/00/0000 00:00", "MM/DD/YYYY HH:mm");
+    // }
+    // if (data.toString() == "Invalid date") {
+    //     data = moment(valor_celula, "MM/DD/YYYY HH:mm");
+    // }
+    // if (data.toString() == "Invalid date") {
+    //     data = moment(valor_celula, "DD/MM/YYYY HH:mm");
+    // }
 
     return data
 }
@@ -80,20 +84,17 @@ function convertToHHMM(value) {
     var minutes = Math.floor((decimalTime / 60));
     decimalTime = decimalTime - (minutes * 60);
     var seconds = Math.round(decimalTime);
-    if(hours < 10)
-    {
-      hours = "0" + hours;
+    if (hours < 10) {
+        hours = "0" + hours;
     }
-    if(minutes < 10)
-    {
-      minutes = "0" + minutes;
+    if (minutes < 10) {
+        minutes = "0" + minutes;
     }
-    if(seconds < 10)
-    {
-      seconds = "0" + seconds;
+    if (seconds < 10) {
+        seconds = "0" + seconds;
     }
-    return "" + hours + ":" + minutes + ":" + seconds;
-  }
+    return hours + ":" + minutes;
+}
 
 workbook.xlsx.readFile(config.SOURCE_FILE)
     .then(function () {
@@ -121,27 +122,31 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             // worksheet.getCell(config.TEMPO_ATENDIMENTO + i).numFmt = 'hh:mm';
             //worksheet.getCell(config.TEMPO_RESPOSTA + i).value = hours.toFixed(2)
             if (hours >= 24) {
-                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "24:00:00"; 
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "24:00";
+            } else if (hours <= 0.04) {
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "00:05";
+            } else if (hours.toString().includes("NaN")) {
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "00:00";
             } else {
-                worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'h:mm:ss';
-                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + convertToHHMM(hours.toFixed(2)) + "\",\"0:05\"),1)" }
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'hh:mm';
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + convertToHHMM(hours) + "\",\"0:05\"),1)" }
             }
             // se nao tem copy
-            if(!title.includes("copy"))  {
-                relacao_title_resposta[title] = worksheet.getCell(config.TEMPO_RESPOSTA + i).value 
+            if (!title.includes("copy")) {
+                relacao_title_resposta[title] = worksheet.getCell(config.TEMPO_RESPOSTA + i).value
             }
 
             i++;
         }
-       
+
         // 
         i = 2
         while (i <= worksheet.rowCount) {
             var title = worksheet.getCell(config.TITLE_COLUMN + i).value
-            if(title.includes("copy")){
+            if (title.includes("copy")) {
                 let clean_title = title.replaceAll("(copy)", "").trim()
                 let tempo_resposta = relacao_title_resposta[clean_title];
-                if(tempo_resposta) {
+                if (tempo_resposta) {
                     worksheet.getCell(config.TEMPO_RESPOSTA + i).value = tempo_resposta;
                 }
             }
