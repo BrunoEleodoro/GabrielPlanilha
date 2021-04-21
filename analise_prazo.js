@@ -140,6 +140,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 res = "NaN"
             }
 
+            if (sla_ticket.toLowerCase().includes("sem sla")) {
+                res = "Solicitado prioridade com SLA vencido"
+            }
             if (sla_ticket_vencido == "Solicitado Prioridade com SLA Vencido") {
                 res = "Solicitado prioridade com SLA vencido"
             }
