@@ -107,6 +107,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var created_at = worksheet.getCell(config.CREATED_AT + i).value
             var horario_acionamento = worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
             var monthName = worksheet.getCell(config.STORE_MONTH + i).value
+            var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
 
             var horario_acionamento_date = parseDateToMoment(monthName, horario_acionamento);
             var created_at = parseDateToMoment(monthName, created_at);
@@ -136,6 +137,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 relacao_title_resposta[title] = worksheet.getCell(config.TEMPO_RESPOSTA + i).value
             }
 
+            if (type == "CH" || type == "REPORT" || type == "SC") {
+                worksheet.getCell(config.TEMPO_RESPOSTA + i).value = null;
+            }
             i++;
         }
 
@@ -147,7 +151,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 let clean_title = title.replaceAll("(copy)", "").trim()
                 let tempo_resposta = relacao_title_resposta[clean_title];
                 if (tempo_resposta) {
-                    worksheet.getCell(config.TEMPO_RESPOSTA + i).value = tempo_resposta;
+                    worksheet.getCell(config.TEMPO_RESPOSTA + i).value = null;
                 }
             }
             i++;

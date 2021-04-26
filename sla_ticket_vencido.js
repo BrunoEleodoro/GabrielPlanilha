@@ -57,6 +57,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
         worksheet.getCell(config.SLA_TICKET_VENCIDO + 1).value = "SLA do Ticket Vencido?"
         var i = 2
         while (i <= worksheet.rowCount) {
+            var card_identifier = worksheet.getCell("AN" + i).value;
             var horario_acionamento = worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
             var sla_ticket = worksheet.getCell(config.SLA_TICKET + i).value
             var monthName = worksheet.getCell(config.STORE_MONTH + i).value
@@ -69,7 +70,15 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
 
             // if (horario_acionamento_date > sla_ticket_date) {
             // console.log('horario_acionamento_date', horario_acionamento, horario_acionamento_date, sla_ticket_date, horario_acionamento_date.isAfter(sla_ticket_date, 'hour'))
-            if(sla_ticket.toLowerCase().includes("sem sla")) {
+            var keys = ["#0al459", "#0akvra", "#0ahmob"]
+            if (keys.includes(card_identifier)) {
+                console.log(card_identifier, sla_ticket_date, sla_ticket_date.toString() == "Invalid date");
+            }
+            if(sla_ticket_date.toString() == "Invalid date") {
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade com SLA Vencido"
+            } else if(sla_ticket.toLowerCase().includes("sla")) {
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade com SLA Vencido"
+            } else if(sla_ticket.toLowerCase().includes("n/a")) {
                 worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade com SLA Vencido"
             } else if (horario_acionamento_date.toString() != "Invalid date" && horario_acionamento_date.toString() != "Invalid date") {
                 if (horario_acionamento_date.isAfter(sla_ticket_date, 'seconds')) {

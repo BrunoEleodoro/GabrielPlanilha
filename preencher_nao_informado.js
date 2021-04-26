@@ -12,6 +12,15 @@ function highlight(worksheet, key) {
     };
 }
 
+function verifyClaim(worksheet, key) {
+    if (worksheet.getCell(key).value == "NaN") {
+        return parseFloat("0")
+    }
+
+    return worksheet.getCell(key).value
+}
+
+
 function verifyNa(worksheet, key) {
     if (worksheet.getCell(key).value == null) {
         highlight(worksheet, key)
@@ -76,6 +85,8 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
         while (i <= worksheet.rowCount) {
 
             let base_claim = worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value
+            worksheet.getCell(config.BASE_CALCULO_CLAIM + i).value = verifyClaim(worksheet, config.BASE_CALCULO_CLAIM + i)
+            worksheet.getCell(config.CLAIM + i).value = verifyClaim(worksheet, config.CLAIM + i)
             worksheet.getCell(config.CLIENTS_COLUMN + i).value = verifyNa(worksheet, config.CLIENTS_COLUMN + i)
             worksheet.getCell(config.STORE_TYPE_COLUMN + i).value = verifyNa(worksheet, config.STORE_TYPE_COLUMN + i)
             worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = verifyNa(worksheet, config.STORE_SEVERITY_COLUNM + i)
@@ -121,7 +132,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = label
                 worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
                 worksheet.getCell(config.ISM_SOLICITOU + i).value = label
-                worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = parseFloat(0) 
+                worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = parseFloat("0")
                 worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
             }
 
