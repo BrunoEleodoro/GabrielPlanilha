@@ -1,5 +1,7 @@
 require('dotenv').config({ path: 'config' })
 const utf8 = require('utf8');
+const config = require('./load_columns');
+var moment = require('moment')
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
@@ -91,133 +93,61 @@ var months_name = ["January", "February", "March", "April", "May", "June", "July
 workbook.xlsx.readFile(SOURCE_FILE)
     .then(function () {
         var worksheet = workbook.getWorksheet(WORKSHEET);
-        var todos_emails = []
-        var todos_emails_lista = []
         var i = 2;
-        var todas_as_labels = []
-
-        var integrantes_ism = []
-        var clientes = []
-        var types = []
-        var sevs = []
-        var days = []
-        var months_years = []
-        var years = []
-        var titles = []
+        var cards_originais = {}
+        var cards_originais_index = {}
         worksheet.getCell(QUANTIDADE_TICKETS_PER_USER + 1).value = "Quantidade de tickets"
         worksheet.getCell(STORE_QUANTIDADE_TICKETS + 1).value = "Quantidade de tickets per user"
         while (i <= worksheet.rowCount) {
-
-            // var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
-            var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
-            // var type = worksheet.getCell(STORE_TYPE_COLUMN + i).value
-            // var sev = worksheet.getCell(STORE_SEVERITY_COLUNM + i).value
-            // var data = worksheet.getCell(CREATED_AT + i).value
             var title = worksheet.getCell(STORE_TITLE_COLUMN + i).value
-            var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
-            var time_worked = worksheet.getCell(STORE_WORKED_HOURS + i).value
+            var created_at = worksheet.getCell(config.CREATED_AT + i).value
+            var card_identifier = worksheet.getCell("AN" + i).value;
 
             worksheet.getCell(QUANTIDADE_TICKETS_PER_USER + i).value = '1'
 
             if (title != null) {
-                if (title.includes("(copy)")) {
+                if (title.toLowerCase().includes("(copy)")) {
                     worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '0'
                 } else {
                     worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '1'
+                    //cards_originais[title] = created_at
+                    //CH01114877
+                    var data = moment(created_at, "MM/DD/YYYY HH:mm");
+                    if (data.toString() == "Invalid date") {
+                        data = moment(created_at, "DD/MM/YYYY HH:mm");
+                    }
+                    if (data.toString() == "Invalid date") {
+                        data = moment(created_at, "MM/DD/YYYY HH:mm");
+                    }
+                    if(cards_originais[title] == null) {
+                        cards_originais[title] = data;
+                        cards_originais_index[title] = i;
+                    } else if(cards_originais[title].isBefore(data)) {
+                        
+                        var keys = ["#0afqo1", "#0anggt"]
+                        if (keys.includes(card_identifier)) {
+                            console.log(title, cards_originais[title], cards_originais_index[title], data);
+                        }
+                        cards_originais[title] = data;
+                        
+                        worksheet.getCell(STORE_QUANTIDADE_TICKETS + cards_originais_index[title]).value = '1'
+                        worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '0'
+                        cards_originais_index[title] = i;
+                    }
                 }
             }
-            // var index = clientes.indexOf(client);
-            // if (client != null && index == -1) {
-            //     clientes.push(client)
-            //     titles[client] = []
-            //     titles[client].push({ title: title, assignee: assignee, worked_hours: time_worked })
-            // } else if (client != null && index >= 0) {
-            //     titles[client].push({ title: title, assignee: assignee, worked_hours: time_worked })
-            // }
-
-            // if (assignee != null && integrantes_ism.indexOf(assignee) == -1) {
-            //     integrantes_ism.push(assignee)
-            // }
             i++;
 
         }
-        // var titles_originals = JSON.parse(JSON.stringify(titles));
-        // // console.log(titles)
-
-        // var repetidos = []
-
-        // var i = 0;
-        // while (i < titles.length) {
-        //     var title = titles[i];
-        //     var res = check(titles_originals, title)
-        //     if (res.length > 0) {
-        //         repetidos[title] = res
-        //     }
-        //     // if (titles.indexOf(title) != null) {
-        //     //     if (repetidos[title] == null) {
-        //     //         repetidos[title] = 1;
-        //     //     } else {
-        //     //         repetidos[title] = repetidos[title] + 1
-        //     //     }
-        //     //     delete titles[titles.indexOf(title)]
-        //     //     // repetidos[title] = 1;
-        //     // }
-        //     i++;
-        // }
-
-        // var i = 2;
-        // while (i <= worksheet.rowCount) {
-        //     var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-        //     var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
-        //     var title = worksheet.getCell(STORE_TITLE_COLUMN + i).value
-        //     var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
-        //     var time_worked = worksheet.getCell(STORE_WORKED_HOURS + i).value
-
-        //     i++;
-        // }
-
-        // var i = 0;
-        // var keys = Object.keys(repetidos)
-        // while (i < keys.length) {
-        //     var k = 0;
-        //     while (k < repetidos[keys[i]].length) {
-        //         var index_title_repetido = repetidos[keys[i]][k];
-        //         var client = worksheet.getCell(STORE_CLIENT_COLUMN + (index_title_repetido + 2)).value
-        //         var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + (index_title_repetido + 2)).value
-        //         var title = worksheet.getCell(STORE_TITLE_COLUMN + (index_title_repetido + 2)).value
-        //         var assignee = worksheet.getCell(CARD_ASSIGNEES + (index_title_repetido + 2)).value
-        //         var time_worked = worksheet.getCell(STORE_WORKED_HOURS + (index_title_repetido + 2)).value
-
-        //         if (k > 2) {
-        //             worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '0'
-        //         } else {
-        //             if (client == "CARREFOUR" && labels.includes("issue")) {
-        //                 worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '1'
-        //             } else {
-        //                 worksheet.getCell(STORE_QUANTIDADE_TICKETS + (index_title_repetido + 2)).value = '0'
-        //             }
-        //         }
-
-        //         k++;
-        //     }
-        //     i++;
-        // }
-
         var i = 2;
         while (i <= worksheet.rowCount) {
-            var client = worksheet.getCell(STORE_CLIENT_COLUMN + i).value
-            var labels = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
             var title = worksheet.getCell(STORE_TITLE_COLUMN + i).value
-            var assignee = worksheet.getCell(CARD_ASSIGNEES + i).value
-            var time_worked = worksheet.getCell(STORE_WORKED_HOURS + i).value
 
             if (worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value == null || worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value == "") {
                 worksheet.getCell(STORE_QUANTIDADE_TICKETS + i).value = '1'
             }
             i++;
         }
-        // console.log(repetidos)
 
         console.log('finalizado!');
         return workbook.xlsx.writeFile(OUTPUT_FILE);
