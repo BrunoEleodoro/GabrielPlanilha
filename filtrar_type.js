@@ -42,7 +42,7 @@ workbook.xlsx.readFile(SOURCE_FILE)
                 var type = "SC"
                 if(valor_celula_p.toLowerCase().includes("service request")) {
                     type=  "SR"
-                } else if(valor_celula_p.toLowerCase().includes("sev")) {
+                } else if(valor_celula_p.toLowerCase().includes("incident")) {
                     type=  "IN"
                 } else if(valor_celula_p.toLowerCase().includes("change")) {
                     type=  "CH"

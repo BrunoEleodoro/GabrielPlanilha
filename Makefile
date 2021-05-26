@@ -54,6 +54,8 @@ build:
 	node complexidade.js
 	@echo "\033[0;32mQuantidade de recursos...\033[0m" 
 	node quantidade_recursos.js
+	@echo "\033[0;32mTime Worked ISM...\033[0m" 
+	node time_worked_ism.js
 
 	# @echo "\033[0;32mInverter datas...\033[0m" 
 	# node inverter_datas.js

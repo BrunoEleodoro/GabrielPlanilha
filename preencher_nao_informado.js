@@ -49,10 +49,11 @@ function verifyAnalise(worksheet, key) {
         // highlight(worksheet, key)
         return "Análise impossível de ser feita"
     }
-
+    /*
     if (key.includes(config.SLA_TICKET_VENCIDO)) {
         console.log(worksheet.getCell(key).value)
     }
+    */
     return worksheet.getCell(key).value
 }
 
@@ -127,13 +128,13 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             }
             if (label != "") {
                 worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = label
-                worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
-                worksheet.getCell(config.SLA_TICKET + i).value = label
+                // worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
+                // worksheet.getCell(config.SLA_TICKET + i).value = label
                 worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = label
-                worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
-                worksheet.getCell(config.ISM_SOLICITOU + i).value = label
+                // worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
+                // worksheet.getCell(config.ISM_SOLICITOU + i).value = label
                 worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = parseFloat("0")
-                worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
+                // worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
             }
 
 

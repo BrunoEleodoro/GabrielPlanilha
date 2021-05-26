@@ -72,47 +72,19 @@ workbook.xlsx.readFile(SOURCE_FILE)
         worksheet.getCell(STORE_WORKED_HOURS + 1).value = "time worked"
 
         while (i <= worksheet.rowCount) {
-            // var closed_at_date = worksheet.getCell(STORE_CLOSED_AT + i).value
-            // var created_at_date = worksheet.getCell(CREATED_AT + i).value
             var lead_time = worksheet.getCell(OPERATIONAL_LEAD_TIME + i).value
             var waiting_time = worksheet.getCell(TOTAL_WAITING_TIME + i).value
 
             if (lead_time != null && waiting_time != null) {
 
                 var result = parseFloat(lead_time) - parseFloat(waiting_time);
-                // var startDate = new Date(created_at_date)
-                // var endDate = new Date(closed_at_date)
-
-                // var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
-
-                // var t = new Date(1970, 0, 1);
-                // t.setSeconds(seconds);
-
-                // var finalTime = secondsToTime(seconds);
-                // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
-                // worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
-                // var seconds = result * 60
-                // var finalTime = secondsToTime(seconds);
-                // // console.log(finalTime.h);
-                // if (parseFloat(finalTime.h) >= 8) {
-                //     // finalTime = "08" + ":" + "00" + ":" + "00"
-                //     finalTime = "08"
-                // } else {
-                //     // finalTime = finalTime.h + ":" + finalTime.m + ":" + finalTime.s
-                //     finalTime = finalTime.h.toString().padStart(2, '0');
-                // }
-                // worksheet.getCell(STORE_WORKED_HOURS + i).value = new Date()
                 var finalTime = ""
                 var hours = result
                 finalTime = Math.round(hours * 100) / 100
                 worksheet.getCell(STORE_WORKED_HOURS + i).value = finalTime
-                // worksheet.getCell(STORE_WORKED_HOURS + i).numFmt = 'hh:mm:ss';
             }
             i++;
         }
         console.log('finalizado!');
         return workbook.xlsx.writeFile(OUTPUT_FILE);
     })
-
-// console.log(new Date('01/01/2019 10:11').getHours())
-// console.log(new Date(2019, 01, 01, 10, 11, 00, 00).getMinutes())

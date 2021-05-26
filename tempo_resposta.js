@@ -101,11 +101,15 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
         var worksheet = workbook.getWorksheet(config.WORKSHEET);
         worksheet.getCell(config.TEMPO_RESPOSTA + 1).value = "Tempo de Resposta ISM"
         var i = 2
-        var relacao_title_resposta = {};
+        var tempo_resposta_title = {};
         while (i <= worksheet.rowCount) {
             var title = worksheet.getCell(config.TITLE_COLUMN + i).value
             var created_at = worksheet.getCell(config.CREATED_AT + i).value
-            var horario_acionamento = worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
+            var horario_incidente =  worksheet.getCell(config.HORARIO_INCIDENTE + i).value
+            var sla_do_ticket =  worksheet.getCell(config.SLA_TICKET + i).value
+            var horario_acionamento =  worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value
+    
+            var key = horario_incidente+""+sla_do_ticket+""+horario_acionamento;
             var monthName = worksheet.getCell(config.STORE_MONTH + i).value
             var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
 
@@ -121,7 +125,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             }
 
             // worksheet.getCell(config.TEMPO_ATENDIMENTO + i).numFmt = 'hh:mm';
-            //worksheet.getCell(config.TEMPO_RESPOSTA + i).value = hours.toFixed(2)
+            worksheet.getCell(config.TEMPO_RESPOSTA + i).value = hours.toFixed(2)
             if (hours >= 24) {
                 worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "24:00";
             } else if (hours <= 0.04) {
@@ -132,27 +136,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 worksheet.getCell(config.TEMPO_RESPOSTA + i).numFmt = 'hh:mm';
                 worksheet.getCell(config.TEMPO_RESPOSTA + i).value = { formula: "MOD(MROUND(\"" + convertToHHMM(hours) + "\",\"0:05\"),1)" }
             }
-            // se nao tem copy
-            if (!title.includes("copy")) {
-                relacao_title_resposta[title] = worksheet.getCell(config.TEMPO_RESPOSTA + i).value
-            }
 
             if (type == "CH" || type == "REPORT" || type == "SC") {
                 worksheet.getCell(config.TEMPO_RESPOSTA + i).value = null;
-            }
-            i++;
-        }
-
-        // 
-        i = 2
-        while (i <= worksheet.rowCount) {
-            var title = worksheet.getCell(config.TITLE_COLUMN + i).value
-            if (title.includes("copy")) {
-                let clean_title = title.replaceAll("(copy)", "").trim()
-                let tempo_resposta = relacao_title_resposta[clean_title];
-                if (tempo_resposta) {
-                    worksheet.getCell(config.TEMPO_RESPOSTA + i).value = null;
-                }
             }
             i++;
         }
