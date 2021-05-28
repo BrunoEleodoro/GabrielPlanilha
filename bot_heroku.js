@@ -6,18 +6,6 @@ var path = require('path')
 const { exec } = require('child_process');
 var cron = require("node-cron");
 var request = require("request");
-const pptrFirefox = require('puppeteer');
-
-//
-cron.schedule('*/20 * * * *', async () => {
-    console.log('pingando....')
-    var browser, page;
-    browser = await pptrFirefox.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'], ignoreHTTPSErrors: true, waitUntil: ['load', 'domcontentloaded'] });
-    page = await browser.newPage();
-    await page.goto("https://ism-grafana.herokuapp.com");
-    // await page.goto("https://ismmetrics.herokuapp.com/");
-    browser.close();
-});
 
 // Configure your bot.
 var slackController = Botkit.slackbot({ clientSigningSecret: process.env.SLACK_SIGNING_SECRET });

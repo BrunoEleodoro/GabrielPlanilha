@@ -104,7 +104,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.SLA_TICKET_VENCIDO + i)
             worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyTempoAtendimento(worksheet, config.TEMPO_ATENDIMENTO + i)
             worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.ANALISE_PRAZO_ACIONAMENTO + i)
-            if(worksheet.getCell(config.STORE_TYPE_COLUMN + i).value == "Nao Informado") {
+            if (worksheet.getCell(config.STORE_TYPE_COLUMN + i).value == "Nao Informado") {
                 highlight(worksheet, config.STORE_TYPE_COLUMN + i);
             }
 
@@ -131,13 +131,15 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             }
             if (label != "") {
                 worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value = label
-                // worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
-                // worksheet.getCell(config.SLA_TICKET + i).value = label
+                if (label == "N/A - SEM CHAMADO") {
+                    worksheet.getCell(config.HORARIO_INCIDENTE + i).value = label
+                    worksheet.getCell(config.SLA_TICKET + i).value = label
+                    worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
+                }
                 worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = label
                 // worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
                 // worksheet.getCell(config.ISM_SOLICITOU + i).value = label
                 worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = parseFloat("0")
-                // worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = label
             }
 
 
