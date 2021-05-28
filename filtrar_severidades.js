@@ -2,6 +2,7 @@ require('dotenv').config({ path: 'config' })
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
+const config = require('./load_columns');
 
 // CONTROLLERS
 const STORE_PRIMARY_LABELS_COLUMN = process.env.STORE_PRIMARY_LABELS_COLUMN
@@ -123,6 +124,11 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     severidade = "4"
                     total_sev4 = total_sev4 + 1
                     clientes_sevs[index_cliente].sev4 = clientes_sevs[index_cliente].sev4 + 1
+                }
+                var card_identifier = worksheet.getCell("AN" + i).value;
+                var keys = ["#0atnxf", "#0aq8b7", "#0aq8h8"]
+                if (keys.includes(card_identifier)) {
+                    console.log(card_identifier, severidade);
                 }
             }
 

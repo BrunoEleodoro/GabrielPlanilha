@@ -3,6 +3,7 @@ const utf8 = require('utf8');
 
 var Excel = require('exceljs');
 var workbook = new Excel.Workbook();
+const config = require('./load_columns');
 var not_allowed = [];
 
 // CONTROLLERS
@@ -144,6 +145,7 @@ categoria_problema["cancelamento de job"] = "user request"
 categoria_problema["vmware creation request"] = "user request"
 categoria_problema["security issue"] = "security"
 categoria_problema["printer creation request"] = "user request"
+categoria_problema["datacenter access request"] = "user request"
 
 categoria_problema["control m issue"] = "issue"
 categoria_problema["space issue"] = "issue"
@@ -224,6 +226,7 @@ var problema_reportado = [
     "ftp issue",
     "security issue",
     "monitoracao/report",
+    "datacenter access request",
     // "interface issue",
     "intranet prd app",
     "odi application",
@@ -574,10 +577,21 @@ workbook.xlsx.readFile(SOURCE_FILE)
                     worksheet.getCell(CATEGORIA + i).value = "N/A - CHANGE"
                     worksheet.getCell(SERVICE_LINE + i).value = "N/A - CHANGE"
                     worksheet.getCell(PROBLEMA_REPORTADO + i).value = "N/A - CHANGE"
+                    worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = "N/A - CHANGE"
+                    worksheet.getCell(QUEM_TE_ACIONOU + i).value = "N/A - CHANGE"
+                    worksheet.getCell(config.HORARIO_ENCERRAMENTO + i).value = "N/A - CHANGE"
+                    worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "N/A - CHANGE"
                 } else if (type == "REPORT") {
                     worksheet.getCell(CATEGORIA + i).value = "N/A - REPORT"
                     worksheet.getCell(SERVICE_LINE + i).value = "N/A - REPORT"
                     worksheet.getCell(PROBLEMA_REPORTADO + i).value = "N/A - REPORT"
+                    worksheet.getCell(QUEM_VOCE_ACIONOU + i).value = "N/A - REPORT"
+                    worksheet.getCell(QUEM_TE_ACIONOU + i).value = "N/A - REPORT"
+                    worksheet.getCell(config.HORARIO_ENCERRAMENTO + i).value = "N/A - REPORT"
+                    worksheet.getCell(config.TEMPO_RESPOSTA + i).value = "N/A - REPORT"
+                }
+                if(worksheet.getCell(CANAL_ACIONAMENTO + i).value == "acionamento via crit") {
+                    worksheet.getCell(QUEM_TE_ACIONOU + i).value = "acionado via crit"
                 }
             }
             i++;

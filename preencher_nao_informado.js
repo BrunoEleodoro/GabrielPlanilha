@@ -104,6 +104,9 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = verifyAnalise(worksheet, config.SLA_TICKET_VENCIDO + i)
             worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = verifyTempoAtendimento(worksheet, config.TEMPO_ATENDIMENTO + i)
             worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = verifyAnalise(worksheet, config.ANALISE_PRAZO_ACIONAMENTO + i)
+            if(worksheet.getCell(config.STORE_TYPE_COLUMN + i).value == "Nao Informado") {
+                highlight(worksheet, config.STORE_TYPE_COLUMN + i);
+            }
 
             var severidade = worksheet.getCell(config.STORE_SEVERITY_COLUNM + i).value
             var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value

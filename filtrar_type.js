@@ -39,19 +39,19 @@ workbook.xlsx.readFile(SOURCE_FILE)
             var valor_celula_p = worksheet.getCell(STORE_PRIMARY_LABELS_COLUMN + i).value
 
             if (valor_celula_p != null) {
-                var type = "SC"
-                if(valor_celula_p.toLowerCase().includes("service request")) {
-                    type=  "SR"
-                } else if(valor_celula_p.toLowerCase().includes("incident")) {
-                    type=  "IN"
-                } else if(valor_celula_p.toLowerCase().includes("change")) {
-                    type=  "CH"
-				} else if(valor_celula_p.toLowerCase().includes("report")) {
-                    type=  "REPORT"
-				} else if(valor_celula_p.toLowerCase().includes("sem chamado")) {
-                    type=  "SC"
+                var type = "Nao Informado"
+                if (valor_celula_p.toLowerCase().includes("service request")) {
+                    type = "SR"
+                } else if (valor_celula_p.toLowerCase().includes("incident")) {
+                    type = "IN"
+                } else if (valor_celula_p.toLowerCase().includes("change")) {
+                    type = "CH"
+                } else if (valor_celula_p.toLowerCase().includes("report")) {
+                    type = "REPORT"
+                } else if (valor_celula_p.toLowerCase().includes("sem chamado")) {
+                    type = "SC"
                 }
-                worksheet.getCell(STORE_TYPE_COLUMN + i).value = type.toUpperCase()
+                worksheet.getCell(STORE_TYPE_COLUMN + i).value = type
             }
             i++;
         }

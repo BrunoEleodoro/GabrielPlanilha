@@ -40,7 +40,7 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var horario_incidente = worksheet.getCell(config.HORARIO_INCIDENTE + i).value
             var quantidade_tickets_per_user = worksheet.getCell(config.QUANTIDADE_TICKETS_PER_USER + i).value;
             if(quantidade_tickets_per_user == 1) {
-                worksheet.getCell(config.TIME_WORKED_ISM + i).value = time_workeds[horario_incidente] / time_workeds_amount[horario_incidente]
+                worksheet.getCell(config.TIME_WORKED_ISM + i).value = parseFloat(time_workeds[horario_incidente] / time_workeds_amount[horario_incidente]).toFixed(2)
             }
             i++;
         }
