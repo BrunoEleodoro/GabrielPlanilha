@@ -140,8 +140,27 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 // worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = label
                 // worksheet.getCell(config.ISM_SOLICITOU + i).value = label
                 worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = parseFloat("0")
-            }
 
+
+            }
+            if (severidade.toString().includes("N/A")) {
+                let valor = "";
+                if (type == "CH") {
+                    valor = "N/A - CHANGE"
+                } else if (type == "REPORT") {
+                    valor = "N/A - REPORT"
+                } else if (type == "SC") {
+                    valor = "N/A - SEM CHAMADO"
+                }
+                worksheet.getCell(config.HORARIO_INCIDENTE + i).value = valor
+                worksheet.getCell(config.SLA_TICKET + i).value = valor
+                worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = valor
+                worksheet.getCell(config.ISM_SOLICITOU + i).value = valor
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = valor
+                worksheet.getCell(config.TEMPO_ATENDIMENTO + i).value = valor
+                worksheet.getCell(config.ANALISE_PRAZO_ACIONAMENTO + i).value = valor
+                worksheet.getCell(config.HORARIO_ENCERRAMENTO + i).value = valor
+            }
 
             // Horário do Incident,
             // SLA do ticket

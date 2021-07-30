@@ -156,12 +156,15 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
 
             var newHorarioAcionamentoDate = created_at.format('DD/MM/YYYY').toString();
             var horarioAcionamentoFinal = newHorarioAcionamentoDate + " " + horario_acionamento.split(" ")[1]
+
+            //var horarioAcionamentoFinal = newHorarioAcionamentoDate + " " + (horario_acionamento.split(" ")[1] == undefined ? horario_acionamento.split(" ")[0] : horario_acionamento.split(" ")[1])
             worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value = horarioAcionamentoFinal
 
-            var keys = ["#0aq9f7", "#0arndu", "#0arnue"]
+            var keys = ["#0al7mx", "#0aliij", "#0aym5v"]
             if (keys.includes(card_identifier)) {
                 console.log({
                     'cod': '1',
+                    'card_identifier': card_identifier,
                     'horario_acionamento': worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value,
                     'created_at': worksheet.getCell(config.CREATED_AT + i).value
                 })
@@ -182,23 +185,29 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
             var type = worksheet.getCell(config.STORE_TYPE_COLUMN + i).value
 
             var horario_acionamento_date = parseTimeToMoment(monthName, horario_acionamento);
-            var created_at = parseTimeToMoment(monthName, created_at);
+            var created_at_date = parseTimeToMoment(monthName, created_at);
 
             var hours = calculateHours(
                 horario_acionamento_date,
-                created_at);
+                created_at_date);
 
             hours = hours < 0 ? hours * -1 : hours
-            if (hours >= 24) {
-                // console.log('hours')
+            if (hours >= 4) {
+                horario_acionamento_date = parseDateToMoment(monthName, horario_acionamento);
+                created_at_date = parseDateToMoment(monthName, created_at);
+                hours = calculateHours(
+                    horario_acionamento_date,
+                    created_at_date);
+                console.log('hours', hours)
             }
 
 
-            var keys = ["#0aq9f7", "#0arndu", "#0arnue"]
+            var keys = ["#0al7mx", "#0aliij", "#0aym5v"]
             if (keys.includes(card_identifier)) {
                 console.log({
                     'cod': '2',
                     'hours': hours,
+                    'card_identifier': card_identifier,
                     'horario_acionamento': worksheet.getCell(config.HORARIO_ACIONAMENTO + i).value,
                     'created_at': worksheet.getCell(config.CREATED_AT + i).value
                 })
@@ -260,30 +269,28 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 var card_identifier = worksheet.getCell("AN" + index).value
                 var horario_encerramento = worksheet.getCell(config.HORARIO_ENCERRAMENTO + index).value
                 if (horario_encerramento != null) {
-                    if (index == 0) {
-                        // console.log(card_identifier, index, tempo_resposta)
-                    }
-
                     var hours = worksheet.getCell(config.TEMPO_RESPOSTA + lowest_created_at_index).value
-                    var keys = ["#0aq9f7", "#0arndu", "#0arnue"]
+                    var keys = ["#0al7mx", "#0aliij", "#0aym5v"]
                     if (keys.includes(card_identifier)) {
-                        console.log('tempo _resposta', hours)
+                        console.log('tempo _resposta', card_identifier, hours)
                     }
                     if (hours >= 24) {
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).value = "24:00";
+
                     } else if (hours <= 0.04) {
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).value = "00:05";
+
                     } else if (hours.toString().includes("NaN")) {
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).value = "00:00";
+
                     } else if (hours.formula != null) {
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).numFmt = 'hh:mm';
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).value = hours
+
                     } else {
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).numFmt = 'hh:mm';
                         worksheet.getCell(config.TEMPO_RESPOSTA + index).value = { formula: "MOD(MROUND(\"" + convertToHHMM(hours) + "\",\"0:05\"),1)" }
-
                     }
-
                 } else {
                     worksheet.getCell(config.TEMPO_RESPOSTA + index).value = null
                 }
