@@ -75,11 +75,11 @@ workbook.xlsx.readFile(config.SOURCE_FILE)
                 console.log(card_identifier, sla_ticket_date, sla_ticket_date.toString() == "Invalid date");
             }
             if(sla_ticket_date.toString() == "Invalid date") {
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Analise Impossivel de ser feita"
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Análise impossível de ser feita"
             } else if(sla_ticket.toLowerCase().includes("sla")) {
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Analise Impossivel de ser feita"
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Análise impossível de ser feita"
             } else if(sla_ticket.toLowerCase().includes("n/a")) {
-                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Analise Impossivel de ser feita"
+                worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Análise impossível de ser feita"
             } else if (horario_acionamento_date.toString() != "Invalid date" && horario_acionamento_date.toString() != "Invalid date") {
                 if (horario_acionamento_date.isAfter(sla_ticket_date, 'seconds')) {
                     worksheet.getCell(config.SLA_TICKET_VENCIDO + i).value = "Solicitado Prioridade com SLA Vencido"
